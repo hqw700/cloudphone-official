@@ -1,0 +1,17 @@
+{
+  "name": "website",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && vitepress build docs && rm -rf dist/docs && mkdir -p dist/docs && cp -R docs/.vitepress/dist/ dist/docs",
+    "preview": "vite preview",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs"
+  },
+  "devDependencies": {
+    "vite": "^8.0.12",
+    "vitepress": "^1.6.4"
+  }
+}

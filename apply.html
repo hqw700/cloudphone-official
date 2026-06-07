@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="申请 CloudPhone 云手机免费试用。提供企业及团队一站式高性能 WebRTC 云手机解决方案体验，1对1专家部署支持。" />
+    <title>申请试用 | CloudPhone 开源云手机平台</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- 页头导航栏 (与主页完全一致，仅 active 项不同) -->
+    <header class="site-header" id="site-header" style="background: rgba(6, 9, 14, 0.85); border-color: rgba(0, 242, 254, 0.15);">
+      <div class="container header-container">
+        <a href="/" class="logo-link">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            <path d="M17 12h-2a2 2 0 0 0-2 2v2"></path>
+          </svg>
+          <span class="text-gradient">CloudPhone</span>
+        </a>
+        
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="/" class="nav-link">官网首页</a></li>
+            <li><a href="/docs/" class="nav-link">帮助文档</a></li>
+            <li><a href="/apply.html" class="nav-link active">申请试用</a></li>
+          </ul>
+        </nav>
+        
+        <div class="header-actions">
+          <a href="https://github.com" target="_blank" class="github-btn" aria-label="GitHub Repository">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></svg>
+            </a>
+            <a href="/apply.html" class="btn btn-primary btn-sm">申请试用</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 申请主区域 -->
+    <main class="apply-main" style="padding-top: 140px; padding-bottom: 100px; min-height: 85vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+      <div class="visual-glow" style="top: 10%; left: 30%;"></div>
+      <div class="container" style="max-width: 960px;">
+        <div class="apply-card glass-box" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; padding: 48px; border-radius: var(--radius-lg); position: relative; overflow: hidden;">
+          
+          <!-- 左侧：宣传引导信息 -->
+          <div class="apply-info" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="badge-tag" style="margin-bottom: 16px;">
+                <span class="badge-dot"></span>
+                <span>Enterprise Sandbox</span>
+              </span>
+              <h2 style="font-size: 28px; line-height: 1.25; margin-bottom: 16px;">开启商用级<br /><span class="text-gradient">云手机沙箱体验</span></h2>
+              <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 24px;">
+                申请后，我们将在 24 小时内为您开通专属演示环境，并提供 1 对 1 技术顾问协助，帮您验证如下核心场景：
+              </p>
+              
+              <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; color: var(--text-primary); font-size: 13px;">
+                <li style="display: flex; align-items: center; gap: 8px;">
+                  <span style="color: var(--accent-blue);">✔</span> 大规模 redroid 镜像性能压力评测
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px;">
+                  <span style="color: var(--accent-blue);">✔</span> 自定义按键映射在各类游戏下的操纵体验
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px;">
+                  <span style="color: var(--accent-blue);">✔</span> 公网穿透与跨运营商打洞性能对比
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px;">
+                  <span style="color: var(--accent-blue);">✔</span> 1对1专属方案架构设计与运维指导
+                </li>
+              </ul>
+            </div>
+            
+            <div style="font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border-muted); padding-top: 16px; margin-top: 24px;">
+              * 申请提交后，所有数据将严格加密存储，仅用作技术对接沟通。
+            </div>
+          </div>
+          
+          <!-- 右侧：表单提交区 -->
+          <div class="apply-form-container" style="position: relative; min-height: 380px;">
+            <!-- 初始表单 -->
+            <form id="apply-form" style="display: flex; flex-direction: column; gap: 16px; transition: opacity var(--transition-fast);">
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <label for="orgName" style="font-size: 12px; font-weight: 600; color: var(--text-secondary);">公司 / 团队名称 *</label>
+                <input type="text" id="orgName" required placeholder="请输入您的公司、实验室或团队名称" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-muted); padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; color: var(--text-primary);" />
+              </div>
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                  <label for="contactName" style="font-size: 12px; font-weight: 600; color: var(--text-secondary);">联系人姓名 *</label>
+                  <input type="text" id="contactName" required placeholder="怎么称呼您" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-muted); padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; color: var(--text-primary);" />
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                  <label for="contactPhone" style="font-size: 12px; font-weight: 600; color: var(--text-secondary);">微信号 / 手机号码 *</label>
+                  <input type="text" id="contactPhone" required placeholder="方便顾问沟通的联系方式" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-muted); padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; color: var(--text-primary);" />
+                </div>
+              </div>
+              
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <label for="email" style="font-size: 12px; font-weight: 600; color: var(--text-secondary);">电子邮箱 *</label>
+                <input type="email" id="email" required placeholder="接收部署凭据的邮箱地址" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-muted); padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; color: var(--text-primary);" />
+              </div>
+              
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <label for="scale" style="font-size: 12px; font-weight: 600; color: var(--text-secondary);">预计测试或使用的云手机规模 *</label>
+                <select id="scale" required style="background: rgba(255,255,255,0.02) !important; border: 1px solid var(--border-muted); padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; color: var(--text-primary);">
+                  <option value="" disabled selected>请选择预计规模</option>
+                  <option value="small">1 - 10 台 (小规模研发评估)</option>
+                  <option value="medium">11 - 50 台 (中型团队方案)</option>
+                  <option value="large">51 - 200 台 (企业级批量部署)</option>
+                  <option value="enterprise">200 台以上 (海量云手机集群)</option>
+                </select>
+              </div>
+              
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <label for="诉求" style="font-size: 12px; font-weight: 600; color: var(--text-secondary);">您的核心试用诉求描述</label>
+                <textarea id="useCase" rows="3" placeholder="例如：我们主要需要验证动作游戏改键运行、或是群控调试的延迟情况" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-muted); padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; color: var(--text-primary); outline: none; transition: border-color var(--transition-fast); min-height: 80px; font-family: inherit; resize: none;"></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-primary" style="margin-top: 10px; padding: 12px; font-size: 14px;">
+                提交申请
+              </button>
+            </form>
+            
+            <!-- 提交中状态 (隐藏) -->
+            <div id="submit-loading" style="display: none; position: absolute; inset: 0; flex-direction: column; align-items: center; justify-content: center; gap: 16px; transition: opacity var(--transition-fast);">
+              <div style="width: 48px; height: 48px; border: 3px solid rgba(0,242,254,0.1); border-top-color: var(--accent-blue); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+              <span style="font-size: 14px; color: var(--accent-blue); font-weight: 600; letter-spacing: 0.05em;" class="animate-pulse">正在安全加密并提交您的申请...</span>
+            </div>
+            
+            <!-- 提交成功状态 (隐藏) -->
+            <div id="submit-success" style="display: none; position: absolute; inset: 0; flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center; transition: opacity var(--transition-fast);">
+              <div style="width: 64px; height: 64px; background: rgba(63, 185, 80, 0.1); border: 2px solid var(--color-success); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-success); font-size: 28px; box-shadow: 0 0 20px rgba(63, 185, 80, 0.2);" class="scale-in">✓</div>
+              <div>
+                <h3 style="font-size: 18px; margin-bottom: 8px; color: var(--text-primary);">申请提交成功！</h3>
+                <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.6; max-width: 280px; margin: 0 auto;">
+                  我们已收到您的试用申请。技术顾问将在 24 小时内联系您并分配测试凭据。
+                </p>
+              </div>
+              <a href="/" class="btn btn-secondary btn-sm" style="margin-top: 8px;">返回首页</a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </main>
+
+    <!-- 页脚 (与主页完全一致) -->
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <div class="footer-logo text-gradient">CloudPhone Project</div>
+          <p class="footer-info" style="margin-top: 8px;">基于开源协议分发。致力于为社区提供极速无损的安卓云端投屏体验。</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="/" class="footer-link">主页</a></li>
+          <li><a href="/docs/" class="footer-link">帮助文档</a></li>
+          <li><a href="/apply.html" class="footer-link">申请试用</a></li>
+          <li><a href="https://github.com" class="footer-link" target="_blank">GitHub</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/apply.js"></script>
+  </body>
+</html>
