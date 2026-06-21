@@ -33,7 +33,7 @@ try {
   // 2. 创建并拷贝最新的 docs 构建产物
   if (fs.existsSync(srcDir)) {
     copyDir(srcDir, destDir);
-    console.log('✨ CloudPhone Docs successfully merged into dist/docs!');
+    console.log('✨ ScrcpyOverWebRTC Docs successfully merged into dist/docs!');
   } else {
     console.error('❌ Error: docs/.vitepress/dist not found. Please build docs first.');
     process.exit(1);

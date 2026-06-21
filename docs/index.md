@@ -1,6 +1,6 @@
-# CloudPhone 官方指南与帮助文档
+# ScrcpyOverWebRTC (CloudPhone) 官方指南与帮助文档
 
-欢迎使用 CloudPhone 官方开发者指南。本指南由项目核心维护团队编写，旨在帮助您快速启动、编译及将云手机项目集成至商业环境中。
+欢迎使用 ScrcpyOverWebRTC 官方开发者指南。本指南由项目核心维护团队编写，旨在帮助您快速启动、编译及将云手机项目集成至商业环境中。
 
 ---
 
@@ -11,13 +11,40 @@
 - **[极速运行指南](/quickstart)**：只需三步，即可在本地和真机运行起体验版。
 
 ### [💻 服务端部署](/deps-and-build)
-- **[依赖安装与服务编译](/deps-and-build)**：配置公网 Coturn 服务端安全规范，并使用 Go 交叉编译信令服务器与 WebRTC 桥接组件。
+- **[局域网部署](/deploy-lan)**
+- **[云服务器部署](/deploy-cloud)**
+- **[无服务器部署（运行在Android手机内）](/deploy-standalone)**
 
-### [📱 Agent 安装与推送](/agent-deploy)
-- **[Agent 部署 (Redroid & 真机)](/agent-deploy)**：通过 Docker 多开 redroid 安卓 12 虚机集群，或使用 WebUSB 浏览器一键免驱动推送物理真机。
+### [📱 添加Android手机（Agent）](/agent-deploy)
+
+- **[添加真机](/agent-real-device)**
+- **[添加Redroid容器机器](/agent-redroid)**
+
+- **[通过APP添加](/agent-add-app)**
+- **[通过PC网页添加](/agent-add-web)**
+- **[通过ADB添加](/agent-add-adb)**
+- **[通过ROOT权限添加](/agent-add-root)**
+
+### [客户端连接](/deps-and-build)
+- **[PC浏览器连接](/client-pc)**
+- **[手机浏览器连接](/client-mobile)**
+- **[Android APP连接](/client-app)**
+
+### [定制ROM功能](/rom-custom)
+- **[支持系统和平台](/rom-support)**
+- **[虚拟摄像头](/rom-camera)**
+- **[GPS透传](/rom-gps)**
+- **[传感器透传](/rom-sensor)**
+
+### 功能介绍
+- **[系统功能介绍](/feature-intro)**
+
+### 开发路标
+- **[roadmap](/roadmap)**
+
+
 
 ### [🛠️ 高级配置与常见问题](/keymap-advanced)
-- **[自定义按键映射规范](/keymap-advanced)**：掌握游戏级 Tap、Joystick 及 Swipe 映射的 JSON 规范与坐标转换算法。
 - **[常见问题排查 (FAQ)](/faq)**：解决黑屏超时、触控漂移偏移及音频积压等常见排障手段。
 
 ---

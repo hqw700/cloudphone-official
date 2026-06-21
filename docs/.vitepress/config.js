@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'CloudPhone Docs',
+  title: 'ScrcpyOverWebRTC Docs',
   description: '下一代 WebRTC 极速超低延迟云手机官方开发者指南与帮助文档',
   
   // 编译输出的目标相对路径设为相对 docs/ 的 .vitepress/dist
@@ -55,14 +55,50 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: '依赖安装与服务编译', link: '/deps-and-build' },
-          { text: 'Docker & TURN 一键部署', link: '/deploy-cloud' }
+          { text: '局域网部署', link: '/deploy-lan' },
+          { text: '云服务器部署', link: '/deploy-cloud' },
+          { text: '无服务器部署 (Android 内运行)', link: '/deploy-standalone' }
         ]
       },
       {
-        text: '📱 Agent 安装与推送',
+        text: '📱 添加 Android 手机 (Agent)',
         collapsed: false,
         items: [
-          { text: 'Agent 部署 (Redroid & 真机)', link: '/agent-deploy' }
+          { text: 'Agent 部署概述', link: '/agent-deploy' },
+          { text: '添加真机', link: '/agent-real-device' },
+          { text: '添加 Redroid 容器机器', link: '/agent-redroid' },
+          { text: '通过 APP 添加', link: '/agent-add-app' },
+          { text: '通过 PC 网页添加', link: '/agent-add-web' },
+          { text: '通过 ADB 添加', link: '/agent-add-adb' },
+          { text: '通过 ROOT 权限添加', link: '/agent-add-root' }
+        ]
+      },
+      {
+        text: '🔌 客户端连接',
+        collapsed: false,
+        items: [
+          { text: 'PC 浏览器连接', link: '/client-pc' },
+          { text: '手机浏览器连接', link: '/client-mobile' },
+          { text: 'Android APP 连接', link: '/client-app' }
+        ]
+      },
+      {
+        text: '⚙️ 定制 ROM 功能',
+        collapsed: false,
+        items: [
+          { text: 'ROM 功能概述', link: '/rom-custom' },
+          { text: '支持系统和平台', link: '/rom-support' },
+          { text: '虚拟摄像头', link: '/rom-camera' },
+          { text: 'GPS 透传', link: '/rom-gps' },
+          { text: '传感器透传', link: '/rom-sensor' }
+        ]
+      },
+      {
+        text: '📝 功能与路标',
+        collapsed: false,
+        items: [
+          { text: '系统功能介绍', link: '/feature-intro' },
+          { text: '开发路标', link: '/roadmap' }
         ]
       },
       {
@@ -77,13 +113,13 @@ export default defineConfig({
 
     // 社交链接
     socialLinks: [
-      { icon: 'github', link: 'https://github.com' }
+      { icon: 'github', link: 'https://github.com/hqw700/ScrcpyOverWebRTC' }
     ],
 
     // 页脚配置
     footer: {
       message: '基于开源协议分发。本文档持续同步 AOSP 与 scrcpy 优化规范。',
-      copyright: 'Copyright © 2026-present CloudPhone Project'
+      copyright: 'Copyright © 2026-present ScrcpyOverWebRTC Project'
     },
 
     // 辅助配置
