@@ -14,7 +14,7 @@
 
 在启动服务前，请确保您已获取到服务端程序包及编译好的前端静态资源。
 
-* **获取与编译代码**：关于如何下载 Releases 预编译包，或者如何克隆开源仓库并使用脚本自动编译 Web 前端，请参阅专门的 [依赖安装与服务编译指南](/deps-and-build)。
+* **获取代码与一键编译**：关于如何下载打包好的 Release 预编译包，或者如何克隆开源仓库并在 `web-app` 下开发热更新，请参阅 [项目简介 & 架构优势](/introduction) 与 [二次开发与联调说明指南](https://github.com/hqw700/ScrcpyOverWebRTC/blob/main/docs/DEVELOPMENT.md)。
 
 #### 🔐 安全证书准备（强烈推荐）
 为保障客户端浏览器能正常唤起 WebUSB 和 WebADB 等本地硬件直连接口，页面必须运行在安全的 HTTPS 上下文（或本地 localhost）。如果您是在局域网内通过 IP 地址跨设备访问，请提前在 `certs/` 目录下放置自签名或正式申请的 SSL 证书文件：

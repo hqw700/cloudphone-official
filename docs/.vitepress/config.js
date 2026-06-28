@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: 'ScrcpyOverWebRTC Docs',
   description: '下一代 WebRTC 极速超低延迟云手机官方开发者指南与帮助文档',
   
@@ -35,9 +36,9 @@ export default defineConfig({
 
     // 顶部导航栏
     nav: [
-      { text: '官网首页', link: 'http://localhost:8443/' }, // 便于从文档回退到官网
-      { text: '帮助指南', link: '/introduction' },
-      { text: '开发指南', link: '/deps-and-build' }
+      { text: '官网首页', link: '/' }, // 便于从文档回退到官网
+      { text: '使用文档', link: '/introduction' },
+      { text: '接入指引', link: '/agent-deploy' }
     ],
 
     // 侧边栏目录配置
@@ -47,65 +48,46 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: '项目简介 & 架构优势', link: '/introduction' },
-          { text: '极速运行指南', link: '/quickstart' }
+          { text: '极速运行与入网指南', link: '/quickstart' }
         ]
       },
       {
         text: '💻 服务端部署',
         collapsed: false,
         items: [
-          { text: '依赖安装与服务编译', link: '/deps-and-build' },
-          { text: '局域网部署', link: '/deploy-lan' },
-          { text: '云服务器部署', link: '/deploy-cloud' },
-          { text: '无服务器部署 (Android 内运行)', link: '/deploy-standalone' }
+          { text: '内网与局域网部署', link: '/deploy-lan' },
+          { text: '飞牛 OS (fnOS) NAS 部署', link: '/deploy-fnos' },
+          { text: 'iStoreOS 软路由部署', link: '/deploy-istoreos' },
+          { text: '云服务器部署与穿透', link: '/deploy-cloud' },
+          { text: 'Android 独立运行生态', link: '/deploy-standalone' }
         ]
       },
       {
-        text: '📱 添加 Android 手机 (Agent)',
+        text: '📱 设备接入与 Agent 配置',
         collapsed: false,
         items: [
-          { text: 'Agent 部署概述', link: '/agent-deploy' },
-          { text: '添加真机', link: '/agent-real-device' },
-          { text: '添加 Redroid 容器机器', link: '/agent-redroid' },
-          { text: '通过 APP 添加', link: '/agent-add-app' },
-          { text: '通过 PC 网页添加', link: '/agent-add-web' },
-          { text: '通过 ADB 添加', link: '/agent-add-adb' },
-          { text: '通过 ROOT 权限添加', link: '/agent-add-root' }
+          { text: '真机与容器 Agent 部署', link: '/agent-deploy' }
         ]
       },
       {
-        text: '🔌 客户端连接',
+        text: '⚙️ 高级特性与深度定制',
         collapsed: false,
         items: [
-          { text: 'PC 浏览器连接', link: '/client-pc' },
-          { text: '手机浏览器连接', link: '/client-mobile' },
-          { text: 'Android APP 连接', link: '/client-app' }
+          { text: '虚拟相机与定制 ROM 方案', link: '/rom-custom' },
+          { text: '按键映射与群控高级应用', link: '/keymap-advanced' }
         ]
       },
       {
-        text: '⚙️ 定制 ROM 功能',
+        text: '💻 开发者二次开发',
         collapsed: false,
         items: [
-          { text: 'ROM 功能概述', link: '/rom-custom' },
-          { text: '支持系统和平台', link: '/rom-support' },
-          { text: '虚拟摄像头', link: '/rom-camera' },
-          { text: 'GPS 透传', link: '/rom-gps' },
-          { text: '传感器透传', link: '/rom-sensor' }
-        ]
-      },
-      {
-        text: '📝 功能与路标',
-        collapsed: false,
-        items: [
-          { text: '系统功能介绍', link: '/feature-intro' },
-          { text: '开发路标', link: '/roadmap' }
+          { text: '前端控制台二次开发', link: '/web-development' }
         ]
       },
       {
         text: '🛠️ 高级配置与常见问题',
         collapsed: false,
         items: [
-          { text: '自定义按键映射规范', link: '/keymap-advanced' },
           { text: '常见问题排查 (FAQ)', link: '/faq' }
         ]
       }
@@ -139,4 +121,4 @@ export default defineConfig({
     sidebarMenuLabel: '文档菜单',
     returnToTopLabel: '返回顶部'
   }
-})
+}))
