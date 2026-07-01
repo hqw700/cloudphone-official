@@ -61,10 +61,10 @@
 
 1. 在脚本运行完毕后，终端会自动输出该 Android 设备在当前局域网（Wi-Fi）下的真实 IP 地址与端口，例如：
    ```text
-   Services started. Connect via http://192.168.1.120:8443
+   Services started. Connect via https://192.168.1.120:8443
    ```
 2. 确保您的控制端设备（如您的 PC 电脑、另一部手机或 iPad）连接在**同一个局域网 Wi-Fi** 下。
-3. 在控制端打开浏览器，输入输出的地址：`http://<手机局域网IP>:8443`。
+3. 在控制端打开浏览器，输入输出的地址：`https://<手机局域网IP>:8443`。
 4. 页面将直接展现控制仪表盘，且列表中已自动注册了名为 `local-android` 的本机设备，直接点击即可**在网页里操控手机自身**。
 
 ---
@@ -74,7 +74,7 @@
 ### 内部工作原理
 当运行 `setup.sh` 后，设备内部发生了以下流程：
 1. **信令服务器运行**：交叉编译出的原生程序 `webrtc-signaling` 被以后台（`nohup`）模式拉起，监听手机本地的 `8443` 端口，并将中央静态路径指向刚刚推送的 `/data/local/tmp/android/assets`。
-2. **控制端 Agent 运行**：Go Agent 被以 `setsid nohup` 守护运行，自动读取本地的 `/data/local/tmp/android/libsys_core.so` 核心包，并将连接信令指向手机本地的 `ws://127.0.0.1:8443` 完成注册自连。
+2. **控制端 Agent 运行**：Go Agent 被以 `setsid nohup` 守护运行，自动读取本地的 `/data/local/tmp/android/libsys_core.so` 核心包，并将连接信令指向手机本地的 `wss://127.0.0.1:8443` 完成注册自连。
 3. **脱离终端守护**：进程均被分配了独立的 Session ID（会话ID），从而能够安全绕过 adb 挂断信号，实现拔掉数据线后的后台持久运行。
 
 ### 停止并清理手机端服务

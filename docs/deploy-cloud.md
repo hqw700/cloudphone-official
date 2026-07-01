@@ -44,11 +44,13 @@ docker run -d --name cp-aio \
   -p 3478:3478/tcp \
   -p 3478:3478/udp \
   -p 55000-55100:55000-55100/udp \
+  -v ./data:/app/data \
   -e PUBLIC_IP=<您的服务器真实公网IP> \
   -e COTURN_MIN_PORT=55000 \
   -e COTURN_MAX_PORT=55100 \
   buutuu/scrcpy-over-webrtc:latest
 ```
+*(注：挂载 `-v ./data:/app/data` 后，容器会把所有的持久化资产包括用户账号 users.json、设备标签及下载的文件保存在宿主机本地的 `./data` 目录下，保证升级时不被覆盖。)*
 
 ### 方式 B：使用 Docker Compose 极速拉起
 在您的服务器上任意新建一个空白目录，并在同目录下创建一个 `docker-compose.yml` 配置文件：
@@ -64,7 +66,10 @@ services:
     restart: always
     environment:
       - PUBLIC_IP=<您的服务器真实公网IP>
+      - DATA_DIR=/app/data
       - NO_AUTH=true    # [可选] 开启后跳过登录鉴权，实现快速免密测试
+    volumes:
+      - ./data:/app/data
 ```
 在同目录下直接执行以下指令拉起：
 ```bash

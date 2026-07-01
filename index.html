@@ -294,7 +294,7 @@
                   <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
                 </div>
                 <div class="bg-slate-900/90 h-4.5 rounded px-4 text-[9px] font-mono text-slate-400 flex items-center w-40 justify-center border border-white/5">
-                  http://[HOST IP]:8443
+                  https://[HOST IP]:8443
                 </div>
                 <div class="w-6"></div>
               </div>
@@ -690,15 +690,15 @@
             <div class="terminal-line">
               <span class="t-comment"># 2. 网页直连物理手机进行 Agent 一键部署</span>
               <div class="t-cmd-container">
-                <span class="t-cmd"># 打开浏览器访问 http://localhost:8443 点击「部署新设备」即可</span>
+                <span class="t-cmd"># 打开浏览器访问 https://localhost:8443 点击「部署新设备」即可</span>
               </div>
             </div>
             
             <div class="terminal-line">
               <span class="t-comment"># 3. 宿主机命令行脚本手动推送 (真机/Docker 适用)</span>
               <div class="t-cmd-container">
-                <span class="t-cmd">cd agentd && ./run.sh -id phone-01 -signaling ws://127.0.0.1:8443</span>
-                <button class="copy-btn" aria-label="Copy command" data-cmd="cd agentd && ./run.sh -id phone-01 -signaling ws://127.0.0.1:8443">
+                <span class="t-cmd">cd agentd && ./run.sh -id phone-01 -signaling wss://127.0.0.1:8443</span>
+                <button class="copy-btn" aria-label="Copy command" data-cmd="cd agentd && ./run.sh -id phone-01 -signaling wss://127.0.0.1:8443">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>

@@ -28,37 +28,32 @@
 1. 打开终端，进入发布包根目录。
 2. 直接运行智能启动脚本（它会自动识别您的操作系统与 CPU 架构，并拉起 `bin/` 下对应的二进制程序）：
    ```bash
-   # 默认 HTTP 模式启动（监听 8443 端口）
+   # 默认以 HTTPS 模式启动（自动加载 certs/ 目录下的证书，监听 8443 端口）
    ./start_server.sh
+
+   # 如需以 HTTP 模式运行，可以传入 -tls=false
+   ./start_server.sh -tls=false
    ```
-3. **高级运行选项**：
-   * **启用 HTTPS 模式**（推荐，读取 `certs/` 下的证书）：
-     ```bash
-     ./start_server.sh -tls
-     ```
+
 ---
 
 ### 3. Windows 运行步骤
 
 1. 打开文件管理器或命令提示符，进入 `bin/windows_amd64/` 目录。
 2. **快速运行**：
-   * 双击运行 `run.bat`，即可启动 HTTP 模式的信令服务器。
-3. **开启 TLS/HTTPS 模式**：
-   * 若需在 Windows 命令行中启用安全访问，可以使用 PowerShell 或 CMD 设置环境变量并启动：
+   * 双击运行 `run.bat`，默认以 HTTPS 模式启动信令服务器。
+3. **以 HTTP 模式运行**：
+   * 若需在 Windows 命令行中以 HTTP 方式启动，可以使用命令行并附带 `-tls=false` 参数启动：
      ```cmd
-     # CMD 方式
-     set USE_TLS=true
-     webrtc-signaling.exe -port 8443 -assets ../../assets -tls
+     webrtc-signaling.exe -port 8443 -assets ../../assets -tls=false
      ```
-     *或者直接通过双击修改后的 `run.bat` 并附带 `-tls` 参数启动。*
 
 ---
 
 ### 4. 局域网内访问
 
 启动成功后，终端将输出运行地址。同局域网内的其他设备（包括 PC、手机、平板）通过浏览器访问即可：
-* HTTP 链接：`http://<服务器局域网IP>:8443`
-* HTTPS 链接：`https://<服务器局域网IP>:8443`  
+* 访问地址：`https://<服务器局域网IP>:8443` （默认 HTTPS 模式） 
    *默认登录账号admin, 密码admin123*
 
 ---
