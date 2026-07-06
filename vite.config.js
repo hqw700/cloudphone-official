@@ -46,6 +46,9 @@ export default defineConfig({
       })
     }
   }, cloudflare()],
+  preview: {
+    allowedHosts: ['webrtc-phone.com']
+  },
   build: {
     rollupOptions: {
       input: {

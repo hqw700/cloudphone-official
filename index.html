@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="ScrcpyOverWebRTC - 基于 WebRTC 和 redroid 的高性能、极速超低延迟云手机解决方案。支持硬件级 PTS 帧透传、三通道 Unix Socket 隔离与公网 P2P 直连，提供商业级按键映射与 WebADB 运维工具。" />
-    <title>ScrcpyOverWebRTC | 下一代 WebRTC 极速超低延迟云手机平台</title>
+    <meta name="description" content="穿云投屏 (ScrcpyOverWebRTC) - 基于 WebRTC 和 redroid 的高性能、极速超低延迟云手机与真机投屏解决方案。支持硬件级 PTS 帧透传、三通道 Unix Socket 隔离与公网 P2P 直连，提供商业级按键映射与 WebADB 运维工具。" />
+    <title>穿云投屏 | 下一代 WebRTC 极速超低延迟云手机与真机投屏平台</title>
     
     <!-- 引入 Google Fonts 提升排版档次 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,7 +33,7 @@
             <line x1="12" y1="18" x2="12.01" y2="18"></line>
             <path d="M17 12h-2a2 2 0 0 0-2 2v2"></path>
           </svg>
-          <span class="text-gradient">ScrcpyOverWebRTC</span>
+          <span class="text-gradient">穿云投屏</span>
         </a>
         
         <nav>
@@ -60,17 +60,18 @@
         <div class="hero-content" style="animation: slideInLeft var(--transition-slow); display: flex; flex-direction: column; align-items: center;">
           <div class="badge-tag" style="margin-bottom: 20px;">
             <span class="badge-dot"></span>
-            <span>V5.2 Stable Build 正式发布</span>
+            <span>v0.2.7 正式发布</span>
           </div>
           <h1 class="hero-title" style="font-size: 44px; margin-bottom: 16px;">
-            无需客户端，网页直接连接<span class="text-gradient">高帧率云手机</span>
+            无需客户端，网页直接连接<span class="text-gradient">穿云投屏</span>
           </h1>
           <p class="hero-desc" style="max-width: 680px; margin-bottom: 24px; font-size: 16px;">
-            基于 <strong>WebRTC</strong> 和 <strong>redroid</strong> 的超高性能云手机平台。采用独创的 <strong>硬件级 PTS 帧透传</strong> 与 <strong>三通道 UDS 隔离</strong> 架构，端到端交互延迟低至毫秒级，带来完美真机质感。
+            基于 <strong>WebRTC</strong> 和 <strong>redroid</strong> 的超高性能云手机与真机投屏平台。采用独创的 <strong>硬件级 PTS 帧透传</strong> 与 <strong>三通道 UDS 隔离</strong> 架构，端到端交互延迟低至毫秒级，带来完美真机质感。
           </p>
           <div class="hero-actions" style="margin-bottom: 10px;">
             <a href="/apply.html" class="btn btn-primary">🚀 申请免费试用</a>
-            <a href="/docs/" class="btn btn-secondary">📖 帮助文档</a>
+            <a href="https://github.com/hqw700/ScrcpyOverWebRTC" target="_blank" class="btn btn-secondary">🌐 GitHub 源码</a>
+            <a href="/docs/" class="btn btn-secondary" style="background: rgba(255,255,255,0.05); margin-left: 8px;">📖 帮助文档</a>
           </div>
         </div>
       </div>
@@ -636,6 +637,24 @@
                 <td>基于 Chrome WebUSB 接口直连真机，自动判断架构推送 Agent，setsid 守护自启。</td>
               </tr>
               <tr>
+                <td style="font-weight: 600;">硬件模拟</td>
+                <td>相机注入与传感器虚拟化</td>
+                <td><span class="status-badge status-supported">✓ 已支持</span></td>
+                <td>网页摄像头 JPEG 裸流直注 Camera HAL，Sensor 及 GPS 定位动态模拟。</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">性能大盘</td>
+                <td>系统指标采集与趋势图表</td>
+                <td><span class="status-badge status-supported">✓ 已支持</span></td>
+                <td>5s 定期差分采集 CPU、内存、网速及温度指标，配合 ECharts 大盘渲染。</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">数据同步</td>
+                <td>双向剪切板静默粘贴</td>
+                <td><span class="status-badge status-supported">✓ 已支持</span></td>
+                <td>焦点回弹无感静默同步，Ctrl+V/Cmd+V 粘贴拦截防回环，中文免注入支持。</td>
+              </tr>
+              <tr>
                 <td style="font-weight: 600;">画质优化</td>
                 <td>H.265/HEVC 视频编码</td>
                 <td><span class="status-badge status-planned">📅 规划中</span></td>
@@ -659,7 +678,7 @@
         <div class="quickstart-text">
           <span class="section-subtitle">Get Started</span>
           <h3>三步开启您的云手机之旅</h3>
-          <p>ScrcpyOverWebRTC 原生支持在 MacOS、Linux 和 Windows 上交叉编译并一键运行。跟随以下极简流程，立刻启动您的服务。</p>
+          <p>“穿云投屏”原生支持在 MacOS、Linux 和 Windows 上交叉编译并一键运行。跟随以下极简流程，立刻启动您的服务。</p>
           <a href="/docs/" class="btn btn-secondary">阅读完整部署文档</a>
         </div>
         
@@ -675,10 +694,10 @@
           </div>
           <div class="terminal-body">
             <div class="terminal-line">
-              <span class="t-comment"># 1. 启动信令服务器</span>
+              <span class="t-comment"># 1. 使用 Docker 一键运行信令服务端 (PUBLIC_IP为宿主机IP或者公网IP)</span>
               <div class="t-cmd-container">
-                <span class="t-cmd">./start_server.sh v2</span>
-                <button class="copy-btn" aria-label="Copy command" data-cmd="./start_server.sh v2">
+                <span class="t-cmd">docker run -d --net=host -e PUBLIC_IP=192.168.1.100  buutuu/scrcpy-over-webrtc:latest</span>
+                <button class="copy-btn" aria-label="Copy command" data-cmd="docker run -d --net=host -e PUBLIC_IP=192.168.1.100 buutuu/scrcpy-over-webrtc:latest">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -688,17 +707,17 @@
             </div>
             
             <div class="terminal-line">
-              <span class="t-comment"># 2. 网页直连物理手机进行 Agent 一键部署</span>
+              <span class="t-comment"># 2. 免驱一键部署：浏览器访问 https://192.168.1.100:8443 点击「部署新设备」自动配置</span>
               <div class="t-cmd-container">
-                <span class="t-cmd"># 打开浏览器访问 https://localhost:8443 点击「部署新设备」即可</span>
+                <span class="t-cmd"># 支持自动判定架构并推送 Agent 服务，Setsid 守护常驻启动</span>
               </div>
             </div>
             
             <div class="terminal-line">
-              <span class="t-comment"># 3. 宿主机命令行脚本手动推送 (真机/Docker 适用)</span>
+              <span class="t-comment"># 3. 命令行手动部署：下载一键资源包推送并启动 Agent</span>
               <div class="t-cmd-container">
-                <span class="t-cmd">cd agentd && ./run.sh -id phone-01 -signaling wss://127.0.0.1:8443</span>
-                <button class="copy-btn" aria-label="Copy command" data-cmd="cd agentd && ./run.sh -id phone-01 -signaling wss://127.0.0.1:8443">
+                <span class="t-cmd">unzip agent-deploy.zip && cd agent-deploy && ./run.sh -id phone-01 -signaling wss://192.168.1.100:8443</span>
+                <button class="copy-btn" aria-label="Copy command" data-cmd="unzip agent-deploy.zip && cd agent-deploy && ./run.sh -id phone-01 -signaling ws://192.168.1.100:8443">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -715,8 +734,8 @@
     <footer class="site-footer">
       <div class="container footer-content">
         <div>
-          <div class="footer-logo text-gradient">ScrcpyOverWebRTC Project</div>
-          <p class="footer-info" style="margin-top: 8px;">基于开源协议分发。致力于为社区提供极速无损的安卓云端投屏体验。</p>
+          <div class="footer-logo text-gradient">“穿云投屏”开源项目</div>
+          <p class="footer-info" style="margin-top: 8px;">基于开源协议分发。致力于为社区提供极速无损的安卓云手机与真机远程投屏体验。</p>
         </div>
         <ul class="footer-links">
           <li><a href="/" class="footer-link">主页</a></li>
