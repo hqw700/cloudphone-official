@@ -62,11 +62,14 @@
             <span class="badge-dot"></span>
             <span>v0.2.7 正式发布</span>
           </div>
-          <h1 class="hero-title" style="font-size: 44px; margin-bottom: 16px;">
-            无需客户端，网页直接连接<span class="text-gradient">穿云投屏</span>
+          <h1 class="hero-title" style="font-size: 64px; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px;">
+            <span class="text-gradient">穿云投屏</span>
           </h1>
-          <p class="hero-desc" style="max-width: 680px; margin-bottom: 24px; font-size: 16px;">
-            基于 <strong>WebRTC</strong> 和 <strong>redroid</strong> 的超高性能云手机与真机投屏平台。采用独创的 <strong>硬件级 PTS 帧透传</strong> 与 <strong>三通道 UDS 隔离</strong> 架构，端到端交互延迟低至毫秒级，带来完美真机质感。
+          <p class="hero-subtitle" style="font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 24px; letter-spacing: 0.5px;">
+            免装客户端，浏览器一键直控的高帧率安卓云手机与真机管理平台
+          </p>
+          <p class="hero-desc" style="max-width: 680px; margin-bottom: 24px; font-size: 15px; color: var(--text-muted); line-height: 1.6;">
+            融合 <strong>WebRTC</strong> 极速流媒体与 <strong>redroid</strong> 虚拟化架构，专为高频群控大盘与远程运维设计。凭借自研的 <strong>硬件级 PTS 帧透传</strong> 与 <strong>三通道 UDS 隔离</strong> 技术，将端到端延迟压缩至毫秒级，还原完美丝滑的物理真机触感。
           </p>
           <div class="hero-actions" style="margin-bottom: 10px;">
             <a href="/apply.html" class="btn btn-primary">🚀 申请免费试用</a>
@@ -77,7 +80,7 @@
       </div>
 
       <!-- 巨型架构动效画板容器 (自适应缩放内嵌) -->
-      <div class="container" style="width: 100%; max-width: 1200px; padding: 0 24px;">
+      <div class="container" style="width: 100%; max-width: 1440px; padding: 0 24px;">
         <div id="arch-canvas-wrapper" style="width: 100%; position: relative; overflow: hidden; border-radius: var(--radius-lg); border: 1px solid var(--border-glow); background: #070a13; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65); height: 675px;">
           <!-- 动效画布 (1280x720 物理比例) -->
           <div id="recording-canvas" class="bg-grid select-none state-overview" style="width: 1280px; height: 720px; position: absolute; top: 0; left: 0; transform-origin: top left;">
@@ -88,22 +91,22 @@
               <button type="button" id="tab-overview" class="flex-grow text-center py-2 text-xs font-semibold rounded-lg text-cyan-400 bg-cyan-950/40 border border-cyan-800/30 transition-all duration-300">
                 🚀 全局预览
               </button>
-              <button type="button" id="tab-minimal" class="flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-all duration-300">
+              <button type="button" id="tab-minimal" class="flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white bg-transparent border border-transparent transition-all duration-300">
                 📱 极简直连
               </button>
-              <button type="button" id="tab-signaling" class="flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-all duration-300">
+              <button type="button" id="tab-signaling" class="flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white bg-transparent border border-transparent transition-all duration-300">
                 💬 信令建立
               </button>
-              <button type="button" id="tab-streaming" class="flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-all duration-300">
+              <button type="button" id="tab-streaming" class="flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white bg-transparent border border-transparent transition-all duration-300">
                 🎬 音视频流
               </button>
-              <button type="button" id="tab-interactive" class="flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-all duration-300">
+              <button type="button" id="tab-interactive" class="flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white bg-transparent border border-transparent transition-all duration-300">
                 ⚡ 毫秒级触控
               </button>
-              <button type="button" id="tab-file" class="flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-all duration-300">
+              <button type="button" id="tab-file" class="flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white bg-transparent border border-transparent transition-all duration-300">
                 📁 文件管理
               </button>
-              <button type="button" id="tab-adb" class="flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-all duration-300">
+              <button type="button" id="tab-adb" class="flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white bg-transparent border border-transparent transition-all duration-300">
                 🐚 ADB 隧道
               </button>
             </div>

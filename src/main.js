@@ -173,7 +173,7 @@ function initArchitectureAnimation() {
       if (tab === mode) {
         btn.className = "flex-grow text-center py-2 text-xs font-semibold rounded-lg text-cyan-400 bg-cyan-950/40 border border-cyan-800/30 transition-all duration-300 shadow-[0_0_12px_rgba(6,182,212,0.15)]"
       } else {
-        btn.className = "flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-all duration-300"
+        btn.className = "flex-grow text-center py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white bg-transparent border border-transparent transition-all duration-300"
       }
     })
 
