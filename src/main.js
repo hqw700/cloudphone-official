@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 初始化系统架构图交互
   initArchitectureAnimation()
+
+  // 异步加载动态配置
+  loadDynamicConfig()
 })
 
 /**
@@ -434,3 +437,92 @@ function initArchitectureAnimation() {
   // 初始化首帧流动
   updatePipeFlows('overview')
 }
+
+/**
+ * 异步加载 config.json 动态配置并渲染至对应 DOM 节点
+ */
+async function loadDynamicConfig() {
+  try {
+    const res = await fetch('/config.json')
+    if (!res.ok) throw new Error('Failed to load config')
+    const config = await res.json()
+    
+    // 渲染网盘信息
+    const quarkName = document.getElementById('quark-name')
+    const quarkCode = document.getElementById('quark-code')
+    const quarkUpdateTime = document.getElementById('quark-update-time')
+    const quarkLink = document.getElementById('quark-link')
+    
+    if (config.quarkName && quarkName) quarkName.textContent = config.quarkName
+    if (config.quarkCode && quarkCode) quarkCode.textContent = config.quarkCode
+    if (config.updateTime && quarkUpdateTime) quarkUpdateTime.textContent = config.updateTime
+    if (config.quarkLink && quarkLink) quarkLink.setAttribute('href', config.quarkLink)
+    
+    // 渲染三分发包网盘链接
+    const appApkLink = document.getElementById('app-apk-link')
+    const magiskModuleLink = document.getElementById('magisk-module-link')
+    const platformZipLink = document.getElementById('platform-zip-link')
+    
+    if (config.appApkLink && appApkLink) appApkLink.setAttribute('href', config.appApkLink)
+    if (config.magiskModuleLink && magiskModuleLink) magiskModuleLink.setAttribute('href', config.magiskModuleLink)
+    if (config.platformZipLink && platformZipLink) platformZipLink.setAttribute('href', config.platformZipLink)
+
+    // 渲染 GitHub 最新版本
+    const githubVersion = document.getElementById('github-version')
+    if (config.latestVersion && githubVersion) githubVersion.textContent = config.latestVersion
+    
+    // 渲染 Docker 拉取指令和对应的复制属性
+    const dockerPullCmd = document.getElementById('docker-pull-cmd')
+    const dockerPullBtn = document.getElementById('docker-pull-btn')
+    
+    if (config.dockerPullCmd) {
+      if (dockerPullCmd) dockerPullCmd.textContent = config.dockerPullCmd
+      if (dockerPullBtn) dockerPullBtn.setAttribute('data-cmd', config.dockerPullCmd)
+    }
+  } catch (err) {
+    console.warn('⚠️ 动态配置加载失败（将使用页面硬编码默认值）:', err)
+  }
+}
+
+/**
+ * 全景功能大盘分类 Tab 切换事件绑定
+ */
+function initFeatureTabs() {
+  const tabBtns = document.querySelectorAll('.feature-tab-btn')
+  const panels = document.querySelectorAll('.feature-panel')
+  
+  if (!tabBtns.length || !panels.length) return
+  
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.getAttribute('data-tab')
+      
+      // 更新按钮选中状态与高亮样式
+      tabBtns.forEach(b => {
+        b.classList.remove('active')
+        b.style.borderColor = 'var(--border-muted)'
+        b.style.background = 'rgba(0, 0, 0, 0.3)'
+        b.style.color = 'var(--text-secondary)'
+      })
+      
+      btn.classList.add('active')
+      btn.style.borderColor = 'var(--accent-blue)'
+      btn.style.background = 'rgba(6, 182, 212, 0.15)'
+      btn.style.color = 'var(--accent-blue)'
+      
+      // 切换对应面板的显隐
+      panels.forEach(p => {
+        if (p.id === `panel-${targetTab}`) {
+          p.style.display = 'block'
+        } else {
+          p.style.display = 'none'
+        }
+      })
+    })
+  })
+}
+
+// 初始化
+initFeatureTabs()
+
+

@@ -75,15 +75,36 @@ export default {
       document.addEventListener('keydown', handleEsc)
     }
 
+    const handleHomeLinkClick = (e) => {
+      const link = e.target.closest('a')
+      if (link) {
+        const text = link.textContent ? link.textContent.trim() : ''
+        if (text === '官网首页') {
+          e.preventDefault()
+          e.stopPropagation()
+          window.location.href = '/'
+        }
+      }
+    }
+
+    const initHomeLinkFix = () => {
+      document.removeEventListener('click', handleHomeLinkClick)
+      document.addEventListener('click', handleHomeLinkClick)
+    }
+
     onMounted(() => {
       initLightbox()
+      initHomeLinkFix()
     })
 
     // 监听路由改变，在路由跳转完成且 DOM 重新渲染后重新绑定事件
     watch(() => route.path, () => {
       nextTick(() => {
         // 给 300ms 宽限期以保证 Vitepress/Mermaid 异步渲染 SVG 占位完毕
-        setTimeout(initLightbox, 300)
+        setTimeout(() => {
+          initLightbox()
+          initHomeLinkFix()
+        }, 300)
       })
     })
   }

@@ -36,7 +36,7 @@ export default withMermaid(defineConfig({
 
     // 顶部导航栏
     nav: [
-      { text: '官网首页', link: '/' }, // 便于从文档回退到官网
+      { text: '官网首页', link: '/index.html' }, // 便于从文档回退到官网
       { text: '使用文档', link: '/introduction' },
       { text: '接入指引', link: '/agent-deploy' }
     ],
@@ -48,6 +48,7 @@ export default withMermaid(defineConfig({
         collapsed: false,
         items: [
           { text: '项目简介 & 架构优势', link: '/introduction' },
+          { text: '应用场景与硬件要求', link: '/use-cases' },
           { text: '极速运行与入网指南', link: '/quickstart' }
         ]
       },
@@ -59,6 +60,7 @@ export default withMermaid(defineConfig({
           { text: '飞牛 OS (fnOS) NAS 部署', link: '/deploy-fnos' },
           { text: 'iStoreOS 软路由部署', link: '/deploy-istoreos' },
           { text: '云服务器部署与穿透', link: '/deploy-cloud' },
+          { text: '服务端配置参考 (参数与端口)', link: '/deploy-config' },
           { text: 'Android 独立运行生态', link: '/deploy-standalone' }
         ]
       },
@@ -66,7 +68,9 @@ export default withMermaid(defineConfig({
         text: '📱 设备接入与 Agent 配置',
         collapsed: false,
         items: [
-          { text: '真机与容器 Agent 部署', link: '/agent-deploy' }
+          { text: '真机与容器 Agent 部署', link: '/agent-deploy' },
+          { text: 'Magisk 模块部署指南', link: '/agent-magisk' },
+          { text: '安卓 APP 使用指南', link: '/app-guide' }
         ]
       },
       {
@@ -81,7 +85,8 @@ export default withMermaid(defineConfig({
         text: '💻 开发者二次开发',
         collapsed: false,
         items: [
-          { text: '前端控制台二次开发', link: '/web-development' }
+          { text: '前端控制台二次开发', link: '/web-development' },
+          { text: '官网部署与动态更新', link: '/deploy-website' }
         ]
       },
       {

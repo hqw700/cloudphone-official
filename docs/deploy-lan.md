@@ -2,114 +2,66 @@
 
 本章节介绍如何在局域网（LAN）环境下部署 ScrcpyOverWebRTC 服务端系统。局域网内部署能够提供极高带宽和极低延迟（端到端交互延迟通常可低至 50ms 以内），且不产生任何公网流量费用，非常适合本地开发调试、真机群控以及内网私有化体验。
 
-我们将从 **普通 PC（Mac/Windows/Linux）原生脚本直接运行** 和 **Docker 容器化部署（带 TURN 中转）** 两个维度为您详细讲解。
+我们提供 **非 Docker 原生运行** 与 **Docker 一体化容器 (AIO)** 两种方式，按需选择即可。
 
 ---
 
-## 💻 方式一：普通 PC（Mac / Windows / Linux）原生运行
+## 💻 方式一：非 Docker 原生运行 (Mac / Windows / Linux)
 
-如果您是用于个人测试、本地调试或不想使用 Docker，可以直接在物理机上运行编译好的二进制服务。
+如果您用于个人测试、本地调试或不想安装 Docker，可以直接运行发布包内的单二进制服务，零依赖、解压即用。
 
-### 1. 获取服务端代码与准备工作
+### 1. 下载并解压发布包
 
-在启动服务前，请确保您已获取到服务端程序包及编译好的前端静态资源。
+前往 [Releases](https://github.com/hqw700/ScrcpyOverWebRTC/releases) 页面下载完整发布包 `cloudphone-vX.Y.Z.zip` 并解压。包内已包含 Linux / macOS / Windows (amd64 / arm64) 全平台二进制、前端静态资源与自签名 HTTPS 证书。
 
-* **获取代码与一键编译**：关于如何下载打包好的 Release 预编译包，或者如何克隆开源仓库并在 `web-app` 下开发热更新，请参阅 [项目简介 & 架构优势](/introduction) 与 [二次开发与联调说明指南](https://github.com/hqw700/ScrcpyOverWebRTC/blob/main/docs/DEVELOPMENT.md)。
+> 🔐 保留默认的 HTTPS 模式，可确保浏览器正常唤起 WebUSB / WebADB 一键部署等硬件接口；如仅在本机 localhost 调试，可传入 `-tls=false` 切换为 HTTP 模式。
 
-#### 🔐 安全证书准备（强烈推荐）
-为保障客户端浏览器能正常唤起 WebUSB 和 WebADB 等本地硬件直连接口，页面必须运行在安全的 HTTPS 上下文（或本地 localhost）。如果您是在局域网内通过 IP 地址跨设备访问，请提前在 `certs/` 目录下放置自签名或正式申请的 SSL 证书文件：
-* `certs/server.crt`
-* `certs/server.key`
+### 2. 启动服务
 
----
+* **Linux / macOS**：
+  ```bash
+  chmod +x start_server.sh
+  ./start_server.sh
+  ```
+  脚本会自动识别操作系统与 CPU 架构，拉起 `bin/` 下对应的二进制程序。
 
-### 2. Linux / macOS 运行步骤
+* **Windows**：进入 `bin\windows_amd64\` 目录，运行 `run.bat`。
 
-1. 打开终端，进入发布包根目录。
-2. 直接运行智能启动脚本（它会自动识别您的操作系统与 CPU 架构，并拉起 `bin/` 下对应的二进制程序）：
-   ```bash
-   # 默认以 HTTPS 模式启动（自动加载 certs/ 目录下的证书，监听 8443 端口）
-   ./start_server.sh
+### 3. 局域网内访问
 
-   # 如需以 HTTP 模式运行，可以传入 -tls=false
-   ./start_server.sh -tls=false
-   ```
+启动成功后，终端会打印本机各网卡的访问地址。同局域网内的其他设备（PC、手机、平板）通过浏览器访问 `https://<服务器局域网IP>:8443` 即可打开管理大盘，默认账号 `admin` / `admin123`。
+
+> 💡 常用启动参数（`-port`、`-tls=false`、`-no-auth`、`-ice_servers` 跨网段中转等）与数据目录说明，请参阅 [服务端配置参考](/deploy-config)。
 
 ---
 
-### 3. Windows 运行步骤
+## 🐳 方式二：Docker 一体化容器 (AIO)
 
-1. 打开文件管理器或命令提示符，进入 `bin/windows_amd64/` 目录。
-2. **快速运行**：
-   * 双击运行 `run.bat`，默认以 HTTPS 模式启动信令服务器。
-3. **以 HTTP 模式运行**：
-   * 若需在 Windows 命令行中以 HTTP 方式启动，可以使用命令行并附带 `-tls=false` 参数启动：
-     ```cmd
-     webrtc-signaling.exe -port 8443 -assets ../../assets -tls=false
-     ```
+如果您希望在局域网内获得“100% 连通率”保障，推荐使用 AIO 镜像——它内置 coturn 中转服务，在以下常见的局域网复杂拓扑中可有效避免黑屏：
 
----
+1. **多网段 / 多 Wi-Fi 隔离**：在公司或复杂企业网络下，Android 设备连接的“设备 Wi-Fi”和电脑客户端连接的“办公 Wi-Fi”可能处于不同的网段或 VLAN，无法建立 P2P 直连通道。
+2. **Docker 网桥隔离**：当 Android 容器（如 redroid）运行在宿主机的隔离 Docker Bridge 网桥中，浏览器无法与容器端口建立直接连接。
+3. **打洞失败兜底**：STUN 打洞失败时，连接会自动无缝降级到 TURN 媒体中转通道。
 
-### 4. 局域网内访问
+### 启动命令 (Host 网络模式)
 
-启动成功后，终端将输出运行地址。同局域网内的其他设备（包括 PC、手机、平板）通过浏览器访问即可：
-* 访问地址：`https://<服务器局域网IP>:8443` （默认 HTTPS 模式） 
-   *默认登录账号admin, 密码admin123*
+```bash
+docker run -d \
+  --name cp-aio \
+  --net=host \
+  -v ./data:/app/data \
+  -e PUBLIC_IP=<服务器局域网IP> \
+  buutuu/scrcpy-over-webrtc:latest
+```
 
----
+* **PUBLIC_IP**：局域网场景直接填服务器的内网 IP。
+* **数据持久化**：`-v ./data:/app/data` 将用户账号、设备标签等数据保存在宿主机 `./data` 目录，升级镜像不丢失。
+* **端口要求**：Host 模式下请确保宿主机的 `8443` 与 `3478` 未被其他服务占用；Bridge 模式与端口段收窄方法请参阅 [服务端配置参考](/deploy-config)。
 
-## 🐳 方式二：局域网内 Docker 部署（带 TURN 中转）
-
-### 1. 为什么局域网部署也需要 TURN 中转？
-
-尽管在同一个局域网下，由于网络拓扑可能比较复杂，我们仍强烈建议使用 TURN 代理中转服务：
-1. **多网段/多 Wi-Fi 隔离**：在公司或复杂企业网络下，Android 设备连接的“设备 Wi-Fi”和电脑客户端连接的“办公 Wi-Fi”可能处于不同的网段或 VLAN，相互之间无法直接建立 P2P 直连通道。
-2. **Docker 网桥隔离**：当您的 Android 容器（如 redroid）运行在宿主机的隔离 Docker Bridge 网桥中，且未配置 host 网络模式时，浏览器无法与容器端口建立直接连接。
-3. **100% 连通率保障**：在 WebRTC 打洞（STUN）失败时，连接会自动无缝降级到 TURN 媒体中转通道，确保“黑屏无画面、有画面无法操控”的概率降至 0。
+> 📦 局域网同样可以使用发布包内 `docker/deploy_cloud.sh` 的 compose 双容器方案（本地编译镜像），其交互式部署流程与云服务器完全一致，请参见 [云服务器部署指南](/deploy-cloud) 的方式二。
 
 ---
 
-### 2. 架构构成
+## ➡️ 下一步
 
-本项目的 `docker/` 部署包设计为双容器集群，包含：
-* **`coturn`（中转服务）**：使用 `network_mode: host`（宿主机网络模式）运行，规避了 Docker 网桥在分发、映射大段 UDP 端口（49152-65535）时的严重性能开销与内存分配失败，支持高并发媒体流转发。
-* **`signaling`（信令服务）**：基于 `cloudphone-all-in-one` 镜像，运行信令交互服务器并托管前端静态资源，在连接建立阶段动态向客户端分发中转配置信息。
-
----
-
-### 3. 一键部署步骤
-
-1. **进入部署包所在路径**：
-   ```bash
-   cd docker/
-   ```
-2. **运行一键部署脚本**：
-   ```bash
-   ./deploy_cloud.sh
-   ```
-3. **交互式指引配置**：
-   * 脚本会自动发出请求探测公网 IP，在局域网部署场景下，请直接在终端输入**您服务器的当前局域网 IP**（例如 `192.168.1.100`），并回车确认。
-   * 脚本会智能检测，如果检测到未生成过配置，将自动随机生成一组高强度安全凭证，用于客户端与 coturn 建立连接。
-   * 脚本将自动调用 `docker build` 编译出集成信令与前端的轻量化 Docker 镜像，并自动执行 `docker compose up -d` 启动全部容器。
-
-4. **查看本地连接配置**：
-   启动成功后，同目录下会生成 `connection_info.txt` 文本文件。您可以直接查看：
-   ```bash
-   cat connection_info.txt
-   ```
-   它详细记录了您的后台管理地址，以及后续 Android Agent 启动时所需要配置的 `-ice-servers` 中转参数。
-
----
-
-### 4. 关键配置与网络端口放行
-
-为了确保中转服务在局域网内无障碍运行，请确保部署服务的宿主机**放行以下物理端口**（在局域网防火墙或安全组中配置）：
-
-| 端口类型 | 传输协议 | 功能说明 |
-| :--- | :--- | :--- |
-| **`8443`** | `TCP` | 信令服务器端口 & 网页管理后台服务端口 |
-| **`3478`** | `TCP / UDP` | coturn 默认 STUN/TURN 连接探测监听端口 |
-| **`49152-65535`** | `UDP` | WebRTC 媒体流转发所使用的大段高位动态 UDP 端口 |
-
-> [!CAUTION]
-> 由于 `coturn` 服务以 `host` 网络模式运行，请确保宿主机上没有其他程序（如其他 `stun` 服务或 `turn` 服务）占用 `3478` 端口，否则会导致中转服务拉起失败。
+服务端启动后，请前往 [真机与容器 Agent 部署](/agent-deploy) 将您的 Android 设备接入大盘。

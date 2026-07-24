@@ -39,6 +39,7 @@
         <nav>
           <ul class="nav-menu">
             <li><a href="/" class="nav-link active">官网首页</a></li>
+            <li><a href="#download" class="nav-link">镜像下载</a></li>
             <li><a href="/docs/" class="nav-link">帮助文档</a></li>
             <li><a href="/apply.html" class="nav-link">申请试用</a></li>
           </ul>
@@ -60,7 +61,7 @@
         <div class="hero-content" style="animation: slideInLeft var(--transition-slow); display: flex; flex-direction: column; align-items: center;">
           <div class="badge-tag" style="margin-bottom: 20px;">
             <span class="badge-dot"></span>
-            <span>v0.2.7 正式发布</span>
+            <span>v0.3.0 / App v0.3.1 正式发布</span>
           </div>
           <h1 class="hero-title" style="font-size: 64px; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px;">
             <span class="text-gradient">穿云投屏</span>
@@ -510,57 +511,469 @@
       </div>
     </section>
 
-    <!-- 特性介绍 Section -->
-    <section class="section" id="features" style="padding-top: 50px;">
+    <!-- 镜像下载 Section -->
+    <section class="section" id="download" style="padding-top: 50px; padding-bottom: 50px;">
       <div class="container">
         <div class="section-title-wrap">
-          <span class="section-subtitle">Core Features</span>
-          <h2 class="section-title">重新定义网页云端操作体验</h2>
-          <p class="section-desc">抛弃传统 VNC 的卡顿与模糊，在任意设备的浏览器中，体验几乎零延迟的 Android 虚拟机系统。</p>
+          <span class="section-subtitle">Downloads & Deploy</span>
+          <h2 class="section-title">镜像与资源下载</h2>
+          <p class="section-desc">提供多样化的获取渠道，包括高速网盘、GitHub 官方发布包以及 Docker 一键拉取镜像。</p>
         </div>
         
-        <div class="features-grid">
-          <!-- 硬件级时间戳 -->
-          <div class="feature-card">
-            <div class="feature-icon-wrapper">⚡</div>
-            <h3>硬件级 PTS 透传 (HW-PTS)</h3>
-            <p>直接捕获 Android MediaCodec 编码器的原始 PTS 时间戳计算 RTP Duration，解决时间戳累积漂移，使 Jitter Buffer 降至毫秒级。</p>
-          </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-10" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
           
-          <!-- 三通道隔离 -->
-          <div class="feature-card">
-            <div class="feature-icon-wrapper">🔒</div>
-            <h3>三通道 UDS 隔离</h3>
-            <p>视频流 (@video)、控制流 (@control) 和多点触控 (@touch) 采用三路独立 Unix Domain Socket 连接，彻底杜绝高频触控抢占视频带宽。</p>
+          <!-- 1. 网盘下载 -->
+          <div class="flex flex-col justify-between p-6 rounded-2xl border border-[--border-glow] bg-[--bg-card] hover:bg-[--bg-card-hover] hover:border-[--border-glow-hover] transition-all duration-300 shadow-xl group" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-glow); background: var(--bg-card); transition: all var(--transition-normal);">
+            <div>
+              <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-cyan-950/40 text-cyan-400 text-2xl mb-4 border border-cyan-800/30 group-hover:scale-110 transition-transform" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); background: rgba(6, 182, 212, 0.1); color: var(--accent-blue); font-size: 24px; margin-bottom: 16px; border: 1px solid rgba(6, 182, 212, 0.2);">
+                💽
+              </div>
+              <h3 class="text-xl font-bold text-[--text-primary] mb-2" style="font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">高速网盘下载 (夸克)</h3>
+              <p class="text-sm text-[--text-secondary] mb-3 leading-relaxed" style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.5;">
+                适合国内网络直连。提供 Android APP、Magisk 模块以及管理平台全套压缩包（免密下载）。
+              </p>
+              <div class="space-y-2 mb-4" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+                <a id="app-apk-link" href="https://pan.quark.cn/s/7906b53d4c18" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
+                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;">📱 Android APP (v0.3.1)</span>
+                  <span class="text-cyan-400 font-mono text-[11px]" style="color: var(--accent-blue);">下载 .apk 🚀</span>
+                </a>
+                <a id="magisk-module-link" href="https://pan.quark.cn/s/81a3aba5f6cc" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
+                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;">🧩 Magisk 模块 (v0.3.0)</span>
+                  <span class="text-cyan-400 font-mono text-[11px]" style="color: var(--accent-blue);">下载 .zip 🚀</span>
+                </a>
+                <a id="platform-zip-link" href="https://pan.quark.cn/s/e68ed1f81740" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
+                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;">📦 管理平台 (v0.3.0)</span>
+                  <span class="text-cyan-400 font-mono text-[11px]" style="color: var(--accent-blue);">下载全套包 🚀</span>
+                </a>
+              </div>
+            </div>
+            <a id="quark-link" href="https://pan.quark.cn/s/e68ed1f81740" target="_blank" class="w-full py-2 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-center transition-colors text-xs shadow-md" style="display: block; width: 100%; padding: 8px 16px; border-radius: var(--radius-md); background: var(--accent-blue); color: var(--bg-deep); font-weight: 600; text-align: center; font-size: 13px; transition: background var(--transition-fast);">
+              打开夸克网盘全量分享
+            </a>
           </div>
+
+          <!-- 2. GitHub Release -->
+          <div class="flex flex-col justify-between p-6 rounded-2xl border border-[--border-glow] bg-[--bg-card] hover:bg-[--bg-card-hover] hover:border-[--border-glow-hover] transition-all duration-300 shadow-xl group" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-glow); background: var(--bg-card); transition: all var(--transition-normal);">
+            <div>
+              <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-purple-950/40 text-purple-400 text-2xl mb-4 border border-purple-800/30 group-hover:scale-110 transition-transform" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); background: rgba(155, 81, 224, 0.1); color: var(--accent-purple); font-size: 24px; margin-bottom: 16px; border: 1px solid rgba(155, 81, 224, 0.2);">
+                🐙
+              </div>
+              <h3 class="text-xl font-bold text-[--text-primary] mb-2" style="font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">GitHub Releases</h3>
+              <p class="text-sm text-[--text-secondary] mb-4 leading-relaxed" style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6;">
+                获取官方最新发布的开源源码、Release 预编译包（包括 webrtc-signaling 信令端、android-agentd 以及脚本工具）。
+              </p>
+              <div class="bg-slate-950/40 border border-slate-800/50 rounded-lg p-3 text-xs text-[--text-secondary] mb-4" style="background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-muted); border-radius: var(--radius-sm); padding: 12px; font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">
+                <div style="margin-bottom: 4px;">最新版本：<span id="github-version" class="font-mono text-purple-400 font-bold" style="color: #c084fc; font-weight: 600;">v0.3.0 (App v0.3.1)</span></div>
+                <div style="margin-bottom: 4px;">官方仓库：<span class="font-mono" style="color: var(--text-secondary);">hqw700/ScrcpyOverWebRTC</span></div>
+                <div>发布状态：<span style="color: var(--color-success);">Stable (稳定版)</span></div>
+              </div>
+            </div>
+            <a href="https://github.com/hqw700/ScrcpyOverWebRTC/releases" target="_blank" class="w-full py-2.5 px-4 rounded-xl text-white font-semibold text-center transition-colors text-sm shadow-md" style="display: block; width: 100%; padding: 10px 16px; border-radius: var(--radius-md); background: #7c3aed; color: #fff; font-weight: 600; text-align: center; font-size: 14px; transition: background var(--transition-fast);">
+              前往 GitHub Releases
+            </a>
+          </div>
+
+          <!-- 3. Docker Pull -->
+          <div class="flex flex-col justify-between p-6 rounded-2xl border border-[--border-glow] bg-[--bg-card] hover:bg-[--bg-card-hover] hover:border-[--border-glow-hover] transition-all duration-300 shadow-xl group" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-glow); background: var(--bg-card); transition: all var(--transition-normal);">
+            <div>
+              <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-blue-950/40 text-blue-400 text-2xl mb-4 border border-blue-800/30 group-hover:scale-110 transition-transform" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); background: rgba(59, 130, 246, 0.1); color: var(--color-info); font-size: 24px; margin-bottom: 16px; border: 1px solid rgba(59, 130, 246, 0.2);">
+                🐳
+              </div>
+              <h3 class="text-xl font-bold text-[--text-primary] mb-2" style="font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Docker 一体化镜像</h3>
+              <p class="text-sm text-[--text-secondary] mb-4 leading-relaxed" style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6;">
+                包含信令服务、Web 仪表盘、coturn 中转服务。一行指令，即可在本地或云端完成全套控制端基础设施部署。
+              </p>
+              
+              <!-- 终端样式的一键复制框 -->
+              <div class="relative bg-slate-950/80 border border-slate-800 rounded-lg p-3 font-mono text-xs text-slate-300 mb-4 flex items-center justify-between" style="background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-muted); border-radius: var(--radius-sm); padding: 12px; font-size: 12px; color: var(--text-primary); margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
+                <span id="docker-pull-cmd" class="overflow-x-auto whitespace-nowrap pr-2 scrollbar-none font-mono" style="font-family: var(--font-mono); overflow-x: auto; white-space: nowrap;">docker pull buutuu/scrcpy-over-webrtc:latest</span>
+                <button id="docker-pull-btn" class="copy-btn text-slate-500 hover:text-cyan-400 cursor-pointer transition-colors p-1" style="background: transparent; border: none; padding: 4px; cursor: pointer; color: var(--text-secondary);" aria-label="Copy command" data-cmd="docker pull buutuu/scrcpy-over-webrtc:latest">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="w-full py-2.5 px-4 rounded-xl bg-slate-800 text-[--text-secondary] font-semibold text-center text-sm border border-slate-700/50" style="display: block; width: 100%; padding: 10px 16px; border-radius: var(--radius-md); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-secondary); font-weight: 600; text-align: center; font-size: 14px;">
+              镜像大小：约 280MB (多架构)
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 版本更新日志 Section -->
+    <section class="section" id="changelog" style="padding-top: 30px; padding-bottom: 50px;">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">What's New in v0.3.0 & App v0.3.1</span>
+          <h2 class="section-title">最新版本更新日志</h2>
+          <p class="section-desc">全新升级 Android 客户端、Magisk 保活模块以及管理平台核心性能。</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-8" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
           
-          <!-- Opus/H.264直通 -->
-          <div class="feature-card">
-            <div class="feature-icon-wrapper">🎵</div>
-            <h3>高音质与视频直通</h3>
-            <p>独家支持 Opus 音频直通编码（StreamID: audio_0）并与视频轨道分离渲染。同时支持 H.264 Annex B 帧直接封包，消除重转码延迟。</p>
+          <!-- 1. Android APP 客户端 -->
+          <div class="p-6 rounded-2xl border border-cyan-800/40 bg-slate-950/50 shadow-xl relative overflow-hidden" style="padding: 24px; border-radius: var(--radius-lg); border: 1px solid rgba(6, 182, 212, 0.3); background: rgba(10, 15, 29, 0.75);">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 text-xs font-bold rounded-full bg-cyan-950 text-cyan-400 border border-cyan-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(6, 182, 212, 0.15); color: var(--accent-blue); font-size: 12px; font-weight: 700; border: 1px solid rgba(6, 182, 212, 0.3);">
+                📱 Android APP 客户端
+              </span>
+              <span class="text-xs font-mono text-cyan-300" style="color: #67e8f9; font-size: 12px; font-family: var(--font-mono);">v0.3.1</span>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+              <li style="display: flex; align-items: flex-start; gap: 6px;">
+                <span style="color: var(--accent-blue);">•</span>
+                <span><strong>主控端体验</strong>：直接连接大盘观看并操控云手机，支持多点触控、物理按键及双向剪切板。</span>
+              </li>
+              <li style="display: flex; align-items: flex-start; gap: 6px;">
+                <span style="color: var(--accent-blue);">•</span>
+                <span><strong>被控端双引擎</strong>：支持 Root 与 Shizuku (ADB) 免电脑免 Root 快速拉起 Agent。</span>
+              </li>
+              <li style="display: flex; align-items: flex-start; gap: 6px;">
+                <span style="color: var(--accent-blue);">•</span>
+                <span><strong>独立单机模式</strong>：服务端可直接运行在手机内部，彻底脱离外部服务器依赖。</span>
+              </li>
+              <li style="display: flex; align-items: flex-start; gap: 6px;">
+                <span style="color: var(--accent-blue);">•</span>
+                <span><strong>直连文件管理 (v0.3.1)</strong>：内置 P2P 文件管理器，支持全功能目录浏览与快速传输。</span>
+              </li>
+            </ul>
+            <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
+              <a href="https://pan.quark.cn/s/7906b53d4c18" target="_blank" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300" style="color: var(--accent-blue); text-decoration: none; font-size: 12px;">
+                获取 ScrcpyOverWebRTC-v0.3.1-release.apk →
+              </a>
+            </div>
           </div>
+
+          <!-- 2. Magisk / KernelSU / APatch 模块 -->
+          <div class="p-6 rounded-2xl border border-purple-800/40 bg-slate-950/50 shadow-xl relative overflow-hidden" style="padding: 24px; border-radius: var(--radius-lg); border: 1px solid rgba(168, 85, 247, 0.3); background: rgba(10, 15, 29, 0.75);">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 text-xs font-bold rounded-full bg-purple-950 text-purple-400 border border-purple-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(168, 85, 247, 0.15); color: #c084fc; font-size: 12px; font-weight: 700; border: 1px solid rgba(168, 85, 247, 0.3);">
+                🧩 Magisk 极速模块
+              </span>
+              <span class="text-xs font-mono text-purple-300" style="color: #d8b4fe; font-size: 12px; font-family: var(--font-mono);">v0.3.0</span>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+              <li style="display: flex; align-items: flex-start; gap: 6px;">
+                <span style="color: #c084fc;">•</span>
+                <span><strong>系统服务自启</strong>：支持作为底层系统服务开机无感自启与后台自动保活。</span>
+              </li>
+              <li style="display: flex; align-items: flex-start; gap: 6px;">
+                <span style="color: #c084fc;">•</span>
+                <span><strong>cpctl 命令行工具</strong>：支持通过终端交互式工具 `cpctl` 实时配置信令、设备 ID 及码率。</span>
+              </li>
+              <li style="display: flex; align-items: flex-start; gap: 6px;">
+                <span style="color: #c084fc;">•</span>
+                <span><strong>MT管理器直编</strong>：可直接编辑 `/data/adb/modules/cloudphone-agent/config` 便捷更新配置。</span>
+              </li>
+            </ul>
+            <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
+              <a href="https://pan.quark.cn/s/81a3aba5f6cc" target="_blank" class="text-xs font-semibold text-purple-400 hover:text-purple-300" style="color: #c084fc; text-decoration: none; font-size: 12px;">
+                获取 cloudphone-agent-magisk-v0.3.0.zip →
+              </a>
+            </div>
+          </div>
+
+          <!-- 3. v0.3.0 管理平台修改 -->
+          <div class="p-6 rounded-2xl border border-blue-800/40 bg-slate-950/50 shadow-xl relative overflow-hidden" style="padding: 24px; border-radius: var(--radius-lg); border: 1px solid rgba(59, 130, 246, 0.3); background: rgba(10, 15, 29, 0.75);">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 text-xs font-bold rounded-full bg-blue-950 text-blue-400 border border-blue-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; font-size: 12px; font-weight: 700; border: 1px solid rgba(59, 130, 246, 0.3);">
+                💻 管理平台优化
+              </span>
+              <span class="text-xs font-mono text-blue-300" style="color: #93c5fd; font-size: 12px; font-family: var(--font-mono);">v0.3.0</span>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+              <li style="display: flex; align-items: flex-start; gap: 6px;">
+                <span style="color: #60a5fa;">•</span>
+                <span><strong>离线设备列表</strong>：优化设备注册流程，新增离线设备状态列表与云端管理。</span>
+              </li>
+              <li style="display: flex; align-items: flex-start; gap: 6px;">
+                <span style="color: #60a5fa;">•</span>
+                <span><strong>自定义快捷指令同步</strong>：自定义快捷宏命令支持与信令 Server 多端持久化同步。</span>
+              </li>
+              <li style="display: flex; align-items: flex-start; gap: 6px;">
+                <span style="color: #60a5fa;">•</span>
+                <span><strong>传输速度飙升</strong>：大幅优化应用远程安装与二进制文件传输拆包效率。</span>
+              </li>
+              <li style="display: flex; align-items: flex-start; gap: 6px;">
+                <span style="color: #60a5fa;">•</span>
+                <span><strong>鲁棒性修复</strong>：修复设备切网后误离线 Bug，修复横屏设备触控逆映射错位。</span>
+              </li>
+            </ul>
+            <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
+              <a href="https://pan.quark.cn/s/e68ed1f81740" target="_blank" class="text-xs font-semibold text-blue-400 hover:text-blue-300" style="color: #60a5fa; text-decoration: none; font-size: 12px;">
+                获取 cloudphone-v0.3.0.zip 平台包 →
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 全景核心功能大盘 Section -->
+    <section class="section" id="features" style="padding-top: 50px; padding-bottom: 50px;">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">Full Feature Matrix</span>
+          <h2 class="section-title">全景功能大盘与核心技术矩阵</h2>
+          <p class="section-desc">全面覆盖 WebRTC 流媒体、高频群控大盘、Android App 双引擎、虚拟 HAL 注入与 AI 智能排障。</p>
+        </div>
+
+        <!-- 6 大分类切换 Tab 栏 -->
+        <div class="feature-tabs-wrapper flex items-center justify-center flex-wrap gap-2 mb-10" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 32px;">
+          <button type="button" class="feature-tab-btn active" data-tab="dashboard" style="padding: 10px 18px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--accent-blue); background: rgba(6, 182, 212, 0.15); color: var(--accent-blue); transition: all 0.3s ease;">
+            🖥️ 高频预览与批量群控
+          </button>
+          <button type="button" class="feature-tab-btn" data-tab="app" style="padding: 10px 18px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border-muted); background: rgba(0, 0, 0, 0.3); color: var(--text-secondary); transition: all 0.3s ease;">
+            📱 Android APP & 模块保活
+          </button>
+          <button type="button" class="feature-tab-btn" data-tab="webrtc" style="padding: 10px 18px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border-muted); background: rgba(0, 0, 0, 0.3); color: var(--text-secondary); transition: all 0.3s ease;">
+            ⚡ 超低延迟与双轨配置
+          </button>
+          <button type="button" class="feature-tab-btn" data-tab="inputs" style="padding: 10px 18px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border-muted); background: rgba(0, 0, 0, 0.3); color: var(--text-secondary); transition: all 0.3s ease;">
+            ⌨️ 高级交互与 Terminal
+          </button>
+          <button type="button" class="feature-tab-btn" data-tab="ai" style="padding: 10px 18px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border-muted); background: rgba(0, 0, 0, 0.3); color: var(--text-secondary); transition: all 0.3s ease;">
+            🤖 AI 智能排障与 WebADB
+          </button>
+          <button type="button" class="feature-tab-btn" data-tab="hal" style="padding: 10px 18px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border-muted); background: rgba(0, 0, 0, 0.3); color: var(--text-secondary); transition: all 0.3s ease;">
+            🔮 虚拟 HAL & 集群管理
+          </button>
+        </div>
+
+        <!-- 面板容器 -->
+        <div class="feature-panels-container">
           
-          <!-- P2P/UPnP/IPv6 -->
-          <div class="feature-card">
-            <div class="feature-icon-wrapper">🌐</div>
-            <h3>公网 P2P 穿透增强</h3>
-            <p>自动探测宿主机网卡并申请 UPnP UDP 端口映射，配合 IPv6 单播直连技术与 STUN/TURN 中继，跨越 CGNAT 屏障，实现公网免配置秒级直连。</p>
+          <!-- 面板 1: 高频预览与批量群控 -->
+          <div class="feature-panel" id="panel-dashboard" style="display: block;">
+            <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">📡</div>
+                <h3>高频大盘实时预览</h3>
+                <p>独立 WebSocket 二进制 H.264 裸流分发，抛弃传统 CPU 压缩 JPEG 方案，支持数十台设备大盘高帧率并发流畅监控。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🎮</div>
+                <h3>独立预览直控 (Direct Control)</h3>
+                <p>无需建立昂贵的 WebRTC P2P 握手，即可在大盘 Canvas 卡片上直接滑动点击操作云手机，极致响应，瞬间直控。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🎯</div>
+                <h3>批量触控与按键群控</h3>
+                <p>支持批量勾选目标云手机，一键将屏幕触控手势、按键宏同步广播至全量设备，大幅提升群控运维效率。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">📦</div>
+                <h3>应用批量分发与静默安装 (v0.3.0)</h3>
+                <p>上传 APK 一键广播分发至多台云手机，Agent 后台异步并发 `pm install -r` 静默安装，在管理大盘实时汇总反馈安装状态。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">📂</div>
+                <h3>P2P 直连文件管理器 (Web & App)</h3>
+                <p>依托 DataChannel P2P 物理通道与滑动窗口 BWE 流控，支持对远端云手机目录进行全功能浏览、新建、删除及极速双向传输。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">📢</div>
+                <h3>批量命令行分发终端</h3>
+                <p>结合设备标签一键全选，并发广播下发 ADB Shell 指令，在大盘实时展示各机器执行状态与 stdout/stderr 输出。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🔄</div>
+                <h3>坐标自适应与 90° 旋转逆映射</h3>
+                <p>自动解析视频帧物理像素，剥离 `object-fit: contain` 黑边；支持原生横屏设备（车机/Pad）90° 顺时针逆映射，触控 100% 精准。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">👁️</div>
+                <h3>视口感知智能降级与 GPU 硬解</h3>
+                <p>感知大盘滚动视口 (IntersectionObserver)，仅对可见区域卡片推流，结合 WebCodecs GPU 硬件解码，极致节省带宽与 CPU。</p>
+              </div>
+            </div>
           </div>
-          
-          <!-- Web-ADB 终端 -->
-          <div class="feature-card">
-            <div class="feature-icon-wrapper">💻</div>
-            <h3>原生 WebADB 交互</h3>
-            <p>不依赖本地 ADB。通过 WebRTC 独立的 adb-channel 数据通道直连虚机 5555 端口，配合前端 xterm.js，带来响应时间小于 10ms 的控制台体验。</p>
+
+          <!-- 面板 2: Android APP & 模块保活 -->
+          <div class="feature-panel" id="panel-app" style="display: none;">
+            <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">📱</div>
+                <h3>APP 主控端直控大盘</h3>
+                <p>支持原生 Android App 登录连接大盘直控云手机，提供多点触控、悬浮金刚键、端到端延迟悬浮球及软键盘抑制。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">⚡</div>
+                <h3>Root / Shizuku 双引擎被控</h3>
+                <p>物理手机免连接电脑，支持 Root 或无线调试 Shizuku (ADB) 双引擎授权，一键免电脑拉起 Agent 受控运行。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🏠</div>
+                <h3>独立单机模式 (手机内置 Server)</h3>
+                <p>信令与 Web 托管可直接解压运行在手机内部，通过局域网/公网 HTTPS 直连访问，彻底摆脱外部服务器依赖。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🧩</div>
+                <h3>Magisk / KSU 系统服务保活</h3>
+                <p>支持作为 Magisk / KernelSU / APatch 插件模块作为底层服务开机自启保活，防 LMK 误杀，稳定性达 99.9%。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🛠️</div>
+                <h3>cpctl 工具与 MT管理器配置</h3>
+                <p>内置 `cpctl` 终端命令行交互配置工具，亦可直接使用 MT管理器 编辑 `/data/adb/modules/cloudphone-agent/config` 热生效。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">📁</div>
+                <h3>App 原生直连文件管理 (v0.3.1)</h3>
+                <p>App 内部集成 P2P 文件管理器，支持对远端云手机目录进行直观浏览、新建、重命名、删除及高速双向上传下载。</p>
+              </div>
+            </div>
           </div>
-          
-          <!-- BWE 弱网自适应 -->
-          <div class="feature-card">
-            <div class="feature-icon-wrapper">📈</div>
-            <h3>拥塞控制与参数热更新</h3>
-            <p>集成了 Pion GCC 带宽评估算法，支持 MediaCodec 底层参数热更新，运行时动态改变码率与分辨率，弱网下依然保持画面丝滑连贯。</p>
+
+          <!-- 面板 3: 超低延迟与双轨配置 -->
+          <div class="feature-panel" id="panel-webrtc" style="display: none;">
+            <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">⏱️</div>
+                <h3>HW-PTS 硬件级时间戳 Passthrough</h3>
+                <p>捕获 MediaCodec 硬件编码器原始 PTS 时间戳解算 RTP Duration，彻底解决累积漂移，Jitter Buffer 降至 10ms 内。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🔒</div>
+                <h3>三通道 UDS 物理隔离</h3>
+                <p>视频 (@video)、控制 (@control) 和多点触控 (@touch) 三路 Socket 隔离运行，高频触控绝不抢占视频带宽。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🎵</div>
+                <h3>Opus 音频内录直通</h3>
+                <p>Android 后台 `scrcpy-server` 输出 Opus 裸流并转换为 WebRTC AudioTrack，画面与声音精准同步低延迟输出。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🌐</div>
+                <h3>P2P IPv6 直连与 TURN 中继</h3>
+                <p>自动收集 IPv6 候选地址实现公网 0 带宽成本直连；严格对称 NAT 环境自动匹配内置 `coturn` TURN 中继中转。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">⚙️</div>
+                <h3>全局 vs 单设备双轨定制隔离</h3>
+                <p>独立保存特定设备的分辨率、码率、帧率、通道策略 (auto/direct/relay) 和 IP 偏好 (v4/v6)，重连瞬间热生效。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🌙</div>
+                <h3>息屏连接防窥与硬件节电</h3>
+                <p>唤醒录屏后自动切断物理真机屏幕背光，具备防窥、防硬件发热、大幅延长电池寿命的作用。</p>
+              </div>
+            </div>
           </div>
+
+          <!-- 面板 4: 高级交互与 Terminal -->
+          <div class="feature-panel" id="panel-inputs" style="display: none;">
+            <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">📋</div>
+                <h3>静默双向剪切板 (防回环)</h3>
+                <p>焦点回弹自动无感同步剪贴板，支持快捷键粘贴，两端以最近同步文本判重，彻底避免无限复制回环。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">✍️</div>
+                <h3>IME 拼音汉字无错落屏</h3>
+                <p>1px 透明 Textarea 锁定焦点与 Composition 拼音合成管理，非 ASCII (汉字) 自动走剪切板注入，100% 选词落屏。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🕹️</div>
+                <h3>可视化改键与摇杆引擎</h3>
+                <p>内置可视化拖拽编辑器，支持 Tap(单击)、Joystick(跑动摇杆)、Swipe(线性滑动)及系统按键映射绑定。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">💻</div>
+                <h3>Interactive Shell (xterm.js)</h3>
+                <p>嵌入 xterm.js ANSI 仿真终端，支持多 Tab 会话，可流畅运行 top、vi、logcat 等真交互式程序。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">📢</div>
+                <h3>批量命令分发终端</h3>
+                <p>支持根据设备标签一键点选全选，并发下发 ADB Shell 命令，在大盘分组高亮展示各机器执行状态与 stdout/stderr。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">☁️</div>
+                <h3>自定义快捷宏云同步 (v0.3.0)</h3>
+                <p>控制台右侧支持自主增删改快捷宏命令，数据自动在信令 Server 端持久化存储 (`shortcuts.json`) 实现多端漫游。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 面板 5: AI 智能排障与 WebADB -->
+          <div class="feature-panel" id="panel-ai" style="display: none;">
+            <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🤖</div>
+                <h3>AI 智能排障代理</h3>
+                <p>完美接入 OpenAI、Claude 及 DeepSeek，自主运行原生工具链 (Tool Calling)，查命令、抓包并分析卡顿根本原因。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🔍</div>
+                <h3>AI 思考与工具 Trace 日志</h3>
+                <p>顶层集成“思考过程与工具调用日志”面板，实时展现 Prompt 解析、逻辑推理以及下发 Shell / Stats 工具的日志。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🔌</div>
+                <h3>P2P 隧道 WebADB 调试</h3>
+                <p>依托 DataChannel 专用通道，前端纯 JS 实现 WebADB 握手，直接在浏览器上与云手机 adbd 通信，免本地安装 ADB。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">📦</div>
+                <h3>P2P 文件管理与静默分发</h3>
+                <p>基于 DataChannel 滑动窗口 BWE 流控传输，支持文件浏览、上传下载及异步并发 `pm install -r` 静默应用安装。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">📊</div>
+                <h3>离线设备列表与状态持久化 (v0.3.0)</h3>
+                <p>信令服务器与管理平台全面优化设备注册心跳，引入离线设备持久化视图，方便大盘对离线设备的统一追踪。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🩹</div>
+                <h3>切网恢复与网络链路自愈 (v0.3.0)</h3>
+                <p>彻底修复因 Wi-Fi / 移动网络切换导致的设备离线误报与假死，网络重连后 Agent 自动触发注册上报与链路自愈。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 面板 6: 虚拟 HAL & 集群管理 -->
+          <div class="feature-panel" id="panel-hal" style="display: none;">
+            <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">📷</div>
+                <h3>Camera HAL 摄像头裸流注入</h3>
+                <p>捕获网页摄像头流，Agent 解码为 YUV420p 裸流直注 TCP 9001 端口，云手机内相机 App 瞬间捕捉本机画面。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">📍</div>
+                <h3>GPS HAL 虚拟定位</h3>
+                <p>Agent 开放 TCP 9002 端口接收经纬度，动态更新 GNSS 配置文件，定位 HAL 线程 1s 轮询上报 LocationManager。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🧭</div>
+                <h3>Sensors HAL 传感器模拟</h3>
+                <p>开放 TCP 9003 端口接收 JSON 数据，动态更新内存 `gMockSensorData`，实时模拟加速度计、陀螺仪与折叠角。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">👑</div>
+                <h3>多账号与租户隔离 (Kick 强退)</h3>
+                <p>划分 admin 与普通用户角色，提供细粒度设备分配；管理员可实时监控活动连接并一键强退 (Kick) 释放设备。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">🏷️</div>
+                <h3>设备彩色标签与大盘筛选</h3>
+                <p>支持给设备设置自定义彩色标签，本地+云端 HTTP API 双轨同步，大盘与 ECharts 监控走势响应式即时过滤。</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-wrapper">📈</div>
+                <h3>WebSocket 指标与 ECharts 趋势</h3>
+                <p>Agent 端 5s 差分采集 CPU、内存、磁盘、网速与温度，前端 Pinia 滑动窗口与 ECharts 展现设备实时性能折线图。</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -610,10 +1023,16 @@
                 <td>支持 Tap(单击)、Joystick(跑动摇杆)、Swipe(线性滑动)及物理按键映射。</td>
               </tr>
               <tr>
-                <td style="font-weight: 600;">文件管理器</td>
-                <td>大文件分片流式上传</td>
-                <td><span class="status-badge status-supported">✓ 已支持</span></td>
-                <td>基于 DataChannel 流式大文件断点传输、apk一键静默安装及应用卸载。</td>
+                <td style="font-weight: 600;">文件管理</td>
+                <td>P2P 直连文件管理器 (Web & App)</td>
+                <td><span class="status-badge status-supported">✓ 已支持 (v0.3.1)</span></td>
+                <td>基于 DataChannel P2P 通道，支持在网页与 App 端进行全功能文件目录浏览、新建、重命名、删除及极速双向传输。</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">应用分发</td>
+                <td>应用批量广播与静默安装</td>
+                <td><span class="status-badge status-supported">✓ 已支持 (v0.3.0)</span></td>
+                <td>支持上传 APK 批量广播分发至选中的多台云手机，Agent 异步并发执行 pm install -r 静默安装并在大盘汇总进度。</td>
               </tr>
               <tr>
                 <td style="font-weight: 600;">ADB 终端</td>
@@ -650,6 +1069,30 @@
                 <td>系统指标采集与趋势图表</td>
                 <td><span class="status-badge status-supported">✓ 已支持</span></td>
                 <td>5s 定期差分采集 CPU、内存、网速及温度指标，配合 ECharts 大盘渲染。</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Android App</td>
+                <td>主控直控 & 免电脑 Root/Shizuku 被控</td>
+                <td><span class="status-badge status-supported">✓ 已支持 (v0.3.1)</span></td>
+                <td>支持手机作为主控直控大盘，被控端 Root/Shizuku 双引擎免电脑运行，内置单机模式与直连文件管理。</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Magisk 模块</td>
+                <td>系统服务自启保活与 cpctl 配置</td>
+                <td><span class="status-badge status-supported">✓ 已支持 (v0.3.0)</span></td>
+                <td>提供 Magisk/KernelSU/APatch 插件包系统服务自启保活，内置 cpctl 命令行工具及 MT管理器 配置热重载。</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">大盘与集群</td>
+                <td>离线设备列表与快捷指令云同步</td>
+                <td><span class="status-badge status-supported">✓ 已支持 (v0.3.0)</span></td>
+                <td>优化设备注册流程与持久化离线列表管理，支持自定义快捷指令与信令 Server 多端热同步。</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">传输与兼容</td>
+                <td>切网恢复与原生横屏触控逆映射</td>
+                <td><span class="status-badge status-supported">✓ 已支持 (v0.3.0)</span></td>
+                <td>彻底修复设备切网误报离线，重构原生横屏机器坐标匹配算法；优化文件与应用安装流控提升传输速度。</td>
               </tr>
               <tr>
                 <td style="font-weight: 600;">数据同步</td>

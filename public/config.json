@@ -1,0 +1,11 @@
+{
+  "quarkName": "夸克网盘",
+  "quarkLink": "https://pan.quark.cn/s/e68ed1f81740",
+  "quarkCode": "免密",
+  "latestVersion": "v0.3.0 (App v0.3.1)",
+  "appApkLink": "https://pan.quark.cn/s/7906b53d4c18",
+  "magiskModuleLink": "https://pan.quark.cn/s/81a3aba5f6cc",
+  "platformZipLink": "https://pan.quark.cn/s/e68ed1f81740",
+  "dockerPullCmd": "docker pull buutuu/scrcpy-over-webrtc:latest",
+  "updateTime": "2026-07-24"
+}
