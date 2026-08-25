@@ -62,7 +62,7 @@
         <div class="hero-content" style="animation: slideInLeft var(--transition-slow); display: flex; flex-direction: column; align-items: center;">
           <div class="badge-tag" style="margin-bottom: 20px;">
             <span class="badge-dot"></span>
-            <span>v0.3.0 / App v0.3.1 正式发布</span>
+            <span id="hero-badge-text">v0.3.3 (App v0.3.2) 正式发布</span>
           </div>
           <h1 class="hero-title" style="font-size: 64px; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px;">
             <span class="text-gradient">穿云投屏</span>
@@ -540,16 +540,16 @@
                 适合国内网络直连。提供 Android APP、Magisk 模块以及管理平台全套压缩包（免密下载）。
               </p>
               <div class="space-y-2 mb-4" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-                <a id="app-apk-link" href="https://pan.quark.cn/s/7906b53d4c18" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
-                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;">📱 Android APP (v0.3.1)</span>
+                <a id="app-apk-link" href="https://pan.quark.cn/s/5bc91448b37e" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
+                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;">📱 Android APP (<span id="app-apk-version">v0.3.2</span>)</span>
                   <span class="text-cyan-400 font-mono text-[11px]" style="color: var(--accent-blue);">下载 .apk 🚀</span>
                 </a>
-                <a id="magisk-module-link" href="https://pan.quark.cn/s/81a3aba5f6cc" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
-                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;">🧩 Magisk 模块 (v0.3.0)</span>
+                <a id="magisk-module-link" href="https://pan.quark.cn/s/071eb552381c" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
+                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;">🧩 Magisk 模块 (<span id="magisk-module-version">v0.3.3</span>)</span>
                   <span class="text-cyan-400 font-mono text-[11px]" style="color: var(--accent-blue);">下载 .zip 🚀</span>
                 </a>
-                <a id="platform-zip-link" href="https://pan.quark.cn/s/e68ed1f81740" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
-                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;">📦 管理平台 (v0.3.0)</span>
+                <a id="platform-zip-link" href="https://pan.quark.cn/s/18d37ca38717" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
+                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;">📦 管理平台 (<span id="platform-zip-version">v0.3.3</span>)</span>
                   <span class="text-cyan-400 font-mono text-[11px]" style="color: var(--accent-blue);">下载全套包 🚀</span>
                 </a>
               </div>
@@ -570,7 +570,7 @@
                 获取官方最新发布的开源源码、Release 预编译包（包括 webrtc-signaling 信令端、android-agentd 以及脚本工具）。
               </p>
               <div class="bg-slate-950/40 border border-slate-800/50 rounded-lg p-3 text-xs text-[--text-secondary] mb-4" style="background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-muted); border-radius: var(--radius-sm); padding: 12px; font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">
-                <div style="margin-bottom: 4px;">最新版本：<span id="github-version" class="font-mono text-purple-400 font-bold" style="color: #c084fc; font-weight: 600;">v0.3.0 (App v0.3.1)</span></div>
+                <div style="margin-bottom: 4px;">最新版本：<span id="github-version" class="font-mono text-purple-400 font-bold" style="color: #c084fc; font-weight: 600;">v0.3.3 (App v0.3.2)</span></div>
                 <div style="margin-bottom: 4px;">官方仓库：<span class="font-mono" style="color: var(--text-secondary);">hqw700/ScrcpyOverWebRTC</span></div>
                 <div>发布状态：<span style="color: var(--color-success);">Stable (稳定版)</span></div>
               </div>
@@ -615,7 +615,7 @@
     <section class="section" id="changelog" style="padding-top: 30px; padding-bottom: 50px;">
       <div class="container">
         <div class="section-title-wrap">
-          <span class="section-subtitle">What's New in v0.3.0 & App v0.3.1</span>
+          <span class="section-subtitle" id="changelog-subtitle">What's New in v0.3.3 & App v0.3.2</span>
           <h2 class="section-title">最新版本更新日志</h2>
           <p class="section-desc">全新升级 Android 客户端、Magisk 保活模块以及管理平台核心性能。</p>
         </div>
@@ -628,7 +628,7 @@
               <span class="px-3 py-1 text-xs font-bold rounded-full bg-cyan-950 text-cyan-400 border border-cyan-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(6, 182, 212, 0.15); color: var(--accent-blue); font-size: 12px; font-weight: 700; border: 1px solid rgba(6, 182, 212, 0.3);">
                 📱 Android APP 客户端
               </span>
-              <span class="text-xs font-mono text-cyan-300" style="color: #67e8f9; font-size: 12px; font-family: var(--font-mono);">v0.3.1</span>
+              <span class="text-xs font-mono text-cyan-300" id="changelog-app-version" style="color: #67e8f9; font-size: 12px; font-family: var(--font-mono);">v0.3.2</span>
             </div>
             <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
               <li style="display: flex; align-items: flex-start; gap: 6px;">
@@ -649,8 +649,8 @@
               </li>
             </ul>
             <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
-              <a href="https://pan.quark.cn/s/7906b53d4c18" target="_blank" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300" style="color: var(--accent-blue); text-decoration: none; font-size: 12px;">
-                获取 ScrcpyOverWebRTC-v0.3.1-release.apk →
+              <a id="changelog-app-link" href="https://pan.quark.cn/s/5bc91448b37e" target="_blank" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300" style="color: var(--accent-blue); text-decoration: none; font-size: 12px;">
+                获取 ScrcpyOverWebRTC-release.apk →
               </a>
             </div>
           </div>
@@ -661,7 +661,7 @@
               <span class="px-3 py-1 text-xs font-bold rounded-full bg-purple-950 text-purple-400 border border-purple-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(168, 85, 247, 0.15); color: #c084fc; font-size: 12px; font-weight: 700; border: 1px solid rgba(168, 85, 247, 0.3);">
                 🧩 Magisk 极速模块
               </span>
-              <span class="text-xs font-mono text-purple-300" style="color: #d8b4fe; font-size: 12px; font-family: var(--font-mono);">v0.3.0</span>
+              <span class="text-xs font-mono text-purple-300" id="changelog-magisk-version" style="color: #d8b4fe; font-size: 12px; font-family: var(--font-mono);">v0.3.3</span>
             </div>
             <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
               <li style="display: flex; align-items: flex-start; gap: 6px;">
@@ -678,8 +678,8 @@
               </li>
             </ul>
             <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
-              <a href="https://pan.quark.cn/s/81a3aba5f6cc" target="_blank" class="text-xs font-semibold text-purple-400 hover:text-purple-300" style="color: #c084fc; text-decoration: none; font-size: 12px;">
-                获取 cloudphone-agent-magisk-v0.3.0.zip →
+              <a id="changelog-magisk-link" href="https://pan.quark.cn/s/071eb552381c" target="_blank" class="text-xs font-semibold text-purple-400 hover:text-purple-300" style="color: #c084fc; text-decoration: none; font-size: 12px;">
+                获取 cloudphone-agent-magisk.zip →
               </a>
             </div>
           </div>
@@ -690,7 +690,7 @@
               <span class="px-3 py-1 text-xs font-bold rounded-full bg-blue-950 text-blue-400 border border-blue-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; font-size: 12px; font-weight: 700; border: 1px solid rgba(59, 130, 246, 0.3);">
                 💻 管理平台优化
               </span>
-              <span class="text-xs font-mono text-blue-300" style="color: #93c5fd; font-size: 12px; font-family: var(--font-mono);">v0.3.0</span>
+              <span class="text-xs font-mono text-blue-300" id="changelog-platform-version" style="color: #93c5fd; font-size: 12px; font-family: var(--font-mono);">v0.3.3</span>
             </div>
             <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
               <li style="display: flex; align-items: flex-start; gap: 6px;">
@@ -711,8 +711,8 @@
               </li>
             </ul>
             <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
-              <a href="https://pan.quark.cn/s/e68ed1f81740" target="_blank" class="text-xs font-semibold text-blue-400 hover:text-blue-300" style="color: #60a5fa; text-decoration: none; font-size: 12px;">
-                获取 cloudphone-v0.3.0.zip 平台包 →
+              <a id="changelog-platform-link" href="https://pan.quark.cn/s/18d37ca38717" target="_blank" class="text-xs font-semibold text-blue-400 hover:text-blue-300" style="color: #60a5fa; text-decoration: none; font-size: 12px;">
+                获取 cloudphone.zip 平台包 →
               </a>
             </div>
           </div>

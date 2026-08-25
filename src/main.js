@@ -458,18 +458,77 @@ async function loadDynamicConfig() {
     if (config.updateTime && quarkUpdateTime) quarkUpdateTime.textContent = config.updateTime
     if (config.quarkLink && quarkLink) quarkLink.setAttribute('href', config.quarkLink)
     
-    // 渲染三分发包网盘链接
+    // 渲染三分发包网盘链接与 Changelog 页面链接
     const appApkLink = document.getElementById('app-apk-link')
     const magiskModuleLink = document.getElementById('magisk-module-link')
     const platformZipLink = document.getElementById('platform-zip-link')
+    const changelogAppLink = document.getElementById('changelog-app-link')
+    const changelogMagiskLink = document.getElementById('changelog-magisk-link')
+    const changelogPlatformLink = document.getElementById('changelog-platform-link')
     
-    if (config.appApkLink && appApkLink) appApkLink.setAttribute('href', config.appApkLink)
-    if (config.magiskModuleLink && magiskModuleLink) magiskModuleLink.setAttribute('href', config.magiskModuleLink)
-    if (config.platformZipLink && platformZipLink) platformZipLink.setAttribute('href', config.platformZipLink)
+    if (config.appApkLink) {
+      if (appApkLink) appApkLink.setAttribute('href', config.appApkLink)
+      if (changelogAppLink) changelogAppLink.setAttribute('href', config.appApkLink)
+    }
+    if (config.magiskModuleLink) {
+      if (magiskModuleLink) magiskModuleLink.setAttribute('href', config.magiskModuleLink)
+      if (changelogMagiskLink) changelogMagiskLink.setAttribute('href', config.magiskModuleLink)
+    }
+    if (config.platformZipLink) {
+      if (platformZipLink) platformZipLink.setAttribute('href', config.platformZipLink)
+      if (changelogPlatformLink) changelogPlatformLink.setAttribute('href', config.platformZipLink)
+    }
 
-    // 渲染 GitHub 最新版本
+    // 渲染各产物独立版本号
+    const appApkVersion = document.getElementById('app-apk-version')
+    const magiskModuleVersion = document.getElementById('magisk-module-version')
+    const platformZipVersion = document.getElementById('platform-zip-version')
+    const changelogAppVer = document.getElementById('changelog-app-version')
+    const changelogMagiskVer = document.getElementById('changelog-magisk-version')
+    const changelogPlatformVer = document.getElementById('changelog-platform-version')
+
+    let appVer = config.appVersion
+    let magiskVer = config.magiskVersion
+    let platformVer = config.platformVersion
+
+    // 如果未单独配置分包版本，尝试从 latestVersion (如 "v0.3.3 (App v0.3.2)") 提取解析
+    if (config.latestVersion) {
+      const matchApp = config.latestVersion.match(/App\s+(v[\d.]+)/i)
+      const matchMain = config.latestVersion.match(/^(v[\d.]+)/i)
+      if (!appVer && matchApp) appVer = matchApp[1]
+      if (!magiskVer && matchMain) magiskVer = matchMain[1]
+      if (!platformVer && matchMain) platformVer = matchMain[1]
+    }
+
+    if (appVer) {
+      if (appApkVersion) appApkVersion.textContent = appVer
+      if (changelogAppVer) changelogAppVer.textContent = appVer
+    }
+    if (magiskVer) {
+      if (magiskModuleVersion) magiskModuleVersion.textContent = magiskVer
+      if (changelogMagiskVer) changelogMagiskVer.textContent = magiskVer
+    }
+    if (platformVer) {
+      if (platformZipVersion) platformZipVersion.textContent = platformVer
+      if (changelogPlatformVer) changelogPlatformVer.textContent = platformVer
+    }
+
+    // 渲染 Hero Badge 与 GitHub / Changelog Subtitle
+    const heroBadgeText = document.getElementById('hero-badge-text')
     const githubVersion = document.getElementById('github-version')
-    if (config.latestVersion && githubVersion) githubVersion.textContent = config.latestVersion
+    const changelogSubtitle = document.getElementById('changelog-subtitle')
+
+    if (config.latestVersion) {
+      if (githubVersion) githubVersion.textContent = config.latestVersion
+      if (heroBadgeText) heroBadgeText.textContent = `${config.latestVersion} 正式发布`
+      if (changelogSubtitle) {
+        if (appVer && platformVer && appVer !== platformVer) {
+          changelogSubtitle.textContent = `What's New in ${platformVer} & App ${appVer}`
+        } else {
+          changelogSubtitle.textContent = `What's New in ${config.latestVersion}`
+        }
+      }
+    }
     
     // 渲染 Docker 拉取指令和对应的复制属性
     const dockerPullCmd = document.getElementById('docker-pull-cmd')
