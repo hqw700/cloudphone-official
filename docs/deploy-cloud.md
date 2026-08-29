@@ -1,204 +1,107 @@
-# 云服务器部署与穿透指南
+# 公网云服务器部署与穿透指南 (Cloud Deployment)
 
-本章节介绍如何在公网云服务器（如阿里云、腾讯云、AWS 等）环境下部署 ScrcpyOverWebRTC。相比于局域网，云服务器部署面临复杂的公网 NAT 环境、网络抖动、丢包，以及浏览器对公网 HTTPS / WebRTC 媒体流安全上下文（Secure Context）的严格限制。
-
---- 
-## 服务器推荐
-阿里云2c2g3Mb固定宽带，一两个人使用基本够用。   
-- 1，**设备不连接**：流量很少，只需要更新屏幕快照，快照间隔可以调整。  
-- 2，**设备公网连接，没有直连条件**：走TURN转发时可以调整码率，根据带宽自适应。  
-- 3，**设备在局域网**：本地连接不需要经过云服务器，不消耗流量。  
-- 4，**业务增加**：可以另购服务器，同时配置多个TURN，不需要和管理台在同一服务器。   
-
-**优惠链接**: [https://www.aliyun.com/product/ecs?userCode=dgnlczx1](https://www.aliyun.com/product/ecs?userCode=dgnlczx1)   
-![](img/ali-ecs.png)  
-
-#### 需要更大带宽的可以使用腾讯云  
-**优惠链接**: [https://curl.qcloud.com/2635ZOSn](https://curl.qcloud.com/2635ZOSn)
-![](img/tx-cloud.png)
-
----
-> 💡 **部署模式选择提示**：
-> * 本文档聚焦于**云服务器 Docker 容器化部署**（包含开箱即用一体镜像与 Compose 双容器方案）。
-> * 如果您希望在服务器/物理机上直接以**绿色单二进制方式运行（免 Docker）**，请参阅 [内网与局域网部署 - 非 Docker 原生运行](/deploy-lan#方式一非-docker-原生运行-mac--windows--linux)。
-> * 如果您希望让整个服务端直接运行在 Android 手机内部（无服务器脱机模式），请参阅 [Android 独立运行生态](/deploy-standalone)。
-
+本指南介绍如何在阿里云、腾讯云、华为云、AWS 等公网云服务器（VPS）上部署 ScrcpyOverWebRTC。  
+在公网环境下，系统支持通过 **IPv6 零成本直连** 与 **内置 coturn TURN 中转** 双轨机制，保障跨公网、复杂 NAT 下的音视频出流与控制。
 
 ---
 
-## 🔑 默认连接地址与账户凭证
+## 💻 云服务器硬件配置推荐与选购
 
-服务拉起成功后，在浏览器中即可打开 Web 管理后台大盘：
-* **访问地址**：`https://<您的服务器公网IP>:8443` *(信令与 Web 默认以 HTTPS 模式运行；浏览器提示自签名证书警告时，点击“高级 ->图形化继续访问”即可)*
-* **默认管理员账号**：`admin`
-* **默认管理员密码**：`admin123`
-
----
-
-## 🔐 1. 部署前的准备工作：安全组端口放行
-
-WebRTC 依赖特定端口建立打洞与媒体流传输。以 AIO 镜像默认配置为例，您必须在云服务器管理后台（安全组 / 防火墙）放行以下端口：
-
-| 端口号 | 协议类型 | 规则说明 |
+| 业务规模 | 推荐规格 | 纳管能力与并发说明 |
 | :--- | :--- | :--- |
-| **`8443`** | `TCP` | 网页后台及 WebSocket 信令通信端口 |
-| **`3478`** | `TCP / UDP` | coturn STUN/TURN 中转服务监听端口 |
-| **`50000-50100`** | `UDP` | TURN 媒体中转 UDP 端口段（`COTURN_MIN_PORT` / `COTURN_MAX_PORT` 默认区间） |
+| **入门极客 / 中小型纳管** | **2 核 CPU / 2GB 内存 / 3Mbps 固定带宽** (阿里云特惠) | 可纳管 **100 台设备** (快照周期设为 30s)；同时支持 **2~4 人并发控制** (需调低码率至 0.2~0.5Mbps) |
+| **多员工并发 / 小微工作室** | 4 核 CPU / 4GB 内存 / 10Mbps~20Mbps 带宽 (腾讯云特惠) | 支持 5~10 人同时在线高清操控，群控与批量分发性能更优 |
+| **中大规模商用集群** | 8 核+ / 8GB+ / 独立中继节点 | 支持多机房集群化部署，外置多个独立 coturn 中继分流媒体数据 |
+
+### 推荐服务器实测配置与容量参考：
+
+以性价比极高的 **阿里云 2c2g3Mb (固定宽带)** 为例，实测容量与承载表现如下：
+- 1. **纳管 100 台设备大盘巡检**：未连接直控时，设备仅需定时上报低频静态快照（快照上报频率可设置为 **30 秒** 或更长），整体占用云服务器带宽极低，轻松容纳 100 台机器挂载大盘。
+- 2. **同时支持 2~4 人并发远程控制**：在跨公网且无法建立 P2P 直连（走服务器 TURN 转发）时，只需在网页端设置中将单设备码率调低至 **`0.2Mbps ~ 0.5Mbps`**（画质依然清晰可辨），3Mbps 带宽即可完美支撑 **2~4 人同时在线操作** 且不丢包不卡顿。
+- 3. **局域网与 IPv6 访问零流量消耗**：若设备与控制端在局域网内或均具备 IPv6，WebRTC 会自动建立端到端直连，**完全不经过云服务器，不消耗公网服务器任何带宽**。
+- 4. **业务增加与按需扩容**：若未来需要支持更多人同时高清操控，可随时升级云服务器带宽，或另购轻量服务器单独部署多个 TURN 中继节点分流。
+
+* **阿里云特惠通道**：[https://www.aliyun.com/product/ecs?userCode=dgnlczx1](https://www.aliyun.com/product/ecs?userCode=dgnlczx1)  
+  ![阿里云服务器选型](img/ali-ecs.png)
+
+* **需要更大带宽可选腾讯云特惠**：[https://curl.qcloud.com/2635ZOSn](https://curl.qcloud.com/2635ZOSn)  
+  ![腾讯云服务器选型](img/tx-cloud.png)
+
+---
+
+## 🔐 1. 安全组与防火墙端口放行 (核心前置)
+
+在云服务器厂商控制台（安全组 / 防火墙）中，必须放行以下端口：
+
+| 端口号 | 协议 | 作用说明 |
+| :--- | :--- | :--- |
+| **`8443`** | `TCP` | Web 控制大盘访问与 WebSocket 信令通道端口 |
+| **`3478`** | `TCP + UDP` | coturn STUN/TURN 中继监听端口 |
+| **`50000-50100`** | `UDP` | TURN 媒体中转 UDP 端口段（AIO 镜像默认收窄范围） |
 
 > [!WARNING]
-> 早期文档要求放行整个 `49152-65535` UDP 段——那是 Compose 方案中 coturn 的默认中转区间。**AIO 镜像已默认收窄为 `50000-50100`**，您还可以通过 `COTURN_MIN_PORT` / `COTURN_MAX_PORT` 进一步调整。当中转段被封禁时，P2P 打洞失败的连接将无法降级中转，导致“连接成功但无视频画面”。
+> 如果安全组中封禁了 `50000-50100/UDP` 段，当客户端与手机处于严格对称 NAT 无法 P2P 直连时，TURN 媒体中继将受阻，导致“网页信令握手成功但画面一直黑屏”。
 
 ---
 
-## 🐳 2. 方式一：Docker Hub 一体化镜像部署 (AIO，推荐)
+## 🐳 2. 方式一：Docker 一体化镜像部署 (AIO，推荐)
 
-零编译、开箱即用，镜像内置信令、Web 前端与 coturn 中转服务。
+在云服务器（Linux）上，推荐直接使用 Host 模式启动。
 
-### 2.1 Host 网络模式 (推荐)
-如果您的 Linux 宿主机有独立的公网 IP 或是纯内网环境，且没有端口占用冲突，**首选 Host 模式**。
+> 💡 **国内云服务器极速拉取提示**：若直接从 Docker Hub 下载超时，可使用国内 DaoCloud 镜像站快速下载：  
+> `docker pull m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest && docker tag m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest buutuu/scrcpy-over-webrtc:latest`
 
-* **启动命令**:
-  ```bash
-  docker run -d \
-    --pull=always \
-    --restart=always \
-    --name cp-aio \
-    --net=host \
-    -v ./data:/app/data \
-    -e PUBLIC_IP=<宿主机真实IP> \
-    buutuu/scrcpy-over-webrtc:latest
-  ```
-* **优势**: 容器直接使用宿主机网络，零 NAT 转发损耗，无需映射大量 UDP 端口段，网络吞吐量最高。
-* **注意**: 必须确保宿主机上 `3478`（TURN）和 `8443`（信令）等端口未被其他服务占用。
-* **用户数据目录挂载**: `-v ./data:/app/data` 容器会把所有的持久化资产（用户账号 `users.json`、设备标签及下载文件）保存在宿主机本地的 `./data` 目录下，保证升级时不丢失。
-* **PUBLIC_IP**: 当有公网 IP 时填入公网 IP，当局域网内使用时填入宿主机内网 IP。
-
----
-
-### 2.2 NAT / Bridge 网络模式 (常规)
-如果运行在 macOS、Windows 等 Docker 虚拟化环境，或者出于安全考量必须使用 `-p` 映射端口，请务必遵循以下两条策略，**切忌映射整个 `49152-65535` 端口段（会导致宿主机 OOM 崩溃）**。
-
-#### 策略 A：收窄 TURN UDP 端口段映射
-在配置中指定一个极窄的中转 UDP 端口区间（如 100 个），并只放行此范围。
-
-* **启动命令 (常规对称映射)**:
-  ```bash
-  docker run -d --name cp-aio \
-    --pull=always \
-    --restart=always \
-    -p 8443:8443 \
-    -p 3478:3478/tcp \
-    -p 3478:3478/udp \
-    -p 55000-55100:55000-55100/udp \
-    -v ./data:/app/data \
-    -e PUBLIC_IP=<宿主机物理IP> \
-    -e COTURN_MIN_PORT=55000 \
-    -e COTURN_MAX_PORT=55100 \
-    buutuu/scrcpy-over-webrtc:latest
-  ```
-
-#### 策略 B：非对称端口映射（重点）
-当宿主机的默认端口（如 8443、3478）被其他服务占用，导致您不得不将外部端口映射为非对称端口（如 8443 映射为 18443，3478 映射为 13478）时。
-
-> [!WARNING]
-> 如果直接启动，容器内部的信令服务由于不知道外部映射了什么端口，依然会将默认的 `3478` 作为 TURN 地址下发给前端。导致前端网页尝试连接 `宿主机:3478` 失败而黑屏。
-> 
-> **解决方案**：必须传入 `EXTERNAL_SIGNALING_PORT` 和 `EXTERNAL_TURN_PORT` 环境变量，明确告知容器外部映射的公开端口。
-
-* **启动命令 (非对称端口映射)**:
-  ```bash
-  docker run -d --name cp-aio \
-    --pull=always \
-    --restart=always \
-    -p 18443:8443 \
-    -p 13478:3478/tcp \
-    -p 13478:3478/udp \
-    -p 55000-55100:55000-55100/udp \
-    -v ./data:/app/data \
-    -e PUBLIC_IP=192.168.100.242 \
-    -e COTURN_MIN_PORT=55000 \
-    -e COTURN_MAX_PORT=55100 \
-    -e EXTERNAL_SIGNALING_PORT=18443 \
-    -e EXTERNAL_TURN_PORT=13478 \
-    buutuu/scrcpy-over-webrtc:latest
-  ```
-
----
-
-### 2.3 Docker 环境变量参数说明
-
-无论是 Host 模式还是 NAT/Bridge 模式，都可以通过 `-e` 传入以下环境变量定制容器行为：
-
-| 环境变量 | 默认值 | 说明 |
-| --- | --- | --- |
-| `PUBLIC_IP` | `127.0.0.1` | 宿主机真实 IP，用于 WebRTC ICE 候选地址发布。有公网填公网 IP，纯局域网填宿主机内网 IP |
-| `TURN_USER` | `cloudphone_user` | TURN 中转服务认证用户名，**生产环境务必修改** |
-| `TURN_PASSWORD` | `cloudphone_secure_password` | TURN 中转服务认证密码，**生产环境务必修改** |
-| `SIGNALING_PORT` | `8443` | 容器内部信令 / Web 服务监听端口 |
-| `USE_TLS` | `true` | 是否启用 HTTPS，设为 `false` 后以 HTTP 模式运行 |
-| `NO_AUTH` | - | 设为 `true` 时关闭登录认证，**仅限内网调试，公网环境严禁开启** |
-| `DEFAULT_SETTINGS` | 见下方说明 | 新接入设备的默认画质参数 (JSON) |
-| `EXTERNAL_SIGNALING_PORT` | 同 `SIGNALING_PORT` | 非对称端口映射时，外部实际暴露的信令端口 |
-| `EXTERNAL_TURN_PORT` | `3478` | 非对称端口映射时，外部实际暴露的 TURN 端口 |
-| `COTURN_MIN_PORT` / `COTURN_MAX_PORT` | `50000` / `50100` | TURN 媒体中转使用的 UDP 端口段，Bridge 模式下需与 `-p` 映射范围保持一致 |
-
-* **DEFAULT_SETTINGS 示例**：`{"maxBitrate":4,"minBitrate":1,"fps":30,"size":1920,"bitrate":4}`，分别对应最高码率 (Mbps)、最低码率 (Mbps)、帧率、分辨率长边像素与默认码率。
-
----
-
-### 🔄 2.4 Docker 镜像更新与平滑升级
-
-由于持久化数据已通过 `-v ./data:/app/data` 挂载至宿主机，更新容器不会丢失账号及设备配置。执行以下命令即可平滑升级至最新版：
+* **一键启动命令**：
 
 ```bash
-# 1. 停止并删除旧容器
-docker stop cp-aio && docker rm cp-aio
-
-# 2. 拉取最新镜像并重新启动（以 Host 模式为例）
 docker run -d \
   --pull=always \
   --restart=always \
   --name cp-aio \
   --net=host \
   -v ./data:/app/data \
-  -e PUBLIC_IP=<宿主机真实IP> \
+  -e PUBLIC_IP=<您的云服务器公网IP> \
+  -e TURN_USER=my_secure_user \
+  -e TURN_PASSWORD=my_secure_password \
   buutuu/scrcpy-over-webrtc:latest
 ```
 
----
-
-## 🛠️ 3. 方式二：基于 Compose 脚本部署 (双容器分立)
-
-> [!IMPORTANT]
-> **发布包依赖**：开源仓库源码版不直接附带 `docker/` 部署脚本。请先前往 [Releases](https://github.com/hqw700/ScrcpyOverWebRTC/releases) 下载官方完整发布包（如 `cloudphone-vX.Y.Z.zip`），解压后进入 `docker/` 目录。
-
-该方案将 `coturn`（Host 网络）与信令服务拆分为两个独立的容器，支持交互式 IP 自动探测、凭证自动生成及版本平滑回滚，适合需要深度定制 coturn 运行参数的场景。
-
-### 部署步骤
-
-1. 进入解压包后的 `docker/` 目录并运行部署脚本：
-   ```bash
-   cd cloudphone-vX.Y.Z/docker
-   chmod +x deploy_cloud.sh
-   ./deploy_cloud.sh deploy
-   ```
-2. 脚本会自动完成以下操作：
-   * **IP 自动探测**：提示并确认云服务器真实的公网 IP。
-   * **凭证生成**：随机生成高强度 `TURN_USER` 与 `TURN_PASSWORD` 并写入 `.env`。
-   * **模板渲染与启动**：自动渲染 `coturn/turnserver.conf` 并启动 Compose 容器集群。
-3. 部署完成后查看连接面板信息：
-   ```bash
-   cat connection_info.txt
-   ```
-
-### 运维管理指令
-
-* **停止并清理服务**：`./deploy_cloud.sh uninstall`
-* **一键回滚版本**：`./deploy_cloud.sh rollback`
-* **查看运行日志**：`docker logs -f cloudphone-signaling` 或 `docker logs -f cloudphone-coturn`
+- **`PUBLIC_IP`**：填写您云服务器的真实静态公网 IPv4 地址。
+- **`TURN_USER` / `TURN_PASSWORD`**：生产环境请务必修改为自定义高强度凭据。
 
 ---
 
-## ➡️ 下一步
+## ⚡ 3. IPv6 零成本公网直连机制
 
-服务端启动成功后，请前往 [真机与容器 Agent 部署](/agent-deploy) 将您的 Android 设备接入大盘。
+系统原生支持 IPv6 候选地址（ICE Candidate）的自动收集与协商：
+- **零中转成本**：当手机（4G/5G 蜂窝网络原生支持 IPv6）与控制端均具备 IPv6 网络时，WebRTC 会自动建立端到端的公网 IPv6 P2P 直连。
+- **直连优势**：数据包直接在手机与控制端之间传输，完全绕过云服务器的中转带宽，**公网流量费直接降为 0 元，且延迟更低**。
+
+---
+
+## 🛠️ 4. 方式二：Docker Compose 双容器分立部署
+
+如果您从官方 [Releases](https://github.com/hqw700/ScrcpyOverWebRTC/releases) 下载了完整发布包，包内的 `docker/` 目录提供了将 `coturn` 与信令服务分立的 Compose 自动化部署脚本：
+
+```bash
+cd cloudphone-vX.Y.Z/docker
+chmod +x deploy_cloud.sh
+./deploy_cloud.sh deploy
+```
+
+该脚本会自动引导公网 IP 探测、生成高强度凭证并渲染配置文件启动集群。
+
+### 常用运维指令：
+- **查看运行日志**：`docker logs -f cloudphone-signaling`
+- **一键回滚旧版本**：`./deploy_cloud.sh rollback`
+- **彻底卸载服务**：`./deploy_cloud.sh uninstall`
+
+---
+
+## 🔑 5. 访问大盘与默认凭据
+
+浏览器访问：`https://<您的云服务器公网IP>:8443`
+- **默认管理员账号**：`admin`
+- **默认初始密码**：`admin123`
+
+*(首次登录后，请立即进入管理面板修改初始密码)*

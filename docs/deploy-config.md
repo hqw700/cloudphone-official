@@ -1,111 +1,95 @@
-# 服务端配置参考 (环境变量 / 启动参数 / 端口)
+# 服务端统一配置与端口参数 (Configuration Reference)
 
-本页是服务端部署的**统一配置参考**：Docker 环境变量、非 Docker 启动参数、端口放行规则与数据持久化。各部署指南（[局域网](/deploy-lan)、[云服务器](/deploy-cloud)、[飞牛 OS](/deploy-fnos)、[iStoreOS](/deploy-istoreos)）中涉及的参数均以此页为准。
-
----
-
-## 🐳 一、Docker 环境变量 (AIO 镜像)
-
-`buutuu/scrcpy-over-webrtc` 一体化镜像通过 `-e` 传入以下环境变量定制行为：
-
-| 环境变量 | 默认值 | 说明 |
-| --- | --- | --- |
-| `PUBLIC_IP` | `127.0.0.1` | 宿主机真实 IP，用于 WebRTC ICE 候选地址发布。有公网填公网 IP，纯局域网填宿主机内网 IP |
-| `TURN_USER` | `cloudphone_user` | TURN 中转服务认证用户名，**生产环境务必修改** |
-| `TURN_PASSWORD` | `cloudphone_secure_password` | TURN 中转服务认证密码，**生产环境务必修改** |
-| `SIGNALING_PORT` | `8443` | 容器内部信令 / Web 服务监听端口 |
-| `USE_TLS` | `true` | 是否启用 HTTPS，设为 `false` 后以 HTTP 模式运行 |
-| `NO_AUTH` | - | 设为 `true` 时关闭登录认证，**仅限内网调试，公网环境严禁开启** |
-| `DEFAULT_SETTINGS` | 见下方说明 | 新接入设备的默认画质参数 (JSON) |
-| `EXTERNAL_SIGNALING_PORT` | 同 `SIGNALING_PORT` | 非对称端口映射时，外部实际暴露的信令端口（见下文第四节） |
-| `EXTERNAL_TURN_PORT` | `3478` | 非对称端口映射时，外部实际暴露的 TURN 端口（见下文第四节） |
-| `COTURN_MIN_PORT` / `COTURN_MAX_PORT` | `50000` / `50100` | TURN 媒体中转使用的 UDP 端口段，Bridge 模式下需与 `-p` 映射范围保持一致 |
-
-*   **DEFAULT_SETTINGS 示例**：`{"maxBitrate":4,"minBitrate":1,"fps":30,"size":1920,"bitrate":4}`，分别对应最高码率 (Mbps)、最低码率 (Mbps)、帧率、分辨率长边像素与默认码率。
-*   **完整示例**：
-    ```bash
-    docker run -d \
-      --name cp-aio \
-      --net=host \
-      -v ./data:/app/data \
-      -e PUBLIC_IP=<宿主机真实IP> \
-      -e TURN_USER=my_turn_user \
-      -e TURN_PASSWORD=my_strong_password \
-      -e DEFAULT_SETTINGS='{"maxBitrate":8,"minBitrate":2,"fps":60,"size":1920,"bitrate":6}' \
-      buutuu/scrcpy-over-webrtc:latest
-    ```
+本页面是 ScrcpyOverWebRTC 服务端部署的**核心统一配置参考**。涵盖 Docker 环境变量、非 Docker 命令行参数、网络端口放行规则与数据持久化目录说明。
 
 ---
 
-## 💻 二、非 Docker 启动参数
+## 🐳 一、Docker 环境变量 (AIO 一体化镜像)
 
-非 Docker 部署时，追加在 `start_server.sh` 之后的参数会透传给 `webrtc-signaling` 二进制：
+使用 `buutuu/scrcpy-over-webrtc:latest` 镜像时，通过 `-e` 传入以下环境变量定制容器行为：
 
-| 参数 | 默认值 | 说明 |
-| --- | --- | --- |
-| `-port` | `8443` | 监听端口 |
-| `-host` | 双栈 | 绑定地址，如 `0.0.0.0`（仅 IPv4）或 `::` |
-| `-tls` | `true` | 是否启用 HTTPS，`-tls=false` 切换为 HTTP 模式 |
-| `-cert` / `-key` | `certs/server.crt` / `certs/server.key` | 替换为正式 SSL 证书路径 |
-| `-assets` | `../assets` | 前端静态资源目录 |
-| `-data` | `data` | 持久化数据目录（用户、快照、下载文件） |
-| `-ice_servers` | 公共 STUN | 自定义 STUN/TURN 列表，如 `"turn:user:pass@IP:3478"` |
-| `-no-auth` | 关闭 | 关闭登录认证（仅限内网调试） |
-| `-debug` | 关闭 | 输出详细调试日志 |
+| 环境变量名 | 默认值 | 说明 |
+| :--- | :--- | :--- |
+| `PUBLIC_IP` | `127.0.0.1` | **核心参数**。宿主机真实 IP，用于 WebRTC ICE 候选地址发布。公网部署填公网 IP，纯局域网填宿主机内网 IP |
+| `TURN_USER` | `cloudphone_user` | 内置 coturn 中转服务认证用户名，**公网生产环境务必修改** |
+| `TURN_PASSWORD` | `cloudphone_secure_password` | 内置 coturn 中转服务认证密码，**公网生产环境务必修改** |
+| `SIGNALING_PORT` | `8443` | 容器内部信令与 Web 前端服务监听端口 |
+| `USE_TLS` | `true` | 是否启用 HTTPS 模式（默认使用自签名证书）。设为 `false` 切换为 HTTP 模式 |
+| `NO_AUTH` | `false` | 设为 `true` 时关闭用户登录鉴权（**仅限内网脱机调试，公网严禁开启**） |
+| `DEFAULT_SETTINGS` | 见下方说明 | 新接入设备的默认画质策略 (JSON 字符串) |
+| `EXTERNAL_SIGNALING_PORT` | 同 `SIGNALING_PORT` | 非对称端口映射时，外部实际暴露的信令端口（如外部映射为 18443） |
+| `EXTERNAL_TURN_PORT` | `3478` | 非对称端口映射时，外部实际暴露的 TURN 端口（如外部映射为 13478） |
+| `COTURN_MIN_PORT` | `50000` | TURN 媒体中转 UDP 端口段起始值 |
+| `COTURN_MAX_PORT` | `50100` | TURN 媒体中转 UDP 端口段结束值 |
 
-> 💡 以上参数均有等价的环境变量（`PORT`、`HOST`、`USE_TLS`、`TLS_CERT`、`TLS_KEY`、`ASSETS`、`DATA_DIR`、`ICE_SERVERS`、`NO_AUTH`、`DEFAULT_SETTINGS`），便于在 systemd 等场景中注入。
+### DEFAULT_SETTINGS 格式说明
+用于控制所有新接入云手机的默认清晰度与帧率：
+```json
+{"maxBitrate":4,"minBitrate":1,"fps":30,"size":1920,"bitrate":4}
+```
+- `maxBitrate`: 最大自适应码率 (Mbps)
+- `minBitrate`: 最小保底码率 (Mbps)
+- `fps`: 默认帧率 (FPS)
+- `size`: 视频长边分辨率 (px)
+- `bitrate`: 默认初始码率 (Mbps)
 
 ---
 
-## 🔌 三、端口放行规则
+## 💻 二、非 Docker 单二进制启动参数
 
-不同部署方式需要放行的端口不同，**切勿照搬整张表**，按您实际的方式选择：
+在 Linux / macOS / Windows 直接运行 `webrtc-signaling` 原生程序时支持的命令行参数：
 
-| 部署方式 | 需放行端口 | 说明 |
-| --- | --- | --- |
-| **非 Docker 原生运行** | `8443/TCP` | 仅需一个端口。媒体流在浏览器与手机间点对点直连，不经过服务器 |
-| **Docker Host 模式** | `8443/TCP`、`3478/TCP+UDP`、`50000-50100/UDP` | `3478` 为 TURN 监听口，`50000-50100` 为 TURN 中转 UDP 段（`COTURN_MIN/MAX_PORT` 默认值） |
-| **Docker Bridge 模式** | 同 Host 模式，但经 `-p` 映射 | 务必用 `COTURN_MIN/MAX_PORT` 收窄中转段并只映射该范围 |
+| 参数 | 等效环境变量 | 默认值 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `-port` | `PORT` | `8443` | 信令与 Web 服务监听端口 |
+| `-host` | `HOST` | 双栈绑定 | 绑定监听地址，如 `0.0.0.0` (仅 IPv4) 或 `::` (IPv4/IPv6 双栈) |
+| `-tls` | `USE_TLS` | `true` | 是否启用 HTTPS，传入 `-tls=false` 切换为 HTTP |
+| `-cert` / `-key` | `TLS_CERT` / `TLS_KEY` | `certs/server.crt` / `.key` | 自定义正式 SSL 证书与私钥路径 |
+| `-assets` | `ASSETS` | `../assets` | Web 前端静态资源目录路径 |
+| `-data` | `DATA_DIR` | `data` | 持久化数据存储目录（用户账号、标签、下载缓存等） |
+| `-ice_servers` | `ICE_SERVERS` | 公共 STUN | 自定义 STUN/TURN 中继列表，格式如 `"turn:user:pass@IP:3478"` |
+| `-no-auth` | `NO_AUTH` | `false` | 关闭登录鉴权（内网调试专用） |
+| `-debug` | `DEBUG` | `false` | 输出详细底层通信调试日志 |
+
+---
+
+## 🔌 三、网络防火墙与安全组端口放行规则
+
+不同部署模式需要放行的端口清单如下，**请根据实际部署方式选择对应规则**：
+
+| 部署模式 | 必须放行的端口 | 协议 | 作用说明 |
+| :--- | :--- | :--- | :--- |
+| **非 Docker 绿色模式** | `8443` | `TCP` | Web 控制台网页访问与 WebSocket 信令通道（媒体直接在浏览器与手机间 P2P 直连） |
+| **Docker Host 模式** | `8443` | `TCP` | 网页与信令通信 |
+| | `3478` | `TCP + UDP` | 内置 coturn STUN/TURN 服务监听口 |
+| | `50000-50100` | `UDP` | TURN 媒体中转数据包转发端口段（`COTURN_MIN/MAX_PORT` 默认范围） |
+| **Docker Bridge 模式** | 同 Host 模式，但需通过 `-p` 映射 | 同上 | 务必收窄中转端口段（如 100 个），禁止映射整个 49152-65535 大段 |
 
 > [!WARNING]
-> **切忌映射或放行整个 `49152-65535` 端口段**：在 Bridge 模式下映射上万条端口会导致宿主机内存耗尽 (OOM)。该端口段是 coturn 上游的默认中转区间，本项目 AIO 镜像已默认收窄为 `50000-50100`；仅当您使用发布包内 `docker/deploy_cloud.sh`（compose 双容器方案）时，才需要按 `coturn/turnserver.conf` 中 `min-port`/`max-port` 的实际配置放行。
+> **切忌在 Docker Bridge 模式下映射整个 `49152-65535` 端口段**！  
+> 在 Docker 宿主机上映射上万个 UDP 端口会瞬间耗尽宿主机内存导致系统崩溃 (OOM)。本项目 AIO 镜像已默认收窄为 `50000-50100`（仅 101 个端口），安全且极度节省系统资源。
 
 ---
 
-## 🔀 四、非对称端口映射 (Bridge 模式防黑屏)
+## 💾 四、数据持久化与升级安全
 
-当宿主机默认端口被占用，不得不将外部端口映射为不同端口（如外部 `18443` ➔ 容器 `8443`、外部 `13478` ➔ 容器 `3478`）时，容器内部不知道外部端口，仍会把默认 `3478` 作为 TURN 地址下发给前端，导致前端连接失败黑屏。
+系统会将所有持久化数据统一保存在 `data/` 目录下：
+- `users.json`: 用户账号、密码 Hash、角色权限、VIP 特权与设备绑定关系；
+- `admin_logs.json`: 管理员全流程操作审计日志；
+- `tags.json`: 设备自定义色彩与名称标签；
+- `shares.json`: 临时分享链接与 8 位卡密记录；
+- `shortcuts.json`: 用户自定义 Shell 快捷宏指令。
 
-**解决方案**：通过 `EXTERNAL_SIGNALING_PORT` 和 `EXTERNAL_TURN_PORT` 明确告知容器外部映射的公开端口：
-
-```bash
-docker run -d --name cp-aio \
-  -p 18443:8443 \
-  -p 13478:3478/tcp \
-  -p 13478:3478/udp \
-  -p 55000-55100:55000-55100/udp \
-  -e PUBLIC_IP=<宿主机IP> \
-  -e COTURN_MIN_PORT=55000 \
-  -e COTURN_MAX_PORT=55100 \
-  -e EXTERNAL_SIGNALING_PORT=18443 \
-  -e EXTERNAL_TURN_PORT=13478 \
-  buutuu/scrcpy-over-webrtc:latest
-```
+### 持久化操作规范：
+- **Docker 部署**：启动时务必挂载 `-v ./data:/app/data`，更新镜像时直接销毁并重新创建容器，用户数据 100% 安全不丢失。
+- **非 Docker 部署**：升级时只需替换二进制文件与 `assets/` 静态目录，**切勿覆盖或删除 `data/` 目录**。
 
 ---
 
-## 💾 五、数据持久化
+## 🔑 五、默认管理员账号
 
-* **Docker**：挂载 `-v ./data:/app/data`。容器会把用户账号 (`users.json`)、设备标签、快照与下载文件全部保存在宿主机 `./data` 目录下，升级镜像时数据不受影响。
-* **非 Docker**：所有数据保存在发布包解压目录的 `./data` 下，升级时替换二进制与 `assets` 即可，请勿覆盖 `data` 目录。
+服务拉起成功后，在浏览器访问 `https://<服务器IP>:8443`：
+- **默认用户名**：`admin`
+- **默认初始密码**：`admin123`
 
----
-
-## 🔑 六、默认访问入口与账号
-
-服务拉起成功后，浏览器访问 `https://<宿主机IP>:8443` 打开管理大盘：
-
-* **默认管理员账号**：`admin`
-* **默认管理员密码**：`admin123`
-
-> ⚠️ 信令与 Web 默认以 HTTPS（自签名证书）运行，首次访问浏览器会提示证书不受信任，选择「继续前往」即可；生产环境请替换 `certs/` 下的证书。
+*(首次登录后，推荐在「管理」页面或全景抽屉中及时修改管理员密码)*

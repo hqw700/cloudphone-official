@@ -36,64 +36,86 @@ export default withMermaid(defineConfig({
 
     // 顶部导航栏
     nav: [
-      { text: '官网首页', link: '/index.html' }, // 便于从文档回退到官网
-      { text: '使用文档', link: '/introduction' },
-      { text: '接入指引', link: '/agent-deploy' }
+      { text: '官网首页', link: '/index.html' },
+      { text: '快速开始', link: '/introduction' },
+      { text: '设备接入', link: '/agent-prep' },
+      { text: '服务端部署', link: '/deploy-config' },
+      { text: '功能手册', link: '/feature-dashboard' },
+      { text: '实操教程', link: '/tutorial-windows' },
+      { text: '常见问题', link: '/faq' }
     ],
 
     // 侧边栏目录配置
     sidebar: [
       {
-        text: '🚀 快速开始',
+        text: '📖 一、项目概览',
         collapsed: false,
         items: [
-          { text: '项目简介 & 架构优势', link: '/introduction' },
-          { text: '应用场景与硬件要求', link: '/use-cases' },
-          { text: '极速运行与入网指南', link: '/quickstart' }
+          { text: '项目简介与架构解析', link: '/introduction' },
+          { text: '核心功能全景特性', link: '/features' },
+          { text: '硬件要求与选型决策', link: '/quickstart' }
         ]
       },
       {
-        text: '💻 服务端部署',
+        text: '📱 二、设备接入与 Agent 部署',
         collapsed: false,
         items: [
-          { text: '内网与局域网部署', link: '/deploy-lan' },
-          { text: '飞牛 OS (fnOS) NAS 部署', link: '/deploy-fnos' },
-          { text: 'iStoreOS 软路由部署', link: '/deploy-istoreos' },
-          { text: '云服务器部署与穿透', link: '/deploy-cloud' },
-          { text: '服务端配置参考 (参数与端口)', link: '/deploy-config' },
-          { text: 'Android 独立运行生态', link: '/deploy-standalone' }
+          { text: '接入准备与开发者选项', link: '/agent-prep' },
+          { text: '方式一：网页端 WebUSB 部署', link: '/agent-webusb' },
+          { text: '方式二：电脑脚本一键包接入', link: '/agent-script' },
+          { text: '方式三：Magisk / Root 模块开机自启', link: '/agent-magisk' },
+          { text: '方式四：Android App 原生客户端', link: '/app-guide' },
+          { text: '方式五：Docker / Redroid 容器云手机', link: '/agent-docker' }
         ]
       },
       {
-        text: '📱 设备接入与 Agent 配置',
+        text: '💻 三、服务端部署与运维',
         collapsed: false,
         items: [
-          { text: '真机与容器 Agent 部署', link: '/agent-deploy' },
-          { text: 'Magisk 模块部署指南', link: '/agent-magisk' },
-          { text: '安卓 APP 使用指南', link: '/app-guide' }
+          { text: '服务端统一配置与端口参数', link: '/deploy-config' },
+          { text: '局域网与绿色免 Docker 部署', link: '/deploy-lan' },
+          { text: 'Docker 一体化镜像部署 (AIO)', link: '/deploy-docker' },
+          { text: 'NAS 与软路由部署 (fnOS / iStoreOS)', link: '/deploy-nas' },
+          { text: '公网云服务器部署与穿透', link: '/deploy-cloud' },
+          { text: '手机脱机独立运行 (Standalone)', link: '/deploy-standalone' }
         ]
       },
       {
-        text: '⚙️ 高级特性与深度定制',
+        text: '🎮 四、核心功能操作手册',
         collapsed: false,
         items: [
-          { text: '虚拟相机与定制 ROM 方案', link: '/rom-custom' },
-          { text: '按键映射与群控高级应用', link: '/keymap-advanced' }
+          { text: '监控大盘、预览直控与群控', link: '/feature-dashboard' },
+          { text: '多账号、租户权限与操作审计', link: '/feature-users' },
+          { text: '机器分享与卡密免登录直连', link: '/feature-share' },
+          { text: '设备标签管理与大盘过滤', link: '/feature-tags' },
+          { text: '高级输入：汉字输入与按键映射', link: '/feature-inputs' },
+          { text: '远程终端：xterm.js 交互与宏指令', link: '/feature-terminal' },
+          { text: 'P2P 文件管理与 APK 批量分发', link: '/feature-files' },
+          { text: 'AI 智能排障诊断助手', link: '/feature-ai' }
         ]
       },
       {
-        text: '💻 开发者二次开发',
+        text: '🎯 五、真实环境手把手实操',
         collapsed: false,
         items: [
-          { text: '前端控制台二次开发', link: '/web-development' },
-          { text: '官网部署与动态更新', link: '/deploy-website' }
+          { text: '实操一：Windows 本地搭建与真机控制', link: '/tutorial-windows' },
+          { text: '实操二：阿里云 ECS 搭建云手机管理平台', link: '/tutorial-aliyun' }
         ]
       },
       {
-        text: '🛠️ 高级配置与常见问题',
+        text: '⚙️ 六、高级定制与二次开发',
         collapsed: false,
         items: [
-          { text: '常见问题排查 (FAQ)', link: '/faq' }
+          { text: '虚拟 HAL 注入 (Camera/GPS/Sensors)', link: '/rom-hal' },
+          { text: '前端控制台二次开发', link: '/dev-web' },
+          { text: '官网与文档站构建部署', link: '/dev-website' }
+        ]
+      },
+      {
+        text: '🛠️ 七、排障与调优',
+        collapsed: false,
+        items: [
+          { text: '常见问题解答与调优 (FAQ)', link: '/faq' }
         ]
       }
     ],
