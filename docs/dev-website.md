@@ -73,14 +73,14 @@ docker run -d \
 ### 字段示例：
 ```json
 {
-  "latestVersion": "v0.3.3 (App v0.3.2)",
+  "latestVersion": "v0.3.4 (App v0.3.2)",
   "appVersion": "v0.3.2",
-  "magiskVersion": "v0.3.3",
-  "platformVersion": "v0.3.3",
+  "magiskVersion": "v0.3.4",
+  "platformVersion": "v0.3.4",
   "appApkLink": "https://pan.quark.cn/s/...",
   "magiskModuleLink": "https://pan.quark.cn/s/...",
   "dockerPullCmd": "docker pull buutuu/scrcpy-over-webrtc:latest",
-  "updateTime": "2026-08-25"
+  "updateTime": "2026-08-31"
 }
 ```
 
