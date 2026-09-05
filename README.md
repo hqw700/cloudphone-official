@@ -74,17 +74,17 @@ docker run -d --name website-nginx -p 8080:80 -v /root/dist:/usr/share/nginx/htm
 ```json
 {
   "quarkName": "夸克网盘",
-  "quarkLink": "https://pan.quark.cn/s/1619d970e7c0",
+  "quarkLink": "https://pan.quark.cn/s/e83971b8a4df",
   "quarkCode": "免密",
-  "latestVersion": "v0.3.4 (App v0.3.2)",
+  "latestVersion": "v0.3.5 (App v0.3.2)",
   "appVersion": "v0.3.2",
-  "magiskVersion": "v0.3.4",
-  "platformVersion": "v0.3.4",
+  "magiskVersion": "v0.3.5",
+  "platformVersion": "v0.3.5",
   "appApkLink": "https://pan.quark.cn/s/5bc91448b37e",
-  "magiskModuleLink": "https://pan.quark.cn/s/411008353891",
-  "platformZipLink": "https://pan.quark.cn/s/1619d970e7c0",
+  "magiskModuleLink": "https://pan.quark.cn/s/b6ae48cb2d21",
+  "platformZipLink": "https://pan.quark.cn/s/e83971b8a4df",
   "dockerPullCmd": "docker pull buutuu/scrcpy-over-webrtc:latest",
-  "updateTime": "2026-08-31"
+  "updateTime": "2026-09-05"
 }
 ```
 
