@@ -615,7 +615,7 @@
     <section class="section" id="changelog" style="padding-top: 30px; padding-bottom: 50px;">
       <div class="container">
         <div class="section-title-wrap">
-          <span class="section-subtitle" id="changelog-subtitle">What's New in v0.3.5 & App v0.3.2</span>
+          <span class="section-subtitle" id="changelog-subtitle">What's New in v0.3.6 & App v0.3.2</span>
           <h2 class="section-title">最新版本更新日志</h2>
           <p class="section-desc">全新升级 Android 客户端、Magisk 保活模块以及管理平台核心性能。</p>
         </div>
@@ -661,7 +661,7 @@
               <span class="px-3 py-1 text-xs font-bold rounded-full bg-purple-950 text-purple-400 border border-purple-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(168, 85, 247, 0.15); color: #c084fc; font-size: 12px; font-weight: 700; border: 1px solid rgba(168, 85, 247, 0.3);">
                 🧩 Magisk 极速模块
               </span>
-              <span class="text-xs font-mono text-purple-300" id="changelog-magisk-version" style="color: #d8b4fe; font-size: 12px; font-family: var(--font-mono);">v0.3.5</span>
+              <span class="text-xs font-mono text-purple-300" id="changelog-magisk-version" style="color: #d8b4fe; font-size: 12px; font-family: var(--font-mono);">v0.3.6</span>
             </div>
             <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
               <li style="display: flex; align-items: flex-start; gap: 6px;">
@@ -682,40 +682,44 @@
               </li>
             </ul>
             <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
-              <a id="changelog-magisk-link" href="https://pan.quark.cn/s/b6ae48cb2d21" target="_blank" class="text-xs font-semibold text-purple-400 hover:text-purple-300" style="color: #c084fc; text-decoration: none; font-size: 12px;">
+              <a id="changelog-magisk-link" href="https://pan.quark.cn/s/7b5f764231fb" target="_blank" class="text-xs font-semibold text-purple-400 hover:text-purple-300" style="color: #c084fc; text-decoration: none; font-size: 12px;">
                 获取 cloudphone-agent-magisk.zip →
               </a>
             </div>
           </div>
 
-          <!-- 3. v0.3.5 管理平台修改 -->
+          <!-- 3. v0.3.6 管理平台修改 -->
           <div class="p-6 rounded-2xl border border-blue-800/40 bg-slate-950/50 shadow-xl relative overflow-hidden" style="padding: 24px; border-radius: var(--radius-lg); border: 1px solid rgba(59, 130, 246, 0.3); background: rgba(10, 15, 29, 0.75);">
             <div class="flex items-center justify-between mb-4">
               <span class="px-3 py-1 text-xs font-bold rounded-full bg-blue-950 text-blue-400 border border-blue-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; font-size: 12px; font-weight: 700; border: 1px solid rgba(59, 130, 246, 0.3);">
                 💻 管理平台优化
               </span>
-              <span class="text-xs font-mono text-blue-300" id="changelog-platform-version" style="color: #93c5fd; font-size: 12px; font-family: var(--font-mono);">v0.3.5</span>
+              <span class="text-xs font-mono text-blue-300" id="changelog-platform-version" style="color: #93c5fd; font-size: 12px; font-family: var(--font-mono);">v0.3.6</span>
             </div>
             <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span><strong>多机直连与多实例工作台</strong>：支持多台云手机平铺/标签/主从/浮窗四大布局并发直控，输入焦点与音频独占隔离。</span>
+                <span><strong>域名信令与自适应 DNS</strong>：内置 Android 自适应 DNS 解析器与 TLS SNI 握手，全面支持标准域名及反向代理部署。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span><strong>卡片动态画幅与高密表格</strong>：动态比例消除边缘黑边，列表视图重构为 48px 高密运维表格，支持缩略图 Hover 悬浮放大。</span>
+                <span><strong>WebSocket 投屏直控模式</strong>：提供 100% TCP 穿透能力与 WebCodecs 硬件加速，受限公网与防火墙环境下免 TURN 稳定出流。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span><strong>摄像头硬件直通与安防监控</strong>：真机无需亮屏硬件直推，专属安防监控大屏支持物理多摄换挡、PTZ 数字变焦、无损抓拍与录像。</span>
+                <span><strong>运行期动态码率热调</strong>：无需重启投屏进程即可实时热调 Android 硬件编码码率，视频状态栏新增实时与目标码率双显。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span><strong>网页全屏与群控直控加固</strong>：网页全屏白屏彻底根治，群控操作条提权防遮挡，并新增 [🎮 预览直控] 快捷按键。</span>
+                <span><strong>页面全屏体验重构</strong>：全屏容器跳出栅格束缚铺满视口，右侧悬浮工具栏支持自动淡出隐藏，彻底根治全屏白屏故障。</span>
+              </li>
+              <li style="display: flex; align-items: flex-start; gap: 6px;">
+                <span style="color: #60a5fa;">•</span>
+                <span><strong>多机直连与分屏协同</strong>：修复分屏副视窗双连接与设备抢跳冲突，加入 WebCodecs 解码积压背压丢帧保护与建连超时自愈。</span>
               </li>
             </ul>
             <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
-              <a id="changelog-platform-link" href="https://pan.quark.cn/s/e83971b8a4df" target="_blank" class="text-xs font-semibold text-blue-400 hover:text-blue-300" style="color: #60a5fa; text-decoration: none; font-size: 12px;">
+              <a id="changelog-platform-link" href="https://pan.quark.cn/s/64a5bace4921" target="_blank" class="text-xs font-semibold text-blue-400 hover:text-blue-300" style="color: #60a5fa; text-decoration: none; font-size: 12px;">
                 获取 cloudphone.zip 平台包 →
               </a>
             </div>

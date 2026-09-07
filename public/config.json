@@ -1,14 +1,14 @@
 {
   "quarkName": "夸克网盘",
-  "quarkLink": "https://pan.quark.cn/s/e83971b8a4df",
+  "quarkLink": "https://pan.quark.cn/s/64a5bace4921",
   "quarkCode": "免密",
-  "latestVersion": "v0.3.5 (App v0.3.2)",
+  "latestVersion": "v0.3.6 (App v0.3.2)",
   "appVersion": "v0.3.2",
-  "magiskVersion": "v0.3.5",
-  "platformVersion": "v0.3.5",
+  "magiskVersion": "v0.3.6",
+  "platformVersion": "v0.3.6",
   "appApkLink": "https://pan.quark.cn/s/5bc91448b37e",
-  "magiskModuleLink": "https://pan.quark.cn/s/b6ae48cb2d21",
-  "platformZipLink": "https://pan.quark.cn/s/e83971b8a4df",
+  "magiskModuleLink": "https://pan.quark.cn/s/7b5f764231fb",
+  "platformZipLink": "https://pan.quark.cn/s/64a5bace4921",
   "dockerPullCmd": "docker pull buutuu/scrcpy-over-webrtc:latest",
-  "updateTime": "2026-09-05"
+  "updateTime": "2026-09-07"
 }
