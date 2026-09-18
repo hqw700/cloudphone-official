@@ -53,7 +53,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        apply: resolve(__dirname, 'apply.html')
+        apply: resolve(__dirname, 'apply.html'),
+        buy: resolve(__dirname, 'buy.html')
       }
     }
   }

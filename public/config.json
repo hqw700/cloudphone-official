@@ -1,14 +1,18 @@
 {
   "quarkName": "夸克网盘",
-  "quarkLink": "https://pan.quark.cn/s/64a5bace4921",
+  "quarkLink": "https://pan.quark.cn/s/f5f590a4c097",
   "quarkCode": "免密",
   "latestVersion": "v0.3.6 (App v0.3.2)",
   "appVersion": "v0.3.2",
   "magiskVersion": "v0.3.6",
   "platformVersion": "v0.3.6",
   "appApkLink": "https://pan.quark.cn/s/5bc91448b37e",
-  "magiskModuleLink": "https://pan.quark.cn/s/7b5f764231fb",
-  "platformZipLink": "https://pan.quark.cn/s/64a5bace4921",
+  "magiskModuleLink": "https://pan.quark.cn/s/a3d48880b40b",
+  "platformZipLink": "https://pan.quark.cn/s/f5f590a4c097",
   "dockerPullCmd": "docker pull buutuu/scrcpy-over-webrtc:latest",
-  "updateTime": "2026-09-07"
+  "updateTime": "2026-09-07",
+  "xianyuName": "闲鱼官方店铺",
+  "xianyuLink": "https://m.tb.cn/h.8HFtVS3?tk=bpk6TQxJF1K",
+  "xianyuTpwd": "【闲鱼】https://m.tb.cn/h.8HFtVS3?tk=bpk6TQxJF1K CZ356 「我在闲鱼发布了【穿云投屏授权码服务】」",
+  "contactEmail": "cloudphone@qq.com"
 }

@@ -1,63 +1,69 @@
 # 手机脱机独立运行指南 (Standalone Mode)
 
-ScrcpyOverWebRTC 支持独特的 **Standalone（手机脱机全功能独立运行）** 模式。  
-在该模式下，您无需准备任何外部 PC 电脑或云服务器。**Web 前端静态网页、信令服务器（ARM64 原生 Go 程序）以及 Agent 控制代理** 全部直接运行在目标 Android 手机内部。
+ScrcpyOverWebRTC 支持独特的 **Standalone（手机脱机单端口独立直连）** 模式。  
+在该模式下，您无需准备任何外部 PC 电脑或云服务器。**Web 控制台单页应用已通过 Go 内嵌机制直接打包在 Agent 二进制程序中**，手机内部仅运行单个轻量级 Agent 进程，通过单个 TCP 端口（默认 `8080`）实现全功能网页直控。
 
 ---
 
 ## 💡 Standalone 模式的工作原理
 
-1. **服务下沉至手机内部**：手机内部运行 `webrtc-signaling` 监听本地 `8443` 端口并托管 Web 页面；同时手机内部的 Agent 连接本地 `wss://127.0.0.1:8443` 进行自注册。
-2. **初始化即脱机**：通过 USB 数据线完成一次性推送与拉起后，即可拔掉数据线。手机在后台以独立 Session ID 保活运行。
-3. **局域网直接开控**：在同一局域网下的任意电脑、平板或手机浏览器中输入目标手机的 IP 地址，即可直接打开控制台操控这部手机。
+1. **单进程单端口服务**：手机内部仅运行单个 `cloudphone-agent` 二进制进程，监听本地 `8080` 端口。同一端口既作为 HTTP 静态网页托管，又作为全双工 WebSocket 音视频裸流与触控通信信道。
+2. **零外部文件依赖**：不再需要解压信令服务器、证书和数百个 Web 静态文件，内存占用由原本的 >100MB 骤降至 20~30MB，极度省电且不会被系统杀后台。
+3. **极速网页直连**：在同一局域网下的任意电脑、平板或手机浏览器中输入 `http://<手机IP>:8080`，即可秒开秒控，尽享低延迟多点触控与硬件加速。
 
 ---
 
-## 🛠️ 1. 初始化推送与拉起
+## 🛠️ 1. 运行方式
 
-### 前置条件：
-- Android 手机一部（推荐 Android 11+，已开启 USB 调试并授权）。
-- 电脑一台（仅用于首次初始化推送）。
-- 从 [Releases](https://github.com/hqw700/ScrcpyOverWebRTC/releases) 下载完整发布包并解压。
+### 方式一：Magisk / KernelSU 模块（最推荐，免电脑开机自启）
+1. 刷入项目提供的 `cloudphone-agent-magisk.zip` 模块。
+2. 模块默认即以 **Standalone 模式** 自启运行。
+3. 手机连接局域网 Wi-Fi 后，终端/Termux 输入 `su -c cloudphone-ctl status` 即可看到直连访问地址：
+   ```text
+   Mode: Standalone (http://192.168.1.120:8080)
+   ```
+4. 在同 Wi-Fi 下的任意设备浏览器打开该地址即可直接控制。
 
-### 选项 A：Windows 电脑用户（一键全自动）
-1. 使用 USB 数据线连接手机至 Windows 电脑。
-2. 进入解压后的 `android/` 目录。
-3. 双击运行 `setup.bat`。
+### 方式二：Android App (WebrtcTest) 一键启动
+1. 在手机上安装 App 并打开「Agent 部署」页面。
+2. 勾选开启「**独立单机模式 (Standalone Mode)**」。
+3. 点击「**启动 Agent 直控服务**」。
+4. 界面会显示当前手机的局域网 IP 与访问入口 `http://<手机IP>:8080`，支持一键复制或在浏览器打开。
 
-### 选项 B：macOS / Linux 用户（命令行推送）
-打开终端，在发布包根目录下执行：
+### 方式三：电脑初始化推送（单次推送后脱机拔线）
+
+#### Windows 用户：
+1. 手机开启 USB 调试连接电脑。
+2. 双击运行解压后 `android/` 目录下的 `setup.bat`。
+3. 部署完成后拔掉 USB 数据线即可。
+
+#### macOS / Linux 用户：
 ```bash
-# 1. 推送 android 原生二进制及 scrcpy 组件
+# 1. 一次性推送 android 原生目录
 adb push android /data/local/tmp/
 
-# 2. 推送 Web 前端静态 assets 资源
-adb push assets /data/local/tmp/android/assets
-
-# 3. 进入手机 Shell 启动全部服务
+# 2. 启动单端口独立直连服务
 adb shell sh /data/local/tmp/android/setup.sh
 ```
 
 ---
 
-## 🔍 2. 拔线并从局域网访问
+## 🔍 2. 从局域网访问
 
-1. 脚本启动完成后，终端会打印手机在当前 Wi-Fi 下的局域网 IP 与访问地址，例如：
+1. 启动完成后，终端会打印手机的局域网 IP 与访问地址，例如：
    ```text
-   Services started. Connect via https://192.168.1.120:8443
+   Services started. Connect via http://192.168.1.120:8080
    ```
 2. **拔掉 USB 数据线**。
-3. 将您的电脑、iPad 或其他手机连接到同一局域网 Wi-Fi 下。
-4. 打开浏览器，输入 `https://<手机局域网IP>:8443`。
-5. 控制大盘会自动列出名为 `local-android` 的本机设备，点击即可直接在网页里控制手机。
+3. 将您的电脑、iPad、平板或其他手机连接到同一局域网 Wi-Fi 下。
+4. 打开浏览器，直接输入 `http://<手机局域网IP>:8080`，即可直接获得全屏低延迟触控体验。
 
 ---
 
 ## 🛑 3. 停止与清理手机内部服务
 
-如果您希望完全停止手机后台运行的服务，通过 ADB 执行以下命令：
+若需停止手机后台运行的服务，通过 ADB 或终端执行：
 
 ```bash
-adb shell "pkill -f webrtc-signaling && pkill -f cloudphone-agent && pkill -f libsys_core.so"
+adb shell "pkill -f cloudphone-agent && pkill -f libsys_core.so"
 ```
-*(该命令会安全回收信令服务器、Agent 代理以及正在运行的 scrcpy-server 伴生进程，完全释放 CPU 与端口资源。)*

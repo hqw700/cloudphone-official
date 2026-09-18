@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="穿云投屏 (ScrcpyOverWebRTC) 商业授权购买页面。解锁全功能企业级云手机集群、无限制设备接入与专属技术支持，提供闲鱼担保交易与对公转账通道。" />
+    <title>授权购买 | 穿云投屏 ScrcpyOverWebRTC 官方正版授权</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="/src/style.css" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        corePlugins: {
+          preflight: false
+        }
+      }
+    </script>
+    <style>
+      .pricing-card {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-lg);
+        backdrop-filter: blur(16px);
+        transition: all var(--transition-normal);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 36px 30px;
+      }
+      .pricing-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(0, 242, 254, 0.3);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 24px rgba(0, 242, 254, 0.1);
+      }
+      .pricing-card.featured {
+        background: linear-gradient(180deg, rgba(14, 30, 53, 0.85) 0%, rgba(10, 18, 32, 0.95) 100%);
+        border: 1.5px solid rgba(0, 242, 254, 0.5);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 242, 254, 0.15);
+      }
+      .pricing-badge {
+        position: absolute;
+        top: -14px;
+        right: 24px;
+        background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+        color: #06090e;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 14px;
+        border-radius: 9999px;
+        box-shadow: 0 4px 12px rgba(0, 242, 254, 0.35);
+      }
+      .channel-box {
+        background: rgba(13, 17, 23, 0.7);
+        border: 1px solid rgba(48, 54, 61, 0.7);
+        border-radius: var(--radius-md);
+        padding: 24px;
+        transition: all var(--transition-fast);
+      }
+      .channel-box:hover {
+        border-color: rgba(0, 242, 254, 0.3);
+        background: rgba(18, 24, 36, 0.85);
+      }
+      .faq-item {
+        background: rgba(15, 23, 42, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: var(--radius-md);
+        margin-bottom: 12px;
+        overflow: hidden;
+        transition: border-color var(--transition-fast);
+      }
+      .faq-item.active {
+        border-color: rgba(0, 242, 254, 0.25);
+        background: rgba(15, 23, 42, 0.7);
+      }
+      .faq-question {
+        padding: 18px 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 600;
+        font-size: 15px;
+        color: var(--text-primary);
+        user-select: none;
+      }
+      .faq-question:hover {
+        color: var(--accent-blue);
+      }
+      .faq-arrow {
+        transition: transform var(--transition-fast);
+        color: var(--text-muted);
+      }
+      .faq-item.active .faq-arrow {
+        transform: rotate(180deg);
+        color: var(--accent-blue);
+      }
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 24px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.7;
+        transition: max-height var(--transition-normal), padding var(--transition-normal);
+      }
+      .faq-item.active .faq-answer {
+        max-height: 300px;
+        padding-bottom: 20px;
+      }
+      .xianyu-btn {
+        background: linear-gradient(135deg, #ff9900 0%, #ff5500 100%);
+        color: #ffffff;
+        font-weight: 700;
+        border: none;
+        border-radius: var(--radius-sm);
+        padding: 12px 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        box-shadow: 0 4px 20px rgba(255, 85, 0, 0.3);
+        transition: all var(--transition-fast);
+        cursor: pointer;
+      }
+      .xianyu-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(255, 85, 0, 0.45);
+        color: #ffffff;
+      }
+      .step-number {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(0, 242, 254, 0.1);
+        border: 1.5px solid var(--accent-blue);
+        color: var(--accent-blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-family: var(--font-mono);
+        flex-shrink: 0;
+      }
+      .channels-grid-container {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        gap: 24px;
+        margin-bottom: 56px;
+      }
+      @media (max-width: 900px) {
+        .channels-grid-container {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      .tpwd-box {
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px dashed rgba(255, 153, 0, 0.35);
+        border-radius: var(--radius-sm);
+        padding: 12px 16px;
+        margin-bottom: 24px;
+        min-width: 0;
+      }
+      .tpwd-code-container {
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 153, 0, 0.2);
+        border-radius: 6px;
+        padding: 8px 12px;
+        min-width: 0;
+        overflow: hidden;
+      }
+      .tpwd-code-text {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: #ffaa00;
+        font-weight: 600;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- 智能转跳倒计时提示栏 (仅在 URL 携带 ?auto=1 或 ?direct=1 时显示) -->
+    <div id="auto-redirect-banner" style="display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: linear-gradient(90deg, #ff6600, #ff9900); color: #ffffff; padding: 12px 24px; align-items: center; justify-content: center; gap: 16px; font-size: 14px; font-weight: 600; box-shadow: 0 4px 20px rgba(0,0,0,0.4); transition: opacity var(--transition-fast);">
+      <span>🚀 检测到直达请求，将在 <strong id="redirect-countdown" style="font-size: 16px; text-decoration: underline;">3s</strong> 后自动跳转至官方闲鱼拍单页面...</span>
+      <div style="display: flex; gap: 8px;">
+        <a id="direct-redirect-btn" href="#" class="btn btn-sm" style="background: #ffffff; color: #ff5500; font-weight: 700; padding: 4px 12px; border-radius: 4px;">立即直达</a>
+        <button id="cancel-redirect-btn" class="btn btn-sm" style="background: rgba(0,0,0,0.25); color: #ffffff; border: 1px solid rgba(255,255,255,0.4); padding: 4px 12px; border-radius: 4px; cursor: pointer;">留在本页</button>
+      </div>
+    </div>
+
+    <!-- 页头导航栏 (与主页/申请页完全对齐) -->
+    <header class="site-header" id="site-header" style="background: rgba(6, 9, 14, 0.85); border-color: rgba(0, 242, 254, 0.15);">
+      <div class="container header-container">
+        <a href="/" class="logo-link">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            <path d="M17 12h-2a2 2 0 0 0-2 2v2"></path>
+          </svg>
+          <span class="text-gradient">穿云投屏</span>
+        </a>
+        
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="/" class="nav-link">官网首页</a></li>
+            <li><a href="/#download" class="nav-link">镜像下载</a></li>
+            <li><a href="/docs/" class="nav-link">帮助文档</a></li>
+            <li><a href="/apply.html" class="nav-link">申请试用</a></li>
+            <li><a href="/buy.html" class="nav-link active">授权购买</a></li>
+          </ul>
+        </nav>
+        
+        <div class="header-actions">
+          <a href="/demo.html" target="_blank" class="btn btn-secondary btn-sm" style="margin-right: 8px; border-color: rgba(6, 182, 212, 0.4); color: #38bdf8;">🎮 演示大盘</a>
+          <a href="https://github.com/hqw700/ScrcpyOverWebRTC" target="_blank" class="github-btn" aria-label="GitHub Repository">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></svg>
+            </a>
+          <a href="/buy.html" class="btn btn-primary btn-sm">购买授权</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 购买主区域 -->
+    <main class="buy-main" style="padding-top: 130px; padding-bottom: 100px; min-height: 85vh; position: relative;">
+      <div class="visual-glow" style="top: 8%; left: 25%;"></div>
+      <div class="visual-glow" style="top: 45%; right: 15%; background: radial-gradient(circle, rgba(155, 81, 224, 0.15) 0%, transparent 70%);"></div>
+      
+      <div class="container" style="max-width: 1120px;">
+        
+        <!-- 1. Hero 标语区 -->
+        <div style="text-align: center; margin-bottom: 50px;">
+          <div class="badge-tag" style="margin-bottom: 18px;">
+            <span class="badge-dot"></span>
+            <span>官方正版商业授权 · 专业技术支持</span>
+          </div>
+          <h1 style="font-size: 42px; font-weight: 800; margin-bottom: 16px; line-height: 1.25;">
+            获取 <span class="text-gradient">穿云投屏</span> 正版商业授权码
+          </h1>
+          <p style="font-size: 16px; color: var(--text-secondary); max-width: 680px; margin: 0 auto; line-height: 1.8;">
+            社区版全功能无限制开放；专业版提供 200台/年 与 不限数量/年 两种规格，同时支持企业深度定制开发。
+          </p>
+        </div>
+
+        <!-- 2. 核心通道卡片 (闲鱼主通道 + 对公/备用通道) -->
+        <div class="channels-grid-container">
+          
+          <!-- 左侧：闲鱼官方店铺 (动态配置) -->
+          <div class="glass-box" style="padding: 32px; border-radius: var(--radius-lg); border: 1.5px solid rgba(255, 153, 0, 0.3); background: linear-gradient(180deg, rgba(255, 153, 0, 0.05) 0%, rgba(15, 23, 42, 0.8) 100%); display: flex; flex-direction: column; justify-content: space-between; min-width: 0;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; background: rgba(255, 153, 0, 0.15); border: 1px solid rgba(255, 153, 0, 0.35); color: #ffaa00; font-size: 12px; font-weight: 700;">
+                  ⚡ 推荐通道 · 担保交易 · 自动发货
+                </span>
+                <span style="font-size: 12px; color: var(--text-muted);">
+                  配置同步: <span id="config-update-time">2026-09</span>
+                </span>
+              </div>
+              
+              <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 12px; color: #ffffff;">
+                闲鱼官方认证店铺购买
+              </h3>
+              <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">
+                通过阿里巴巴旗下「闲鱼」平台担保交易拍下。拍下付款后，授权激活码将自动或人工在聊天窗口极速发放，安全合规、全程保障。
+              </p>
+
+              <!-- 淘口令展示与复制 (上下结构 + min-width:0，杜绝长文本挤压右侧和按钮) -->
+              <div class="tpwd-box">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px;">
+                  <span style="font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; font-weight: 500;">
+                    <span>📱</span> 移动端淘口令 (打开淘宝/闲鱼App自动识别)
+                  </span>
+                  <button id="copy-tpwd-btn" data-copy="47￥ CZ3457 穿云投屏商业授权" class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 11px; border-color: rgba(255,153,0,0.4); color: #ffaa00; white-space: nowrap; flex-shrink: 0; cursor: pointer;">
+                    📋 复制口令
+                  </button>
+                </div>
+                <div class="tpwd-code-container">
+                  <code id="xianyu-tpwd-text" class="tpwd-code-text" title="47￥ CZ3457 穿云投屏商业授权">
+                    47￥ CZ3457 穿云投屏商业授权
+                  </code>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <a href="https://m.tb.cn/h.8UxnpeF?tk=HTNmgBqagHA" target="_blank" rel="noopener" class="xianyu-btn xianyu-buy-link" style="font-size: 16px; width: 100%;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
+                🛒 前往闲鱼拍下「穿云投屏授权码」
+              </a>
+              <span style="font-size: 12px; color: var(--text-muted); text-align: center;">
+                * 链接由官网动态更新维护。如遇到商品调整，本页将自动获取最新地址。
+              </span>
+            </div>
+          </div>
+
+          <!-- 右侧：企业对公与人工备用通道 -->
+          <div class="glass-box" style="padding: 32px; border-radius: var(--radius-lg); display: flex; flex-direction: column; justify-content: space-between; min-width: 0;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; background: rgba(0, 242, 254, 0.1); border: 1px solid rgba(0, 242, 254, 0.25); color: var(--accent-blue); font-size: 12px; font-weight: 700;">
+                  🏢 企业通道 · 对公付款 · 发票支持
+                </span>
+              </div>
+
+              <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 12px; color: #ffffff;">
+                对公采购与商务直通
+              </h3>
+              <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px;">
+                适用于企业批量采购（>50台）、开具增值税发票、签署采购合同或定制私有化集群。支持公对公银行转账。
+              </p>
+
+              <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-primary);">
+                  <span style="color: var(--accent-blue);">📧</span>
+                  <span>商务与发票对接：</span>
+                  <a href="mailto:cloudphone@qq.com" class="contact-email-link contact-email-text" style="color: var(--accent-blue); font-family: var(--font-mono); font-weight: 600;">cloudphone@qq.com</a>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-primary);">
+                  <span style="color: var(--accent-blue);">⚡</span>
+                  <span>响应时效：工作日 2 小时内极速回复</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+              <a href="mailto:cloudphone@qq.com" class="btn btn-secondary contact-email-link" style="flex: 1; justify-content: center; padding: 12px; font-size: 14px;">
+                📧 发送邮件
+              </a>
+              <button id="copy-email-btn" data-copy="cloudphone@qq.com" class="btn btn-outline" style="padding: 12px 18px; font-size: 14px; border-color: var(--border-muted); color: var(--text-secondary); cursor: pointer;">
+                复制邮箱
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 3. 版本权益对比 (Pricing Matrix) -->
+        <div style="margin-bottom: 60px;">
+          <div style="text-align: center; margin-bottom: 36px;">
+            <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">版本与功能方案对比</h2>
+            <p style="font-size: 14px; color: var(--text-secondary);">按需选择适合您业务规模的授权类型</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+            
+            <!-- 方案 1: 社区体验版 -->
+            <div class="pricing-card">
+              <div style="margin-bottom: 24px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                  <h3 style="font-size: 20px; font-weight: 700;">社区体验版</h3>
+                  <span style="font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: rgba(63, 185, 80, 0.15); border: 1px solid rgba(63, 185, 80, 0.35); color: var(--color-success);">
+                    限时提升至20台
+                  </span>
+                </div>
+                <p style="font-size: 13px; color: var(--text-muted); min-height: 38px;">适合个人技术爱好者体验与小微团队本地私有化自建</p>
+                <div style="margin-top: 14px; font-size: 28px; font-weight: 800; color: #ffffff;">
+                  ¥0 <span style="font-size: 13px; color: var(--text-muted); font-weight: 400;">/ 永久免费</span>
+                </div>
+                <div style="margin-top: 10px; font-size: 12px; color: var(--color-success); font-weight: 600; background: rgba(63, 185, 80, 0.08); padding: 8px 10px; border-radius: 6px; border-left: 3px solid var(--color-success); line-height: 1.5;">
+                  🎁 默认支持 10 台，当前限时免费提升到 <strong>20 台</strong> 同时接入！
+                </div>
+              </div>
+
+              <ul style="list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 13px; color: var(--text-primary); margin-bottom: 32px; flex-grow: 1;">
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--color-success);">✔</span> <strong>功能无限制</strong>，全套功能无任何阉割完全开放
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--color-success);">✔</span> <strong>支持同时接入 10 台机器</strong>（当前限时免费提升到 <strong>20 台</strong>）
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> WebRTC 毫秒级音视频极速低延迟串流
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> 原生 Web-ADB 终端、文件直传与按键映射
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> 开放完整社区源代码与全套自建部署文档
+                </li>
+              </ul>
+
+              <a href="/docs/quickstart.html" class="btn btn-secondary" style="justify-content: center; padding: 12px; font-size: 14px;">
+                查看快速部署文档
+              </a>
+            </div>
+
+            <!-- 方案 2: 专业授权版 (高亮，含两规格) -->
+            <div class="pricing-card featured">
+              <div class="pricing-badge">🔥 热门推荐</div>
+              
+              <div style="margin-bottom: 24px;">
+                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 6px; color: var(--accent-blue);">
+                  专业授权版
+                </h3>
+                <p style="font-size: 13px; color: var(--text-secondary); min-height: 38px;">适合批量设备纳管、工作室、自动化测试农场与真机群控</p>
+                
+                <!-- 200台/年 与 不限数量/年 两种规格展示 -->
+                <div style="margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                  <div style="background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 8px; padding: 10px 8px; text-align: center;">
+                    <div style="font-size: 11px; color: var(--text-secondary); margin-bottom: 2px;">规格 A</div>
+                    <div style="font-size: 16px; font-weight: 800; color: #ffffff;">200 台</div>
+                    <div style="font-size: 12px; color: var(--accent-blue); font-weight: 600;">/ 年</div>
+                  </div>
+                  <div style="background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 8px; padding: 10px 8px; text-align: center;">
+                    <div style="font-size: 11px; color: var(--text-secondary); margin-bottom: 2px;">规格 B</div>
+                    <div style="font-size: 16px; font-weight: 800; color: #ffffff;">不限制数量</div>
+                    <div style="font-size: 12px; color: var(--accent-blue); font-weight: 600;">/ 年</div>
+                  </div>
+                </div>
+              </div>
+
+              <ul style="list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 13px; color: var(--text-primary); margin-bottom: 32px; flex-grow: 1;">
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> <strong>提供 200台/年 或 不限制数量/年 两个版本</strong>
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> <strong>超大规模并发接入</strong>，突破单机容量限制
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> <strong>Web-ADB 极速反代终端</strong> (xterm.js 免配桥接)
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> <strong>P2P 隧道文件管理器</strong> 与 APK 批量群发静默安装
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> <strong>批量群控与可视化按键映射</strong> (WASD/摇杆/技能宏)
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> <strong>WebCodecs 硬件加速渲染</strong> 与 GCC 拥塞动态码率
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> 授权期内持续享受版本升级与优先技术支持
+                </li>
+              </ul>
+
+              <a href="https://m.tb.cn/h.8UxnpeF?tk=HTNmgBqagHA" target="_blank" rel="noopener" class="xianyu-btn xianyu-buy-link" style="justify-content: center; padding: 12px; font-size: 14px;">
+                🛒 前往闲鱼购买授权
+              </a>
+            </div>
+
+            <!-- 方案 3: 企业定制版 -->
+            <div class="pricing-card">
+              <div style="margin-bottom: 24px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                  <h3 style="font-size: 20px; font-weight: 700;">企业定制版</h3>
+                  <span style="font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: rgba(155, 81, 224, 0.15); border: 1px solid rgba(155, 81, 224, 0.35); color: #c084fc;">
+                    研发合作
+                  </span>
+                </div>
+                <p style="font-size: 13px; color: var(--text-muted); min-height: 38px;">适合海量云游戏算力集群、深度系统融合与个性化业务改造</p>
+                <div style="margin-top: 14px; font-size: 28px; font-weight: 800; color: #ffffff;">
+                  定制方案 <span style="font-size: 13px; color: var(--text-muted); font-weight: 400;">/ 商务洽谈</span>
+                </div>
+                <div style="margin-top: 10px; font-size: 12px; color: #c084fc; font-weight: 600; background: rgba(155, 81, 224, 0.08); padding: 8px 10px; border-radius: 6px; border-left: 3px solid #9b51e0; line-height: 1.5;">
+                  🛠️ <strong>支持专属功能与业务架构深度定制开发</strong>
+                </div>
+              </div>
+
+              <ul style="list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 13px; color: var(--text-primary); margin-bottom: 32px; flex-grow: 1;">
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-purple);">✔</span> <strong>支持专属功能定制开发</strong> 与业务系统深度对接
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> 定制 Camera 摄像头驱动、传感器与虚拟 GPS HAL
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> 海量节点云手机集群私有化高可用部署架构
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> 专属 STUN/TURN 全球跨域动态打洞加速网络
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> 1对1 资深架构师指导、代码级二次开发支持
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px;">
+                  <span style="color: var(--accent-blue);">✔</span> 签署企业商用授权协议与提供正规发票
+                </li>
+              </ul>
+
+              <a href="/apply.html" class="btn btn-secondary" style="justify-content: center; padding: 12px; font-size: 14px;">
+                申请企业专属顾问
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 4. 3步极速激活说明 (Activation Steps) -->
+        <div class="glass-box" style="padding: 36px 40px; border-radius: var(--radius-lg); margin-bottom: 60px;">
+          <h2 style="font-size: 22px; font-weight: 700; margin-bottom: 28px; text-align: center;">
+            3 步极速激活流程
+          </h2>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position: relative;">
+            
+            <div style="display: flex; gap: 16px;">
+              <div class="step-number">1</div>
+              <div>
+                <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 6px; color: var(--text-primary);">拍下获取激活码</h4>
+                <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+                  在闲鱼拍下后，卖家或自动发货助手将向您发送一串形如 <code style="color: var(--accent-blue); background: rgba(0,242,254,0.1); padding: 2px 6px; border-radius: 4px;">CP-XXXX-XXXX</code> 的专属激活凭证。
+                </p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 16px;">
+              <div class="step-number">2</div>
+              <div>
+                <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 6px; color: var(--text-primary);">进入控制台输入</h4>
+                <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+                  打开已部署的穿云投屏 Web 管理平台，点击右上角「🛡️ 授权管理」按钮（或阻断弹窗中的输入框）。
+                </p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 16px;">
+              <div class="step-number">3</div>
+              <div>
+                <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 6px; color: var(--text-primary);">立即解锁生效</h4>
+                <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+                  粘贴激活码并点击「立即激活解锁」。服务端将就地热更新生效，所有受限功能和设备容量即刻解锁，<strong>无需重启容器或服务</strong>！
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 5. 常见问题解答 (FAQ) -->
+        <div style="max-width: 860px; margin: 0 auto;">
+          <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; text-align: center;">常见问题与购买答疑</h2>
+
+          <div class="faq-item active">
+            <div class="faq-question">
+              <span>Q: 拍下后一般多长时间能够收到授权激活码？</span>
+              <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              闲鱼平台通常支持自动发货。付款成功后，授权码将第一时间发送到您的闲鱼聊天消息中。若遇高峰期，人工客服也会在 5~15 分钟内为您手工发码。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Q: 如果闲鱼商品链接暂时失效或显示已下架怎么办？</span>
+              <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              闲鱼商品链接有时因上架策略调整而更换。官网本页面由后台动态配置维护，如果遇到直达链接过期，请刷新本页面获取最新通道，或直接发送邮件至 <code style="color: var(--accent-blue);">cloudphone@qq.com</code>，我们将为您提供快速购买通道。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Q: 激活码可以更换服务器、重装系统或迁移部署吗？</span>
+              <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              可以。激活码与您的授权凭据关联，迁移服务器时只需在新安装的实例上重新输入原激活码即可完成热激活。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Q: 企业采购是否支持提供增值税发票与合同？</span>
+              <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              支持。企业批量采购可走正规对公转账流程，并开具正规增值税专用/普通发票，欢迎发送邮件至 <code style="color: var(--accent-blue);">cloudphone@qq.com</code> 沟通洽谈。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Q: 社区体验版支持多少台设备？有功能限制吗？</span>
+              <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              社区体验版全套功能完全开放、无任何功能阉割！默认支持同时接入 10 台机器；当前限时特惠期间系统已免费自动提升至 <strong>20 台</strong>同时在线。若您的业务需要接入更多设备，可选择专业授权版（提供 <strong>200台/年</strong> 与 <strong>不限制数量/年</strong> 两个版本），或企业定制版。
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+    <!-- 页脚 (与主页和申请页完全一致) -->
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <div class="footer-logo text-gradient">ScrcpyOverWebRTC Project</div>
+          <p class="footer-info" style="margin-top: 8px;">基于开源协议分发。致力于为社区提供极速无损的安卓云端投屏体验。</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="/" class="footer-link">官网首页</a></li>
+          <li><a href="/#download" class="footer-link">镜像下载</a></li>
+          <li><a href="/docs/" class="footer-link">帮助文档</a></li>
+          <li><a href="/apply.html" class="footer-link">申请试用</a></li>
+          <li><a href="/buy.html" class="footer-link">授权购买</a></li>
+          <li><a href="https://github.com/hqw700/ScrcpyOverWebRTC" class="footer-link" target="_blank">GitHub</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/buy.js"></script>
+  </body>
+</html>
