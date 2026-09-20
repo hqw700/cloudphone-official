@@ -2,6 +2,11 @@
 
 如果您在云服务器或本地 Linux 服务器上通过 Docker 运行 **`redroid` (Remote Android in Docker)** 搭建云手机集群，可以通过本文档将多台 Redroid 虚机批量挂载至 ScrcpyOverWebRTC 管理平台。
 
+> [!NOTE]
+> **🚀 更多接入方式规划（后续发布）**：
+> 1. **自定义 ROM / Redroid 镜像集成**：直接将 Agent 与通信核心固化打包进定制镜像，容器启动即刻自启上线，免人工注入。
+> 2. **Linux Host Agent (宿主机管理守护进程)**：运行于 Linux 宿主机物理层，统一集中管理本机所有 Redroid 容器/虚机实例，并支持信令直接下发远程执行开关机与重启。
+
 ---
 
 ## 📋 关键网络特性：容器 IPv6 限制与网络选型

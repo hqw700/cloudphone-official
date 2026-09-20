@@ -15,6 +15,8 @@
 | **方式三：Magisk 模块开机自启** | 已 Root 真机长期无人值守群控 | 设备具备 Magisk / KernelSU / APatch | [查看 Magisk 模块部署指南](/agent-magisk) |
 | **方式四：Android App 原生客户端** | 手机直接作为主控端或被控端 | Android 手机（支持 Root 或 Shizuku 免 Root） | [查看 Android App 使用指南](/app-guide) |
 | **方式五：Docker / Redroid 容器云手机** | Linux 云服务器批量多开云手机 | 宿主机支持 KVM 虚拟化与 Docker | [查看 Redroid 容器多开指南](/agent-docker) |
+| **方式六：自定义 ROM / Redroid 镜像集成** | 定制固件底座、免推送开机自启 | 支持 Android 源码编译或 Dockerfile 定制 | 🚀 后续发布 |
+| **方式七：Linux Host Agent 宿主机管理** | Linux 物理机统一管理所有虚机与开关机 | Linux 宿主机物理服务器 / 独立主机 | 🚀 后续发布 |
 
 ---
 

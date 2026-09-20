@@ -19,6 +19,8 @@
 * **[方式三：Magisk / Root 模块开机自启](/agent-magisk)**：刷入 Magisk/KernelSU/APatch 模块，实现系统守护保活与 `cpctl` 命令行运维。
 * **[方式四：Android App 原生客户端](/app-guide)**：主控操控 + 被控端（Root 或 Shizuku 免 Root 双模式）+ 单机独立运行。
 * **[方式五：Docker / Redroid 容器云手机](/agent-docker)**：redroid 云虚机多开纳管与指定 UDP 端口段映射。
+* **方式六：自定义 ROM / Redroid 镜像集成** *(🚀 后续发布)*：系统分区直接固化内置 Agent，开机免推送极速自启上线。
+* **方式七：Linux Host Agent 宿主机管理** *(🚀 后续发布)*：Linux 物理机统一管理所有虚机，支持信令下发远程批量开关机。
 
 ### [💻 三、服务端部署与运维](/deploy-config)
 * **[服务端统一配置与端口参数](/deploy-config)**：环境变量、CLI 启动参数、端口放行规则与数据持久化。

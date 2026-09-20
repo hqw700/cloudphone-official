@@ -39,7 +39,7 @@ npm run build
 ```text
 dist/
 ├── index.html          # 官网主页
-├── apply.html          # 申请试用页
+├── buy.html            # 授权购买页
 ├── config.json         # 动态配置文件
 ├── assets/             # 主站静态资源
 └── docs/               # VitePress 静态文档站产物
