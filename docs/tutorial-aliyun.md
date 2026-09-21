@@ -30,16 +30,23 @@
 
 ---
 
-## 🐳 第二步：国内镜像站极速拉取并启动容器
+## 🐳 第二步：配置国内镜像加速并启动容器
 
 SSH 连接登录您的阿里云 ECS，执行以下命令：
 
 ```bash
-# 1. 使用国内加速镜像站快速下载镜像
-docker pull m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest
+# 1. 配置国内 Docker 镜像加速站并重启 Docker
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://docker.m.daocloud.io"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
 
-# 2. 重新打标为标准镜像名
-docker tag m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest buutuu/scrcpy-over-webrtc:latest
+# 2. 原生拉取官方镜像
+docker pull buutuu/scrcpy-over-webrtc:latest
 
 # 3. 以 Host 模式启动容器 (将 PUBLIC_IP 替换为您 ECS 的真实公网 IP)
 docker run -d \

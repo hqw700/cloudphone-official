@@ -25,11 +25,13 @@
 ```text
 agent-deploy/
 ├── cloudphone-agent-arm64       # Android 64位 Agent 原生二进制
-├── cloudphone-agent-arm32       # Android 32位 Agent 原生二进制
+├── cloudphone-agent-armeabi-v7a # Android 32位 Agent 原生二进制
 ├── cloudphone-agent-amd64       # Android x86_64 容器/模拟器 Agent
 ├── libsys_core.so               # 深度定制的 scrcpy-server 投屏核心
-├── run.sh                       # Linux / macOS 一键自动化脚本
-└── run.bat                      # Windows CMD 一键自动化脚本
+├── run.sh                       # Linux / macOS 单机部署脚本
+├── run.bat                      # Windows CMD 单机部署脚本
+├── batch_start.sh               # Linux / macOS 多机批量启动脚本 (群控专享)
+└── batch_start.bat              # Windows 多机批量启动脚本 (双击即用)
 ```
 
 ### 第 2 步：连接手机并核实 ADB 状态
@@ -41,25 +43,41 @@ adb devices
 
 *(如果使用无线 ADB，请先执行 `adb connect <手机IP>:5555`)*
 
-### 第 3 步：运行一键脚本接入
+### 第 3 步：运行脚本接入设备
 
 控制台部署页会根据您当前服务端的地址与配置，**动态生成完整的一键执行命令**，您可直接复制执行：
 
-#### Linux / macOS 用户：
-```bash
-chmod +x run.sh
-./run.sh -id <自定义设备ID> -signaling wss://<您的服务器IP>:8443
-```
+#### 场景 A：单台设备接入
 
-#### Windows 用户 (CMD 或 PowerShell)：
-```cmd
-run.bat -id <自定义设备ID> -signaling wss://<您的服务器IP>:8443
-```
+* **Linux / macOS**：
+  ```bash
+  chmod +x run.sh
+  ./run.sh -id <自定义设备ID> -signaling wss://<您的服务器IP>:8443
+  ```
+* **Windows (CMD / PowerShell)**：
+  ```cmd
+  run.bat -id <自定义设备ID> -signaling wss://<您的服务器IP>:8443
+  ```
+
+#### 场景 B：多机批量并发拉起（自动遍历所有已连接设备）
+
+如果您连接了多台手机进行群控，直接使用内置的批量启动脚本：
+
+* **Linux / macOS**：
+  ```bash
+  chmod +x batch_start.sh
+  ./batch_start.sh -signaling wss://<您的服务器IP>:8443 -ice-servers "<TURN地址>"
+  ```
+* **Windows**：
+  直接**双击 `batch_start.bat`** 即可弹出向导输入信令地址一键全量拉起；或在 CMD 执行：
+  ```cmd
+  batch_start.bat -signaling wss://<您的服务器IP>:8443 -ice-servers "<TURN地址>"
+  ```
 
 > 💡 **参数说明**：
-> - `-id <设备名称>`：自定义该设备在控制台大盘中显示的唯一标识（如 `my-phone-01`），留空则按系统默认的「型号-序列号」生成。
-> - `-signaling <信令地址>`：指向您的服务端信令地址。服务端启用 HTTPS（默认）时使用 `wss://`，关闭时使用 `ws://`。
-> - `-ice-servers <STUN/TURN>`：可选。如果存在跨网段或公网复杂 NAT，可传入中转凭证（例如 `turn:user:pass@ip:3478`）。
+> - `-id <设备名称>`：单机部署时自定义设备唯一标识，留空则按「型号-序列号」生成。批量启动时每台设备会自动分配独立 ID。
+> - `-signaling <信令地址>`：必填。指向服务端信令地址（如 `wss://192.168.1.100:8443`）。
+> - `-ice-servers <STUN/TURN>`：可选。如果存在跨网段或公网复杂 NAT，强烈建议配置 TURN 中转凭证。
 
 ### 第 4 步：脚本自动化流程与验证
 

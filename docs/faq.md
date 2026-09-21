@@ -153,17 +153,24 @@ WebUSB 协议要求浏览器独占访问 Android 手机的物理 USB 接口。
 国内服务器或家庭宽带在直接访问 Docker Hub 官方源时，常因国际网络阻断导致 `docker pull` 极度缓慢或直接报错：
 `net/http: TLS handshake timeout` 或 `Error response from daemon: Get "...": dial tcp ...: i/o timeout`。
 
-### 🛠️ 解决方案（国内极速镜像站）：
+### 🛠️ 解决方案（配置国内镜像加速站）：
 
-使用国内加速镜像源 **`m.daocloud.io`** 进行极速下载，并在本地打标为标准镜像名：
+**强烈推荐直接为 Docker 守护进程配置国内镜像加速站**，配置后可原生极速下载，后续使用任何官方命令（包括 `docker pull`、`docker run --pull=always`）均可自动享受加速：
 
 ```bash
-# 1. 使用国内加速镜像站拉取
-docker pull m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest
+# 1. 写入镜像加速配置
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://docker.m.daocloud.io"]
+}
+EOF
 
-# 2. 重新打标为标准镜像名称（方便直接运行官方启动命令）
-docker tag m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest buutuu/scrcpy-over-webrtc:latest
+# 2. 重启 Docker 服务生效
+sudo systemctl daemon-reload
+sudo systemctl restart docker
 
-# 3. 正常启动容器
+# 3. 原生极速拉取并启动容器
+docker pull buutuu/scrcpy-over-webrtc:latest
 docker run -d --name cp-aio --net=host -v ./data:/app/data -e PUBLIC_IP=<您的IP> buutuu/scrcpy-over-webrtc:latest
 ```

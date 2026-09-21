@@ -48,8 +48,7 @@
 
 在云服务器（Linux）上，推荐直接使用 Host 模式启动。
 
-> 💡 **国内云服务器极速拉取提示**：若直接从 Docker Hub 下载超时，可使用国内 DaoCloud 镜像站快速下载：  
-> `docker pull m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest && docker tag m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest buutuu/scrcpy-over-webrtc:latest`
+> 💡 **国内云服务器极速拉取提示**：若直接从 Docker Hub 下载超时，可配置国内镜像加速站（在 `/etc/docker/daemon.json` 中配置 `"registry-mirrors": ["https://docker.m.daocloud.io"]` 并执行 `sudo systemctl restart docker`），即可直接使用官方命令极速拉取，详见 [Docker 部署镜像加速配置](/deploy-docker#国内服务器--nas-极速加速配置强烈推荐)。
 
 * **一键启动命令**：
 

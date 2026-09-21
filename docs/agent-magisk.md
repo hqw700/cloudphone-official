@@ -64,7 +64,30 @@ cpctl
 
 控制台主菜单会展示当前 Agent 运行状态、PID、信令地址与设备 ID；选择 **“4) 交互式修改参数配置”** 即可依次修改信令地址、设备 ID、视频码率及 ICE 服务器，修改后选择 **“3) 重启 Agent 服务”** 生效。
 
-### 方式 C：直接编辑配置文件
+### 方式 C：电脑端离线预设定制（推荐批量刷机预制）
+
+如果您有多台手机需要批量刷机，或不想在手机端/电脑终端敲命令，推荐在**刷入手机前直接在电脑端修改 ZIP 刷机包的预设配置**：
+
+1. **获取离线配置工具**：
+   在 Web 控制台的“一键部署 -> Magisk / KSU 刷机模块”页面，直接点击下载 **`magisk-config-tools.zip`**（约 15KB，纯原生支持，无需安装 Python 环境）。
+2. **解压工具包**：
+   将 `magisk-config-tools.zip` 解压，并与下载的 `cloudphone-agent-magisk.zip` 置于同一文件夹中。
+3. **一键定制参数**：
+   * **Windows 用户（极简拖拽即用）**：
+     直接将 `cloudphone-agent-magisk.zip` **拖拽并放到 `configure_magisk.bat` 图标上**，弹出终端向导，按提示输入信令地址（或回车使用默认值），秒级生成已定制好的 `cloudphone-agent-magisk-configured.zip`；或在 PowerShell 中执行原生免 Python 脚本：
+     ```powershell
+     .\configure_magisk.ps1 -Signaling "wss://<您的服务器IP>:8443"
+     ```
+   * **macOS / Linux 用户**：
+     在终端运行向导或单行命令：
+     ```bash
+     chmod +x configure_magisk.sh
+     ./configure_magisk.sh -s "wss://<您的服务器IP>:8443"
+     ```
+4. **手机刷入即连**：
+   将生成的定制刷机包传输至手机并在 Magisk / KernelSU / APatch 中刷入，**手机重启后将直接以预设的信令地址自动上线**，完全省去手机端后续敲命令步骤！
+
+### 方式 D：手机端直接编辑配置文件
 
 使用 MT 管理器等具备 Root 权限的文件编辑器直接编辑配置文件：
 

@@ -3,20 +3,49 @@
 官方提供了开箱即用的 **Docker 一体化镜像 (All-in-One)**：`buutuu/scrcpy-over-webrtc:latest`。  
 镜像内部已预置信令服务器（`webrtc-signaling`）、Web 控制大盘前端以及 `coturn` STUN/TURN 媒体中转服务，支持在不同网络环境下保障 100% 连通率。
 
-## ⚡ 镜像拉取与国内加速源
+## ⚡ 镜像拉取与国内镜像加速站配置
 
-在部署之前，可先将镜像拉取至本地：
+官方一体化镜像名：`buutuu/scrcpy-over-webrtc:latest`。
 
-* **官方 Docker Hub 源 (海外服务器 / 具备代理环境)**：
-  ```bash
-  docker pull buutuu/scrcpy-over-webrtc:latest
-  ```
-* **⚡ 国内极速加速源 (DaoCloud 镜像站，国内服务器 / NAS 推荐)**：
-  ```bash
-  # 从国内镜像站拉取并重新打标为标准镜像名
-  docker pull m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest
-  docker tag m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest buutuu/scrcpy-over-webrtc:latest
-  ```
+在海外服务器或具备代理网络环境下，可直接执行标准命令拉取：
+```bash
+docker pull buutuu/scrcpy-over-webrtc:latest
+```
+
+### ⚡ 国内服务器 / NAS 极速加速配置（强烈推荐）
+
+国内服务器因 Docker Hub 网络限制，通常会出现拉取超时或连接失败。**强烈推荐直接为 Docker 守护进程配置国内镜像加速站**，配置后即可原生极速拉取，无需繁琐的临时镜像改名与打标：
+
+#### 1. 配置镜像加速站
+编辑（若不存在则新建）`/etc/docker/daemon.json` 文件：
+```json
+{
+  "registry-mirrors": ["https://docker.m.daocloud.io"]
+}
+```
+
+> 💡 **Linux 一键写入命令**：
+> ```bash
+> sudo mkdir -p /etc/docker
+> sudo tee /etc/docker/daemon.json <<-'EOF'
+> {
+>   "registry-mirrors": ["https://docker.m.daocloud.io"]
+> }
+> EOF
+> ```
+
+#### 2. 重启 Docker 服务生效
+重新加载系统守护配置并重启 Docker 服务：
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+#### 3. 原生极速拉取
+重启完成后，直接使用官方标准命令即可自动通过加速镜像站极速拉取：
+```bash
+docker pull buutuu/scrcpy-over-webrtc:latest
+```
 
 ---
 

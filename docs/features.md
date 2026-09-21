@@ -16,7 +16,7 @@
 | **运维与调试** | 多会话交互式 Shell 终端 (`xterm.js`)、并发批量命令分发、自定义快捷宏、P2P WebADB 免驱调试、DataChannel 文件管理器、APK 批量静默分发 | 批量运维巡检、一键抓取 Focus 页面与安装包、远程传输文件 |
 | **AI 智能助手** | 兼容 OpenAI / Claude / DeepSeek 大模型、思考轨迹日志、原生 Function Tool Calling (ADB/WebRTC诊断/模拟触控) | 画面卡顿智能分析、自动化诊断与故障排障 |
 | **底层硬件模拟** | Camera HAL 视频注入 (TCP 9001)、GPS HAL 虚拟定位 (TCP 9002)、Sensors HAL 传感器模拟 (TCP 9003) | 微信扫码/人脸模拟、LBS 定位测试、重力/陀螺仪运动模拟 |
-| **多形态部署** | WebUSB 免驱一键接入、电脑一键脚本、Magisk 开机自启模块、Android App 双引擎客户端、Docker AIO 容器、Standalone 脱机模式 | 涵盖小白极速上手、机房批量固化以及单机无服务器运行 |
+| **多形态部署** | WebUSB 免驱一键接入、电脑一键脚本、ADB 多机批量并发拉起 (batch_start)、Magisk 开机自启模块与离线配置定制包 (configure_magisk)、Android App 双引擎客户端、Docker AIO 容器、Standalone 脱机模式 | 涵盖小白极速上手、机房批量固化以及单机无服务器运行 |
 
 ---
 
@@ -62,6 +62,12 @@
 - **Camera HAL (TCP 9001)**：前端采集摄像头或本地视频，以 JPEG/YUV 裸流注入 Android Camera HAL。
 - **GPS HAL (TCP 9002)**：将经纬度坐标注入 GPS HAL，底层以 1s 周期刷新并上报 LocationManagerService。
 - **Sensors HAL (TCP 9003)**：将重力、加速度、陀螺仪、折叠角等传感器数据实时注入 Sensors HAL。
+
+### 9. 多形态部署与批量初始化
+- **WebUSB 免驱一键部署**：浏览器原生通过 WebUSB 与手机通信，自动侦测 CPU 架构（`arm64` / `armeabi-v7a` / `amd64`）并推送 Agent，无需在电脑上预装 ADB。
+- **ADB 单机与批量并发部署**：`agent-deploy.zip` 部署包内置单机 `run.sh` / `run.bat` 与多机并发 `batch_start.sh` / `batch_start.bat`，自动遍历所有正常连接设备并一键并行拉起守护进程。
+- **Magisk 模块与离线定制工具**：提供开机自启 Magisk / KernelSU / APatch 模块包及轻量离线配置工具包（`magisk-config-tools.zip`），支持在 Windows 下直接拖拽 ZIP 刷机包至 `configure_magisk.bat` 图标完成免命令行参数预设，手机刷入后开机即连。
+- **自适应部署大屏**：控制台部署中心采用三步走自适应步骤流排版，代码块防遮挡安全边距，全端设备极致贴合。
 
 ---
 

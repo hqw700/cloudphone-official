@@ -13,7 +13,7 @@
 * 在飞牛 OS 「容器」应用中，点击左侧菜单的 **「镜像」**；
 * 点击右上角 **「常用镜像」** 或直接在搜索框中输入：`buutuu/scrcpy-over-webrtc`；
 * 选中并下载 `latest` 版本。
-* *(💡 若网络搜索较慢或超时，可切换到「命令行」执行国内加速拉取：`docker pull m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest && docker tag m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest buutuu/scrcpy-over-webrtc:latest`)*
+* *(💡 若网络搜索较慢或超时，可在 Docker 中配置国内镜像加速站 `"https://docker.m.daocloud.io"`，详见 [Docker 镜像加速配置](/deploy-docker#国内服务器--nas-极速加速配置强烈推荐))*
 
 ![飞牛搜索镜像](img/fnos-1.png)
 
@@ -74,9 +74,9 @@ docker run -d \
   -e TURN_PASSWORD=my_password \
   buutuu/scrcpy-over-webrtc:latest
 
-# 方式 B：国内极速加速拉取 (推荐)
-docker pull m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest
-docker tag m.daocloud.io/docker.io/buutuu/scrcpy-over-webrtc:latest buutuu/scrcpy-over-webrtc:latest
+# 方式 B：配置国内镜像加速站后拉取 (推荐)
+# 在 /etc/docker/daemon.json 中配置 "registry-mirrors": ["https://docker.m.daocloud.io"] 并重启 docker
+docker pull buutuu/scrcpy-over-webrtc:latest
 ```
 
 ### 2. 关键防坑：开放 OpenWrt 防火墙通信规则
