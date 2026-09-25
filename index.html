@@ -615,7 +615,7 @@
     <section class="section" id="changelog" style="padding-top: 30px; padding-bottom: 50px;">
       <div class="container">
         <div class="section-title-wrap">
-          <span class="section-subtitle" id="changelog-subtitle">What's New in v0.3.7</span>
+          <span class="section-subtitle" id="changelog-subtitle">What's New in v0.3.8</span>
           <h2 class="section-title">最新版本更新日志</h2>
           <p class="section-desc">全新升级 Android 客户端、Magisk 保活模块以及管理平台核心性能。</p>
         </div>
@@ -628,28 +628,28 @@
               <span class="px-3 py-1 text-xs font-bold rounded-full bg-cyan-950 text-cyan-400 border border-cyan-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(6, 182, 212, 0.15); color: var(--accent-blue); font-size: 12px; font-weight: 700; border: 1px solid rgba(6, 182, 212, 0.3);">
                 📱 Android APP 客户端
               </span>
-              <span class="text-xs font-mono text-cyan-300" id="changelog-app-version" style="color: #67e8f9; font-size: 12px; font-family: var(--font-mono);">v0.3.7</span>
+              <span class="text-xs font-mono text-cyan-300" id="changelog-app-version" style="color: #67e8f9; font-size: 12px; font-family: var(--font-mono);">v0.3.8</span>
             </div>
             <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: var(--accent-blue);">•</span>
-                <span><strong>全新界面重构</strong>：基于现代 Jetpack Compose 架构深度重写界面交互，全面提升单机直控与大盘预览流畅度，修复画面拉伸。</span>
+                <span><strong>移动端沉浸单机体验</strong>：全面优化移动端界面，修复 iOS 网页全屏与 H.264 视频显示/兼容问题，增加 PWA 添加到主屏幕免地址栏全屏引导。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: var(--accent-blue);">•</span>
-                <span><strong>摄像头监控模式</strong>：支持无需亮屏硬件直通摄像头安防监控推流，新增马达超焦距休眠与低功耗节能换挡。</span>
+                <span><strong>终端与用户管理深度重构</strong>：彻底解决移动端终端点击闪烁、iOS 获焦自动放大网页变形、聚焦跳屏及敲命令行被遮挡；重构用户管理抽屉。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: var(--accent-blue);">•</span>
-                <span><strong>Root 开机自启动</strong>：被控端在 Root 模式下全面支持系统开机无感自启与后台持久化自愈保活。</span>
+                <span><strong>免 Root 宿主 App (Shizuku) 适配</strong>：引入 100% 现代 Kotlin 宿主工程，支持 Shizuku (UID 2000) 与 Root 双通道，手机脱机长期稳定受控。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: var(--accent-blue);">•</span>
-                <span><strong>传输通道优化</strong>：文件通道新增主动取消传输指令（upload/download cancel），支持大文件传输流控与稳健管理。</span>
+                <span><strong>Android 14+ 前台保活与自愈</strong>：接入 specialUse 前台服务与守护看门狗，建立沙盒穿透安全部署机制，抵御系统进程查杀。</span>
               </li>
             </ul>
             <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
-              <a id="changelog-app-link" href="https://pan.quark.cn/s/8fed0a4b57e1" target="_blank" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300" style="color: var(--accent-blue); text-decoration: none; font-size: 12px;">
+              <a id="changelog-app-link" href="https://pan.quark.cn/s/057614cb3e76" target="_blank" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300" style="color: var(--accent-blue); text-decoration: none; font-size: 12px;">
                 获取 ScrcpyOverWebRTC-release.apk →
               </a>
             </div>
@@ -661,61 +661,61 @@
               <span class="px-3 py-1 text-xs font-bold rounded-full bg-purple-950 text-purple-400 border border-purple-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(168, 85, 247, 0.15); color: #c084fc; font-size: 12px; font-weight: 700; border: 1px solid rgba(168, 85, 247, 0.3);">
                 🧩 Magisk 极速模块
               </span>
-              <span class="text-xs font-mono text-purple-300" id="changelog-magisk-version" style="color: #d8b4fe; font-size: 12px; font-family: var(--font-mono);">v0.3.7</span>
+              <span class="text-xs font-mono text-purple-300" id="changelog-magisk-version" style="color: #d8b4fe; font-size: 12px; font-family: var(--font-mono);">v0.3.8</span>
             </div>
             <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #c084fc;">•</span>
-                <span><strong>系统开机自启</strong>：支持作为底层系统服务开机无感自启与后台自动保活，网络闪断毫秒级自愈。</span>
+                <span><strong>Magisk 模块离线配置工具</strong>：支持在电脑端直接解包配置 Magisk 刷机包参数（提供 Windows 批处理/PowerShell 免 Python 及 Shell 脚本），刷入直接连接后台，避免手动敲命令。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #c084fc;">•</span>
-                <span><strong>HTTP 断点续传与重试</strong>：集成 RFC 7233 断点续传与 If-Range 防脏包校验，弱网大文件与 APK 分发支持原地自动重试。</span>
+                <span><strong>ADB 多机批量并发拉起</strong>：提供自动遍历探测在线健康设备并并发推送启动 Agent 的脚本套件，群控多机连上电脑一键批量上线。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #c084fc;">•</span>
-                <span><strong>监控低功耗节能适配</strong>：支持安防监控节能模式，关闭马达对焦与高频防抖，自适应降帧释放软编资源。</span>
+                <span><strong>客户端断开解耦与心跳对齐</strong>：Agent 断开清理流程异步化，心跳超时调整为 60s 对齐服务端，消除网络闪断引发的假死掉线重连风暴。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #c084fc;">•</span>
-                <span><strong>域名信令与 DNS 自适应</strong>：内置 Android DNS 解析适配与 TLS SNI，完美兼容反向代理与域名信令环境。</span>
+                <span><strong>推流源动态追踪与写入超时</strong>：引入 RunningVideoSource 物理源追踪状态机，摄像头与屏幕切换强制冷重启；信令全链路注入 2~3s 写超时防护防死锁。</span>
               </li>
             </ul>
             <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
-              <a id="changelog-magisk-link" href="https://pan.quark.cn/s/d86361df7b12" target="_blank" class="text-xs font-semibold text-purple-400 hover:text-purple-300" style="color: #c084fc; text-decoration: none; font-size: 12px;">
+              <a id="changelog-magisk-link" href="https://pan.quark.cn/s/04332ce61209" target="_blank" class="text-xs font-semibold text-purple-400 hover:text-purple-300" style="color: #c084fc; text-decoration: none; font-size: 12px;">
                 获取 cloudphone-agent-magisk.zip →
               </a>
             </div>
           </div>
 
-          <!-- 3. v0.3.7 管理平台修改 -->
+          <!-- 3. v0.3.8 管理平台修改 -->
           <div class="p-6 rounded-2xl border border-blue-800/40 bg-slate-950/50 shadow-xl relative overflow-hidden" style="padding: 24px; border-radius: var(--radius-lg); border: 1px solid rgba(59, 130, 246, 0.3); background: rgba(10, 15, 29, 0.75);">
             <div class="flex items-center justify-between mb-4">
               <span class="px-3 py-1 text-xs font-bold rounded-full bg-blue-950 text-blue-400 border border-blue-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; font-size: 12px; font-weight: 700; border: 1px solid rgba(59, 130, 246, 0.3);">
                 💻 管理平台优化
               </span>
-              <span class="text-xs font-mono text-blue-300" id="changelog-platform-version" style="color: #93c5fd; font-size: 12px; font-family: var(--font-mono);">v0.3.7</span>
+              <span class="text-xs font-mono text-blue-300" id="changelog-platform-version" style="color: #93c5fd; font-size: 12px; font-family: var(--font-mono);">v0.3.8</span>
             </div>
             <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span><strong>高频预览与大盘群控重构</strong>：引入 Pub/Sub 定向分发机制与租户零泄漏隔离；4 挡推流范围精选（屏幕可视/全量/勾选/标签）节约 90% 带宽；群控并发广播延迟压降至 ~2ms。</span>
+                <span><strong>移动端与 PC 端双模直控重构</strong>：移动端默认沉浸单机全屏，修复 iOS 视频显示与终端焦点跳屏；PC 端单机悬浮窗与自由缩放全量回归，支持单机/多机模式秒级平滑热切换。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span><strong>重构用户管理与租约体系</strong>：用户中心升级为一站式管理抽屉，全面引入设备独占租约（Lease）模型，支持精确设置每台机器到期时间、7 维度权限细粒度管控与到期自动回收。</span>
+                <span><strong>Redroid 云手机一键适配支持</strong>：提供开箱即用的 AIO 镜像构建工具（release/redroid），自动识别导入官方镜像与 AOSP 离线包，容器开机自启、秒级接入。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span><strong>批量文本下发与快捷短语库</strong>：控制台新增文本下发 Tab，经由剪贴板原子通道保证 100% 汉字落屏与可选追加回车；单机直控与大盘群控集成云端与本地双轨持久化的快捷短语库。</span>
+                <span><strong>海量设备展开式高密选择抽屉</strong>：控制台 Tab 更名为“执行命令”，Targets 区域升级为展开式抽屉，支持模糊搜索、批量反选与自适应网格，轻松承载 100+ 台设备批量命令分发。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span><strong>批量安装收敛与断点续传</strong>：运维功能收敛至全局底部控制台，提供任务进度看板与单机诊断日志；Agent 端引入 HTTP Range 断点续传与 If-Range 防脏包，解决大文件超时断流。</span>
+                <span><strong>全链路推流互斥与断开防抖</strong>：加固屏幕直连与摄像头监控切换互斥，引入 1500ms 协议热切换防抖看门狗，根治协议切换或页面刷新导致的误杀黑屏。</span>
               </li>
             </ul>
             <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
-              <a id="changelog-platform-link" href="https://pan.quark.cn/s/fbeb736acb0e" target="_blank" class="text-xs font-semibold text-blue-400 hover:text-blue-300" style="color: #60a5fa; text-decoration: none; font-size: 12px;">
+              <a id="changelog-platform-link" href="https://pan.quark.cn/s/997fcd1004e1" target="_blank" class="text-xs font-semibold text-blue-400 hover:text-blue-300" style="color: #60a5fa; text-decoration: none; font-size: 12px;">
                 获取 cloudphone.zip 平台包 →
               </a>
             </div>
