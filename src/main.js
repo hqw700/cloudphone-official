@@ -3,8 +3,10 @@
    ========================================================================== */
 
 import './style.css'
+import { initI18n, getCurrentLocale } from './i18n.js'
 
 document.addEventListener('DOMContentLoaded', () => {
+  initI18n()
   initHeaderScroll()
   initCommandCopy()
   initLatencySimulation()
@@ -14,6 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 异步加载动态配置
   loadDynamicConfig()
+
+  // 监听多语言切换事件
+  window.addEventListener('website-locale-changed', (e) => {
+    const isEn = e.detail && e.detail.locale === 'en-US'
+    const heroBadgeText = document.getElementById('hero-badge-text')
+    if (heroBadgeText && heroBadgeText.textContent) {
+      const match = heroBadgeText.textContent.match(/^(v[\d\.]+)/)
+      if (match) {
+        heroBadgeText.textContent = `${match[1]} ${isEn ? 'Official Release' : '正式发布'}`
+      }
+    }
+  })
 })
 
 /**
@@ -520,7 +534,9 @@ async function loadDynamicConfig() {
 
     if (config.latestVersion) {
       if (githubVersion) githubVersion.textContent = config.latestVersion
-      if (heroBadgeText) heroBadgeText.textContent = `${config.latestVersion} 正式发布`
+      if (heroBadgeText) {
+        heroBadgeText.textContent = `${config.latestVersion} ${getCurrentLocale() === 'en-US' ? 'Official Release' : '正式发布'}`
+      }
       if (changelogSubtitle) {
         if (appVer && platformVer && appVer !== platformVer) {
           changelogSubtitle.textContent = `What's New in ${platformVer} & App ${appVer}`

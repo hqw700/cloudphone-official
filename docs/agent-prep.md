@@ -51,6 +51,50 @@ adb devices
 
 ---
 
+## 🐳 Docker / Redroid 容器云手机准备清单
+
+如果您使用 Docker 运行 **Redroid (Remote Android)** 云手机容器集群，在部署前必须确保宿主机满足以下前置环境配置：
+
+### 1. 内核 Binder 驱动检查与挂载
+Redroid 依赖 Android 的进程间通信驱动 Binder。现代 Linux 内核（5.0+）通常内置或支持以模块方式加载 `binder_linux`：
+1. **检查 Binder 节点**：
+   ```bash
+   ls -l /dev/binderfs /dev/binder
+   ```
+   - 若输出存在 `/dev/binder` 或 `/dev/binderfs/binder`、`hwbinder`、`vndbinder`，说明驱动已就绪。
+2. **若未加载驱动**（Ubuntu / Debian / PVE）：
+   ```bash
+   # 加载 binder 模块并启用 binderfs
+   sudo modprobe binder_linux devices="binder,hwbinder,vndbinder"
+   ```
+   若提示模块不存在，请安装宿主机发行版的 extra 内核模块包（如 Ubuntu 可通过 `sudo apt install linux-modules-extra-$(uname -r)` 获取，或使用 DKMS 版 binder 模块）。
+
+### 2. Loop 回环设备节点预分配 (高密多开容器核心必做 ⭐️)
+> [!IMPORTANT]
+> **多开容器第 2 台秒退 (Exit Code 129) 的排错关键！**  
+> Android 10+（尤其是 Android 14 与 Android 15）的系统核心运行时（Bionic C 库、动态链接器 `linker64`、ART 等）被打包在 APEX 镜像中。单个容器启动需要将 20~30 个 `.apex` 镜像作为 Loop 设备挂载。  
+> 普通 Linux 宿主机默认只预先创建了 **8 个 Loop 设备节点**（`/dev/loop0` ~ `/dev/loop7`）。当第 1 台容器占满后，第 2 台容器因无节点可用会导致动态链接器挂载失败，触发 `vold` 自毁关机。
+
+在宿主机执行一次性预分配命令（创建至 256 个节点）：
+```bash
+sudo bash -c 'for i in $(seq 8 255); do [ ! -e /dev/loop$i ] && mknod -m 660 /dev/loop$i b 7 $i; done'
+```
+*💡 推荐将此操作固化为开机自启 systemd 服务（如 `/etc/systemd/system/redroid-loop.service`），确保宿主机重启后依然生效。*
+
+### 3. 网络模式安全红线 (严格禁止 `--net=host`)
+> [!CAUTION]
+> **切勿在特权模式下对 Redroid 容器使用 `--net=host`！**  
+> Redroid 是完整的 Android 操作系统。Android 内部的 `netd` 守护进程默认认为自己独占整台机器的网络协议栈：它启动时会直接删除 Linux 宿主机的 `lookup main` 主路由规则、强行关闭 `net.ipv4.ip_forward=0` 并在 iptables 下发 DROP 规则，**直接摧毁宿主机全局所有容器的网桥与外部网络通信**！  
+> **所有 Redroid 容器必须使用标准 Docker Bridge 模式运行。**
+
+### 4. GPU 硬件加速与渲染选型
+* **宿主机具备 Intel/AMD 核显或独立显卡**：
+  启动容器时映射 GPU 节点 `-v /dev/dri:/dev/dri`，并配置内核参数 `androidboot.redroid_gpu_mode=host`，享用显存直通硬件加速。
+* **纯 CPU 云服务器或无显卡环境**：
+  配置 `androidboot.redroid_gpu_mode=guest`，系统将自动采用 Mesa CPU 软解渲染。
+
+---
+
 ## ⚖️ 常见设备接入模式特性对比
 
 在开始部署前，请根据您的设备运行环境、运维规模以及权限情况选择最合适的接入模式。当前支持的几种主要设备接入模式差异如下：
@@ -80,10 +124,10 @@ adb devices
    - **批量操作能力**：✅ **支持统一修复配置**（当信令地址变更或配置异常时，支持在 App 界面内一键检测并统一修复/更新配置）。
    - **适用场景**：已 Root 设备的免电脑直装模式，适合不想刷入 Magisk 模块、希望直接通过图形界面 App 便捷纳管与维护设备的用户。
 
-6. **自定义 ROM / Redroid 镜像集成** <span style="color: #38bdf8; font-size: 13px; font-weight: bold;">(🚀 后续发布)</span>：
-   - **重启自动上线**：✅ **原生支持**（将 Agent 程序与投屏组件直接预置固化进 Android 定制 ROM 系统分区或 Redroid Docker 基础镜像中，开机或容器拉起即刻自动上线，零额外配置）。
-   - **批量操作能力**：✅ **支持统一烧录与批量分发**（基线镜像一次构建，支持大规模设备统一刷机或集群一键并发启动上千台云手机容器）。
-   - **适用场景**：企业级标准化云手机底座、大规模机房 ROM 批量刷机、以及深度定制虚拟 HAL（相机/传感器/GPS）的专用环境。
+6. **Docker / Redroid 一体化 AIO 镜像与定制 ROM 集成** <span style="color: #10b981; font-size: 13px; font-weight: bold;">(✅ 已支持)</span>：
+   - **重启自动上线**：✅ **原生支持**（通过内置极简套件 1 秒免编译打出 AIO 镜像，或固化进定制 ROM，开机或容器拉起即刻自动自启上线，免人工注入）。
+   - **批量操作能力**：✅ **支持统一镜像秒级分发与高密多开**（基线镜像一次生成，支持一键并发拉起数十台云手机，多开自动基于网卡 MAC 地址后 4 位生成唯一 Device ID 防冲突）。
+   - **适用场景**：标准化云手机集群底座、Docker 自动化多开运维、大规模机房 ROM 刷机与专用虚拟化环境。
 
 7. **Linux Host Agent (宿主机管理守护进程)** <span style="color: #38bdf8; font-size: 13px; font-weight: bold;">(🚀 后续发布)</span>：
    - **重启自动上线**：✅ **支持**（作为 Linux 物理宿主机的 systemd 系统服务常驻自启）。
@@ -100,7 +144,7 @@ adb devices
 | **3. Magisk 模块** | ✅ 支持 | ✅ 支持 (修改配置后统一刷入) | Root (Magisk/KSU/APatch) | 系统开机自启常驻，适合机房集群自动化长期运维 | [查阅指南](/agent-magisk) |
 | **4. App ADB 模式 (Shizuku)** | ❌ 不支持 | ❌ 不支持 | 免 Root (需 Shizuku) | 免电脑在手机端一键拉起被控端，适合单机临时体验 | [查阅指南](/app-guide) |
 | **5. App Root 权限模式** | ✅ 支持 | ✅ 支持 (支持统一修复配置) | 需获得 Root (`su`) 权限 | 手机原生 App 图形化提权，开机自启并支持配置修复 | [查阅指南](/app-guide) |
-| **6. 自定义 ROM / Redroid 集成** | ✅ 原生支持 (固化内置) | ✅ 支持 (基线镜像统一分发) | 固件编译 / 镜像定制特权 | 系统底层固化通信组件，开机即上线，适合标准化云机底座 | 🚀 **后续发布** |
+| **6. Docker / Redroid 一体化 AIO 镜像** | ✅ 原生支持 (固化自启) | ✅ 支持 (标准镜像一键多开) | Docker / 特权容器权限 | 1 秒免编译打镜像，开机自启与 MAC 自动防冲突 | [查阅指南](/agent-docker) |
 | **7. Linux Host Agent 宿主机管理** | ✅ 支持 (systemd 常驻) | ✅ 支持 (统一纳管所有虚机与执行开关机) | Linux 宿主机 Root 权限 | 宿主机级守护进程，集中管理本地所有虚机并支持远程开关机 | 🚀 **后续发布** |
 
 ---
@@ -113,8 +157,7 @@ adb devices
 2. **[方式二：电脑脚本一键包接入](/agent-script)**：通过 PC 终端脚本一键推送（支持 USB / 有线 / 无线 ADB，支持批量操作）。
 3. **[方式三：Magisk / Root 模块开机自启](/agent-magisk)**：Root 真机开机自启系统守护，支持预改配置统一刷入，无人值守运维。
 4. **[方式四：Android App 原生客户端](/app-guide)**：手机安装 App，免电脑被控（支持 Root 模式开机自启与配置修复，以及 Shizuku 免 Root ADB 模式）。
-5. **[方式五：Docker / Redroid 容器云手机](/agent-docker)**：服务器端 redroid 虚机端口映射与批量纳管。
-6. **方式六：自定义 ROM / Redroid 镜像集成（后续发布）**：将 Agent 预置固化入 Android 系统分区或 Docker 基础镜像中，开机即上线，免除逐台推送和额外配置。
-7. **方式七：Linux Host Agent 宿主机统一纳管（后续发布）**：在 Linux 服务器物理宿主机上部署 Host 守护进程，统一管理 Linux 下所有虚机，并支持信令下发远程批量开机、关机与重启。
+5. **[方式五：Docker / Redroid 容器云手机](/agent-docker)**：服务器端 Redroid 虚机集群接入（强烈推荐使用发布包内置的 AIO 极速构建套件，1 秒打出开箱自启镜像，亦支持传统动态注入）。
+6. **方式六：Linux Host Agent 宿主机统一纳管（后续发布）**：在 Linux 服务器物理宿主机上部署 Host 守护进程，统一管理 Linux 下所有虚机，并支持信令下发远程批量开机、关机与重启。
 
 
