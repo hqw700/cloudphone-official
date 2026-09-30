@@ -20,7 +20,7 @@ export const TRANSLATIONS = {
     langSwitch: 'English',
 
     // Hero 区域
-    heroBadge: 'v0.3.8 正式发布',
+    heroBadge: 'v0.4.0 正式发布',
     heroTitle: '穿云投屏',
     heroSubtitle: '不仅仅是投屏，更是你的专属云手机',
     heroDesc: '依托纯粹的 <strong>P2P 直连</strong> 与 <strong>WebRTC 极速协议</strong>，“穿云投屏”以企业级云手机架构重构设备连接。我们打破了物理硬件与云端虚拟环境的界限，为您实现 <strong>实体真机</strong>、<strong>本地模拟器</strong>，甚至 <strong>市面主流云手机</strong> 的统一纳管。无需复杂的网络穿透与配置，所有设备一键极速上云，在浏览器中瞬间化身为您的 <strong>专属云端真机</strong>。',
@@ -92,20 +92,20 @@ export const TRANSLATIONS = {
     tabHal: '🔮 虚拟 HAL & 集群管理',
 
     // 更新日志要点
-    clAppLi1: '<strong>移动端沉浸单机体验</strong>：全面优化移动端界面，修复 iOS 网页全屏与 H.264 视频显示/兼容问题，增加 PWA 添加到主屏幕免地址栏全屏引导。',
-    clAppLi2: '<strong>终端与用户管理深度重构</strong>：彻底解决移动端终端点击闪烁、iOS 获焦自动放大网页变形、聚焦跳屏及敲命令行被遮挡；重构用户管理抽屉。',
-    clAppLi3: '<strong>免 Root 宿主 App (Shizuku) 适配</strong>：引入 100% 现代 Kotlin 宿主工程，支持 Shizuku (UID 2000) 与 Root 双通道，手机脱机长期稳定受控。',
-    clAppLi4: '<strong>Android 14+ 前台保活与自愈</strong>：接入 specialUse 前台服务与守护看门狗，建立沙盒穿透安全部署机制，抵御系统进程查杀。',
+    clAppLi1: '<strong>全新前台常驻保活服务</strong>：引入 specialUse 前台守护服务与看门狗自动拉起机制，彻底修复此前状态栏通知图标高频闪烁重绘问题，防杀与长期稳定保活能力大幅提升。',
+    clAppLi2: '<strong>自启与后台无感托管增强</strong>：全面优化 Root 与 Shizuku (免 Root ADB) 双引擎自启与后台运行策略，真机与云机开机即连，脱机状态下长期无感托管。',
+    clAppLi3: '<strong>客户端界面全英文深度适配</strong>：全站 XML 布局、Compose 界面与 Java/Kotlin 代码字符全量国际化抽取，精准跟随系统语言切换，提供标准海外英文交互体验。',
+    clAppLi4: '<strong>多通道状态监听与自愈机制</strong>：优化 Agent 连接心跳探测与网络抖动自愈，切网自动重新上线，保障长时间无人值守运行不掉线。',
 
     clMagiskLi1: '<strong>Magisk 模块离线配置工具</strong>：支持在电脑端直接解包配置 Magisk 刷机包参数（提供 Windows 批处理/PowerShell 免 Python 及 Shell 脚本），刷入直接连接后台，避免手动敲命令。',
     clMagiskLi2: '<strong>ADB 多机批量并发拉起</strong>：提供自动遍历探测在线健康设备并并发推送启动 Agent 的脚本套件，群控多机连上电脑一键批量上线。',
     clMagiskLi3: '<strong>客户端断开解耦与心跳对齐</strong>：Agent 断开清理流程异步化，心跳超时调整为 60s 对齐服务端，消除网络闪断引发的假死掉线重连风暴。',
     clMagiskLi4: '<strong>推流源动态追踪与写入超时</strong>：引入 RunningVideoSource 物理源追踪状态机，摄像头与屏幕切换强制冷重启；信令全链路注入 2~3s 写超时防护防死锁。',
 
-    clPlatformLi1: '<strong>移动端与 PC 端双模直控重构</strong>：移动端默认沉浸单机全屏，修复 iOS 视频显示与终端焦点跳屏；PC 端单机悬浮窗与自由缩放全量回归，支持单机/多机模式秒级平滑热切换。',
-    clPlatformLi2: '<strong>Redroid 云手机一键适配支持</strong>：提供开箱即用的 AIO 镜像构建工具（release/redroid），自动识别导入官方镜像与 AOSP 离线包，容器开机自启、秒级接入。',
-    clPlatformLi3: '<strong>海量设备展开式高密选择抽屉</strong>：控制台 Tab 更名为“执行命令”，Targets 区域升级为展开式抽屉，支持模糊搜索、批量反选与自适应网格，轻松承载 100+ 台设备批量命令分发。',
-    clPlatformLi4: '<strong>全链路推流互斥与断开防抖</strong>：加固屏幕直连与摄像头监控切换互斥，引入 1500ms 协议热切换防抖看门狗，根治协议切换或页面刷新导致的误杀黑屏。',
+    clPlatformLi1: '<strong>全站深度国际化 (i18n) 支持</strong>：管理大盘、设备直控、安防监控大屏、Web-ADB 终端、文件管理及系统设置实现 100% 中英文（English / 简体中文）无缝切换与本地记忆。',
+    clPlatformLi2: '<strong>更新感知提醒与用户反馈集成</strong>：新增智能版本更新感知提醒，支持在网页端直接一键提交反馈建议与问题诊断，沟通与升级更加高效。',
+    clPlatformLi3: '<strong>传输通道与网络稳定性大幅加固</strong>：优化弱网重连与长会话心跳机制，直连与大盘推流资源智能互斥，宿主机带宽与编解码占用更低、连接更稳。',
+    clPlatformLi4: '<strong>群控直控与交互体验细节升级</strong>：大盘矩阵触控映射更精准，快捷指令栏交互与浮窗边界保护完善，全面提升多设备并发管控流畅度。',
     clAppDownload: '获取 ScrcpyOverWebRTC-release.apk →',
     clMagiskDownload: '获取 cloudphone-agent-magisk.zip →',
     clPlatformDownload: '获取 cloudphone.zip 平台包 →',
@@ -233,7 +233,7 @@ export const TRANSLATIONS = {
     langSwitch: '简体中文',
 
     // Hero section
-    heroBadge: 'v0.3.8 Released',
+    heroBadge: 'v0.4.0 Released',
     heroTitle: 'ScrcpyOverWebRTC',
     heroSubtitle: 'More Than Mirroring — Your Dedicated Cloud Phone',
     heroDesc: 'Powered by pure <strong>P2P direct connections</strong> and <strong>WebRTC ultra-fast protocols</strong>, ScrcpyOverWebRTC redefines remote Android device management. We eliminate the barrier between physical hardware and cloud containers, allowing you to unify <strong>physical phones</strong>, <strong>local emulators</strong>, and <strong>cloud instances</strong> in one central console. No complex port forwarding required — every device transforms into your <strong>dedicated cloud phone</strong> inside any modern web browser.',
@@ -295,20 +295,20 @@ export const TRANSLATIONS = {
     changelogPlatformBadge: '💻 Management Platform',
 
     // Changelog bullet points
-    clAppLi1: '<strong>Immersive Mobile Experience</strong>: Fully optimized mobile UI, fixed iOS fullscreen & H.264 video rendering, and added PWA Add-to-Home-Screen prompt for clean UI.',
-    clAppLi2: '<strong>Terminal & User Management Overhaul</strong>: Fixed mobile terminal flicker, iOS zoom deform upon focus, scroll jumps, and keyboard clipping; overhauled user management drawer.',
-    clAppLi3: '<strong>Root-Free Host App (Shizuku)</strong>: 100% modern Kotlin host app supporting both Shizuku (UID 2000) and Root engines for long-term untethered phone management.',
-    clAppLi4: '<strong>Android 14+ Keepalive & Self-Healing</strong>: specialUse foreground service and watchdog daemon with sandbox-bypassing deploy to withstand OS process pruning.',
+    clAppLi1: '<strong>Foreground Daemon Keepalive Service</strong>: Introduced specialUse foreground service with watchdog auto-respawn, eliminating status bar icon flashing and drastically boosting keepalive resilience.',
+    clAppLi2: '<strong>Enhanced Boot Auto-start & Silent Hosting</strong>: Upgraded Root and Shizuku (root-free ADB) dual-engine startup policies, enabling seamless boot connection and robust headless background hosting.',
+    clAppLi3: '<strong>Complete English Localization</strong>: Fully extracted all UI strings across XML layouts, Compose screens, and runtime dialogs, seamlessly adapting to system language for global usability.',
+    clAppLi4: '<strong>Multi-Channel Health Monitoring & Self-Healing</strong>: Improved heartbeat probes and network jitter resilience, automatically reconnecting upon network switches for uninterrupted operation.',
 
     clMagiskLi1: '<strong>Offline Magisk Config Tool</strong>: Unpack and configure Magisk module parameters directly on PC (Windows batch/PowerShell & Shell scripts included) for zero-CLI flashing.',
     clMagiskLi2: '<strong>ADB Multi-Device Concurrent Start</strong>: Automated discovery and concurrent agent launcher script suite to bring dozens of USB-connected phones online at once.',
     clMagiskLi3: '<strong>Async Disconnect & Heartbeat Alignment</strong>: Asynchronous disconnect cleanup and aligned 60s timeout to eliminate reconnect storms caused by network jitters.',
     clMagiskLi4: '<strong>Dynamic Video Source & Write Timeouts</strong>: State machine tracking for screen/camera switching with cold restart; 2-3s write timeouts on signaling channels against deadlocks.',
 
-    clPlatformLi1: '<strong>Dual-Mode Mobile & PC Direct Control</strong>: Mobile defaults to immersive single-device view; PC floating window and free resizing restored with seamless hot switching.',
-    clPlatformLi2: '<strong>Redroid Cloud Phone Instant Adapter</strong>: Ready-to-use AIO image builder (`release/redroid`) with auto-import for official images and AOSP bundles, auto-starting on boot.',
-    clPlatformLi3: '<strong>High-Density Fleet Target Drawer</strong>: Targets area upgraded to expandable drawer with fuzzy search, batch invert selection, and responsive grid for 100+ devices.',
-    clPlatformLi4: '<strong>Stream Mutex & Debounce Guard</strong>: Strict mutual exclusion between screen and camera streaming with 1500ms debounce watchdog to prevent false black screens.',
+    clPlatformLi1: '<strong>Full-site Deep i18n & Bilingual Support</strong>: Management dashboard, direct control, surveillance console, WebADB terminal, file manager, and settings now feature 100% seamless English / Chinese switching.',
+    clPlatformLi2: '<strong>Update Notifications & User Feedback System</strong>: Integrated smart update perception with built-in one-click feedback and diagnostics submission for streamlined communication.',
+    clPlatformLi3: '<strong>Hardened Transmission & Network Robustness</strong>: Optimized weak network reconnection and heartbeat handling, with intelligent stream mutexing to cut bandwidth and codec overhead.',
+    clPlatformLi4: '<strong>Group Control & Interaction Refinement</strong>: Sharper touch coordinate mapping, refined quick action bar, and floating window boundaries for superior multi-device fleet management.',
     clAppDownload: 'Get ScrcpyOverWebRTC-release.apk →',
     clMagiskDownload: 'Get cloudphone-agent-magisk.zip →',
     clPlatformDownload: 'Get cloudphone.zip Platform Bundle →',
