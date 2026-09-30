@@ -1,6 +1,6 @@
 {
   "quarkName": "夸克网盘",
-  "quarkLink": "https://pan.quark.cn/s/5915868c31cc",
+  "quarkLink": "https://pan.quark.cn/s/0b45bebf08c1",
   "quarkCode": "cloudphone",
   "latestVersion": "v0.4.0",
   "appVersion": "v0.4.0",
@@ -8,7 +8,7 @@
   "platformVersion": "v0.4.0",
   "appApkLink": "https://pan.quark.cn/s/7dc2d785910f",
   "magiskModuleLink": "https://pan.quark.cn/s/5fd96c4c4f86",
-  "platformZipLink": "https://pan.quark.cn/s/5915868c31cc",
+  "platformZipLink": "https://pan.quark.cn/s/0b45bebf08c1",
   "dockerPullCmd": "docker pull buutuu/scrcpy-over-webrtc:latest",
   "updateTime": "2026-09-30",
   "xianyuName": "闲鱼官方店铺",
