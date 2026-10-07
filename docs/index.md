@@ -3,6 +3,10 @@
 欢迎使用 ScrcpyOverWebRTC（穿云投屏）官方使用指南与开发者文档。  
 本系统基于 **WebRTC 直连、redroid 虚拟化与定制 scrcpy-server** 深度打造，面向超低延迟、高频交互与大规模设备纳管场景。
 
+> [!TIP]
+> **官方全量资源与镜像下载中心**：👉 [https://webrtc-phone.com/#download](https://webrtc-phone.com/#download)  
+> 提供最新的 Android App 客户端、Magisk 极速模块包、离线配置工具集以及服务端完整部署包。
+
 ---
 
 ## 📖 文档全景导航
@@ -12,10 +16,10 @@
 * **[核心功能全景特性](/features)**：系统支持的所有核心能力总览，包括音视频、大盘、输入、审计、调试等。
 * **[硬件要求与选型决策](/quickstart)**：服务端与设备端环境要求、场景选型与部署路线决策树。
 
-### [📱 二、设备接入与 Agent 部署](/agent-prep)
-* **[接入准备与开发者选项](/agent-prep)**：USB 调试授权、特定品牌安全设置与网络检查。
+### [📱 二、设备接入与 Agent 部署](/agent-deploy)
+* **[设备准备与全景选型指南](/agent-deploy)**：接入模式对比选型、USB 调试授权、特定品牌安全设置与网络检查。
 * **[方式一：网页端 WebUSB 部署](/agent-webusb)**：纯浏览器免驱免装 ADB 一键插线配对推送。
-* **[方式二：电脑脚本一键包接入](/agent-script)**：通过解压 `agent-deploy.zip` 在 PC/Mac/Linux 终端一键拉起。
+* **[方式二：电脑 ADB 脚本一键部署](/agent-script)**：通过解压 `agent-deploy.zip` 在 PC/Mac/Linux 终端一键拉起。
 * **[方式三：Magisk / Root 模块开机自启](/agent-magisk)**：刷入 Magisk/KernelSU/APatch 模块，实现系统守护保活与 `cpctl` 命令行运维。
 * **[方式四：Android App 原生客户端](/app-guide)**：主控操控 + 被控端（Root 或 Shizuku 免 Root 双模式）+ 单机独立运行。
 * **[方式五：Docker / Redroid 容器云手机](/agent-docker)**：redroid 云虚机多开纳管与指定 UDP 端口段映射。

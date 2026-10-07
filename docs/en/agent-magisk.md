@@ -1,57 +1,63 @@
-# Method 3: Magisk / Root Auto-Start Module
+# Method 3: Magisk / Root Auto-Start Module (Root Persistent Daemon)
 
 This guide covers installing `cloudphone-agent` as a **Magisk / KernelSU / APatch module** on rooted Android devices.  
 Once installed, the Agent operates as a persistent system-level daemon: **it launches automatically on device boot and recovers from unexpected process terminations**, requiring no computer connection. It is ideal for unattended device racks, server farms, and 24/7 automated mobile clusters.
 
----
+> 💡 **Quick Tip**: On the **`/deploy` page** of the web console, or directly at the [Official Download Center (webrtc-phone.com/#download)](https://webrtc-phone.com/#download), switch to the **"Magisk / KSU Module (Root Auto-Start)"** panel (shown below) to download the flashable module package and offline configuration tools with one click, or directly click **"Copy Command"** to configure signaling in your terminal.
 
-## 📋 Prerequisites
-
-1. **Rooted Device**: The phone has Magisk (v24+), KernelSU, or APatch installed and active.
-2. **Signaling Server URL**: Your signaling server endpoint (e.g. `wss://192.168.1.100:8443`).
-3. **Download Module**: Open the web console, navigate to **"One-Click Deploy"** ➔ **"Magisk / KSU Module"**, and download **`cloudphone-agent-magisk.zip`**.
+![Web Console Magisk / KSU Deployment & Guide Panel](../img/magisk-deploy-guide.png)
 
 ---
 
-## 🔥 Step 1: Flash the Module
+## 📋 Scenarios & Prerequisites
 
-1. Transfer `cloudphone-agent-magisk.zip` to the phone's internal storage (via USB, browser download, or local file sharing).
-2. Open your **Magisk / KernelSU / APatch Manager** app.
-3. Go to the **"Modules"** section, tap **"Install from storage"**, and select the ZIP file.
-4. Once installation completes, tap **"Reboot"** in the lower-right corner.
+| Item | Requirement |
+| :--- | :--- |
+| **Device Privilege** | The physical phone must be **Rooted** with Magisk (v24+), KernelSU, or APatch installed and active |
+| **Core Advantage** | Runs as an autonomous system daemon; device reboots automatically start the Agent without PC connection |
+| **Network** | The phone's Wi-Fi or cellular network must have connectivity to the signaling server |
+
+---
+
+## 🔥 Step 1: Download & Flash the Module
+
+1. **Get the Module ZIP**:
+   - Open the Web Console and click **"Deploy"** (`/deploy`) in the left sidebar;
+   - Switch to the **"Magisk / KSU Module (Root Auto-Start)"** tab in the bottom-right panel;
+   - Click the purple **"Download Module (ZIP)"** button to get `cloudphone-agent-magisk.zip`.
+2. Transfer `cloudphone-agent-magisk.zip` to the phone's internal storage (via USB, browser download, or messaging tools).
+3. Open your **Magisk / KernelSU / APatch Manager** app.
+4. Go to the **"Modules"** section, tap **"Install from storage"**, and select the ZIP file.
+5. Once installation completes, tap **"Reboot"** in the lower-right corner. After rebooting, the activated `穿云投屏(ScrcpyOverWebRTC)` module card will appear in the modules list:
+
+![Magisk Module Card with Action Button](../img/magisk-module-list.png)
 
 During installation, the module automatically handles:
 * **Architecture Detection**: Identifies device CPU architecture (`arm64`, `armeabi-v7a`, or `x86_64`) and installs the matching native binary.
-* **System-Level Watchdog**: Installs an init boot script that launches the Agent upon network readiness and polls every 5 seconds to ensure health.
+* **System-Level Watchdog**: Installs an init boot script that launches the Agent upon network readiness and polls to ensure health.
 * **CLI Management**: Installs the `cpctl` (`cloudphone-ctl`) interactive command-line tool.
 * **Seamless Backup**: Existing configurations are automatically preserved when flashing newer versions.
 
 ---
 
-## ⚙️ Step 2: Configure Signaling URL & Device ID
+## ⚙️ Step 2: Configuration & Service Start
 
-After rebooting, the watchdog daemon runs in the background. On initial setup, point the Agent to your signaling server using one of the following methods:
+After rebooting, the watchdog daemon runs in the background. On initial setup, point the Agent to your signaling server using one of the following methods (commands are pre-generated on the console `/deploy` page):
 
-### Method A: One-Line CLI Command (Recommended)
+### Recommended Method A: One-Line CLI Command (Phone Terminal / ADB Shell)
 
 In a terminal app on the phone (Termux / MT Manager Terminal) or via PC `adb shell`:
 
 ```bash
 su
 cpctl set CP_AGENT_SIGNALING "wss://<YOUR-SERVER-IP>:8443"
-cpctl set CP_AGENT_ID "<Custom-Device-ID>"
-
-# 💡 Strongly Recommended: Configure TURN relay (guarantees traversal across cellular & symmetric NATs)
-cpctl set CP_AGENT_ICE_SERVERS '["turn:cloudphone_user:cloudphone_secure_password@<YOUR-SERVER-IP>:3478?transport=udp","stun:<YOUR-SERVER-IP>:3478"]'
-
+cpctl set CP_AGENT_ICE_SERVERS "stun:stun.l.google.com:19302"
 cpctl restart
 ```
 
-> [!IMPORTANT]
-> **ICE / TURN Relay Configuration Reminder**:  
-> While devices on the same LAN or with public IPv6 addresses can establish direct P2P connections, devices operating over cellular data (4G/5G) or behind corporate symmetric NATs **may display matrix previews but fail or time out when establishing interactive direct WebRTC sessions if TURN is missing**. Configuring `CP_AGENT_ICE_SERVERS` with your server's TURN credentials ensures 100% traversal success.
-
-> 💡 **Protocol Matching**: Use `wss://` when the server runs HTTPS (default), and `ws://` when TLS is disabled.
+> 💡 **Notes**:
+> - Device ID is assigned automatically by default based on device hardware model and serial number; specifying manually is optional.
+> - The **"Method A: Command Line Setup"** card on the web console `/deploy` page pre-fills your active signaling and STUN endpoints. Simply click **[Copy Command]** on the right to paste and execute.
 
 ### Method B: Interactive Terminal Menu
 
@@ -87,13 +93,27 @@ If you are provisioning a batch of devices and want them to connect immediately 
 
 ### Method D: Direct Configuration File Editing
 
-Edit the configuration file directly using a root text editor:
+If you prefer graphical file management on your mobile device, use **MT Manager** (with root access) to edit the config directly:
 
-```text
-/data/adb/modules/cloudphone-agent/config.conf
-```
+1. Navigate to the module installation directory:
+   ```text
+   /data/adb/modules/cloudphone-agent/
+   ```
 
-After saving, toggle the module's Action button twice in Magisk Manager (stop, then start) to hot-reload without rebooting.
+![MT Manager Viewing Module Files](../img/magisk-module-dir.png)
+
+2. Tap on `config.conf` to edit (as shown below):
+
+![Editing config.conf in MT Manager](../img/magisk-config-edit.png)
+
+Core configuration items:
+- `ENABLED=true`: Master switch for background daemon auto-start and watchdog polling.
+- `CP_AGENT_SIGNALING="wss://<YOUR-SERVER-IP>:8443"`: **Required**. Signaling server WebSocket address.
+- `CP_AGENT_ICE_SERVERS="stun:stun.l.google.com:19302"`: STUN / TURN NAT traversal server.
+- `CP_AGENT_ID=""`: Optional custom device ID. Blank auto-detects from device hardware.
+
+3. **Instant Hot Reload (No Reboot Required)**:
+   After saving changes, you do NOT need to reboot the device! Return to Magisk / KernelSU's module list, and **double-tap the `▶ Action` button** on the `穿云投屏(ScrcpyOverWebRTC)` card (the first tap stops the daemon, the second starts it with new settings), or execute `su -c cpctl restart` in a terminal. The Agent restarts immediately!
 
 ---
 
@@ -135,15 +155,31 @@ Path: `/data/adb/modules/cloudphone-agent/config.conf`
 
 ---
 
-## 🔍 Verification
+## 🔍 Step 3: Verify Magisk Module Service Status
 
-Run in terminal or via PC ADB:
+In **"Step 3: Verify Magisk Module Service Status"** on the web console `/deploy` page, one-click copy commands are provided. You can verify daemon health from either PC ADB or on-device terminal:
 
+### 1. Check Service Status (RUNNING indicates active)
+
+* **Via PC ADB**:
+  ```bash
+  adb shell "su -c cpctl status"
+  ```
+* **Via On-Device Terminal**:
+  ```bash
+  su
+  cpctl status
+  ```
+
+When the output indicates **Agent Process: RUNNING** and **Scrcpy Helper: RUNNING**, the daemon is operational. You may safely unplug the USB cable and start streaming from the "Dashboard" or "Devices" view in the web console.
+
+### 2. View Service Logs in Real Time
+
+To inspect connection handshakes or diagnose errors:
 ```bash
-adb shell "su -c cpctl status"
+adb shell "su -c cpctl log"
 ```
-
-When the output indicates **Agent Process: RUNNING** and **Scrcpy Helper: RUNNING**, the daemon is operational. Open the web console to begin low-latency streaming.
+*(In mobile terminal, run `su -c cpctl log`; press `Ctrl+C` to exit)*
 
 ---
 

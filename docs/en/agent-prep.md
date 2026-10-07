@@ -1,159 +1,127 @@
-# Device Preparation & Developer Options
+# Device Preparation & Onboarding Decision Matrix (Device Preparation)
 
-Before connecting physical Android smartphones or virtual machines to the ScrcpyOverWebRTC management platform, follow this guide to complete the prerequisite system configurations on your target devices.
+Before connecting physical Android devices, virtual machines, or Docker containers to ScrcpyOverWebRTC, complete the prerequisite environment setup and choose the best onboarding path for your infrastructure.
 
 ---
 
-## 📋 General Preparation Checklist for Physical Devices
+## 🧭 1. Onboarding Mode Comparison Matrix
+
+ScrcpyOverWebRTC supports physical devices, rooted hardware, non-root devices, Docker Redroid containers, and dual-mode Android apps. Compare their core capabilities below:
+
+| Mode | Boot Auto-Start | Batch Fleet Control | Privilege Required | Target Scenarios & Positioning | Setup Guide |
+| :--- | :---: | :---: | :--- | :--- | :--- |
+| **1. Web ADB (WebUSB)** | ❌ No | ❌ No | USB Debugging only | Zero-install, pure browser connectivity for single device trial and quick testing | [WebUSB Guide](/en/agent-webusb) |
+| **2. PC ADB Script Deployment** | ❌ No | ✅ Yes (Batch Script) | USB Debugging only | Desktop CLI batch script for rapid non-root multi-device onboarding | [PC Script Guide](/en/agent-script) |
+| **3. Magisk Auto-Start Module** | ✅ Yes | ✅ Yes (Pre-config Flash) | Root (Magisk/KSU/APatch) | Persistent boot daemon for automated server rack fleets and 24/7 stability | [Magisk Guide](/en/agent-magisk) |
+| **4. App ADB Mode (Shizuku)** | ❌ No | ❌ No | Non-Root (via Shizuku) | Host mode directly launched on-device without a PC | [Android App Guide](/en/app-guide) |
+| **5. App Root Mode** | ✅ Yes | ✅ Yes (Offline Config) | Root (`su`) required | Native app UI elevation with boot auto-start and `/data/local/tmp` config templates | [Android App Guide](/en/app-guide) |
+| **6. Docker / Redroid Cloud Phone** | ✅ Yes (Built-in) | ✅ Yes (AIO Image Fleet) | Docker / Privileged Container | 1-sec AIO image builder, auto MAC anti-collision, best for cloud Android virtualization | [Docker Guide](/en/agent-docker) |
+| **7. Linux Host Agent Daemon** | ✅ Yes (systemd) | ✅ Yes (Host Power Control) | Linux Host Root | Host daemon managing local VMs with remote batch power on/off/reboot | 🚀 **Coming Soon** |
+
+---
+
+## 📱 2. Physical Android Device Prerequisites
+
+If you are onboarding **physical Android phones** (via WebUSB, PC Script, Magisk Module, or Android App), complete these system configurations before proceeding:
 
 ### 1. Enable Developer Options
-1. Open your device's **"Settings"** ➔ **"About Phone"** (found under "My Device" or "System Information" on certain brands).
-2. Rapidly tap the **"Build Number"** 5 to 7 times.
-3. Continue until a prompt appears: *"You are now a developer!"* or *"Developer options enabled"*.
+1. Go to **Settings** ➔ **About Phone** (or "My Device" / "System Info");
+2. Tap **Build Number** repeatedly 5 to 7 times;
+3. A toast prompt appears: *"You are now in developer mode!"*.
 
 ### 2. Enable USB Debugging
-1. Return to the main Settings menu and navigate to **"System & Updates"** (or "Additional Settings" / "Developer Options").
-2. Locate and toggle on **"USB Debugging"**.
-3. When the system security dialog pops up, acknowledge the warning and tap **OK**.
+1. Return to the main Settings menu ➔ **System** (or "Additional Settings" / "Developer Options");
+2. Enable **USB Debugging**;
+3. Check "I understand the risks" and tap **OK**.
 
-### 3. Grant Touch & Security Injection Permissions (OEM-Specific)
-For brands such as Xiaomi (MIUI / HyperOS), OPPO, vivo, and Meizu, failure to enable security input permissions will result in **video mirroring functioning normally, but all mouse/touch inputs being completely ignored**.
+### 3. Grant Security Input Permissions (OEM Devices Critical ⭐️)
+For Xiaomi (MIUI/HyperOS), OPPO, vivo, and Meizu devices, touch input events will be blocked if security toggles are disabled, resulting in **visible video streams but completely unresponsive mouse clicks**:
 
-| Brand / OS | Required Critical Toggle | Important Notes |
+| Brand / OS | Required Switch | Notes |
 | :--- | :--- | :--- |
-| **Xiaomi (MIUI / HyperOS)** | **"USB Debugging (Security settings)"** | Requires an active SIM card inserted and a logged-in Mi Account; you must confirm 3 consecutive security warnings. |
-| **OPPO / OnePlus (ColorOS)** | **"Disable Permission Monitoring"** | Prevents system dialog popups from interrupting automated touch events. |
-| **vivo (OriginOS)** | **"USB Security Permissions"** | Must enable simulated input over USB inside Developer Options. |
-| **Meizu (Flyme)** | **"Allow Simulated Clicks"** | Allows external ADB input events to inject touch coordinates onto the screen. |
+| **Xiaomi (MIUI / HyperOS)** | **"USB Debugging (Security settings)"** | Requires an active SIM card and Xiaomi account login; requires confirming 3 consecutive warning prompts |
+| **OPPO / OnePlus (ColorOS)** | **"Disable Permission Monitoring"** | Prevents the system from interrupting automation with permission prompt popups |
+| **vivo (OriginOS)** | **"USB Security Permissions"** | Enables touch event simulation over USB |
+| **Meizu (Flyme)** | **"Allow Simulated Clicks"** | Allows external ADB input event injection |
 
-### 4. Cable & Driver Verification
-- **USB Cable Quality**: Use a high-quality physical USB data cable capable of high-speed transmission. Avoid cheap charge-only cables.
-- **Connection Mode**: When plugged into a computer, select **"Charging Only"** or **"File Transfer (MTP)"** in the dropdown notification shade.
-- **Authorization Prompt**: When connecting to a PC for the first time, an **"Allow USB Debugging?"** dialog will appear on your phone screen. Check **"Always allow from this computer"** and tap **OK**.
+### 4. OEM-Specific ADB Troubleshooting & Pitfalls 💡
 
----
+Different Android manufacturers implement custom restrictions and quirks. Refer to the key points below:
 
-## 🔍 Verify Basic Connectivity
+* **Xiaomi / Redmi / POCO (MIUI / HyperOS)**:
+  - **USB Debugging (Security settings)**: Must be enabled; separate from standard "USB Debugging". Without this, remote touch control will not work.
+  - **Wireless Debugging Pairing Failure**: In system Settings ➔ "Notifications & status bar" ➔ "Notification style", switch to **"Android / Native style"** to allow the wireless pairing code dialog to pop up properly.
+  - **Developer Options Randomly Disabled**: Avoid running the deep scan / clean-up tools in "Security Center" (手机管家), as some ROM versions automatically reset developer options and revoke authorizations during cleaning.
+* **Huawei / Honor (EMUI / HarmonyOS / MagicOS)**:
+  - **Disconnects in "Charge Only" Mode**: Must enable **"Allow ADB debugging in charge only mode"** in Developer Options; otherwise, disconnecting the cable or switching power status drops the connection immediately.
+* **OPPO / OnePlus / Realme (ColorOS)**:
+  - **Permission Prompt Interruption**: In Developer Options, disable **"Permission Monitoring"** (or enable **"Disable Permission Monitoring"**) to prevent background operations from being blocked.
+* **Meizu (Flyme)**:
+  - **Payment Protection Blocking**: In Developer Options, turn off **"Flyme Payment Protection"** and turn on **"Allow simulated clicks"**.
+* **Sony (Sony Xperia)**:
+  - Do not tap the USB mode switch dialog that pops up upon plugging in the USB cable, preventing the USB interface from resetting.
+* **GrapheneOS (Hardened ROM)**:
+  - Go to Settings ➔ "Security" ➔ turn off **"Secure app spawning"**.
 
-If you have the ADB command-line tool installed on your computer, verify device detection in your terminal:
+### 5. Universal Anti-Timeout & Keep-Alive Settings (Highly Recommended)
+- **Disable ADB Authorization Timeout (Android 11+)**: In Developer Options, enable **"Disable adb authorization timeout"** to prevent the ADB authorization from expiring when the device is locked/sleeping for extended periods;
+- **Default USB Configuration**: In Developer Options, set "Default USB configuration" to **"No data transfer / Charging only"** to avoid protocol reconfiguration on cable plug/unplug;
+- **Cables & Drivers**: Use a high-quality data cable; avoid charging-only cables. When prompted with "Allow USB debugging?", check **"Always allow from this computer"** and tap **OK**.
 
+### 6. Verify Basic Connectivity
+Run the following in your terminal to ensure ADB detects the device properly:
 ```bash
 adb devices
 ```
-
-- **Normal Status**: Displays the device serial number with status `device`:
-  ```text
-  List of devices attached
-  08151FDD40003P    device
-  ```
-- **Unauthorized Status** (shows `unauthorized`): An unconfirmed debugging prompt is pending on the phone screen. Wake up the phone and tap "Allow".
-- **No Devices Listed**: Verify cable connection, try different USB ports, or reconnect the cable.
+- **Normal**: Device serial is listed with status `device`;
+- **Unauthorized**: Tap "Allow" on the phone screen;
+- **Empty**: Check USB cables, try a rear USB port, or re-plug the device.
 
 ---
 
-## 🐳 Docker / Redroid Cloud Phone Preparation Checklist
+## 🐳 3. Docker / Redroid Cloud Phone Host Prerequisites
 
-If you run **Redroid (Remote Android)** cloud phone container clusters via Docker, ensure the Linux host meets the following prerequisites before deployment:
+If deploying **Redroid (Remote Android)** containers on Linux servers, ensure the host satisfies these kernel conditions:
 
-### 1. Kernel Binder Driver Check & Mounting
-Redroid relies on Android's IPC driver, Binder. Modern Linux kernels (5.0+) usually come with built-in or module support for `binder_linux`:
-1. **Check Binder nodes**:
+### 1. Kernel Binder Driver Check
+1. **Check Binder Nodes**:
    ```bash
    ls -l /dev/binderfs /dev/binder
    ```
-   - If `/dev/binder` or `/dev/binderfs/binder`, `hwbinder`, `vndbinder` exist, the driver is ready.
-2. **If driver is not loaded** (Ubuntu / Debian / Proxmox VE):
+   If `/dev/binder` or `/dev/binderfs/binder` exists, the driver is ready.
+2. **Load Module if Missing** (Ubuntu / Debian / PVE):
    ```bash
-   # Load binder module and enable binderfs
    sudo modprobe binder_linux devices="binder,hwbinder,vndbinder"
    ```
-   If the module is missing, install your distribution's extra kernel package (e.g. `sudo apt install linux-modules-extra-$(uname -r)` on Ubuntu, or compile DKMS binder modules).
 
-### 2. Loop Device Pre-allocation (Critical for High-Density Multi-Containers ⭐️)
+### 2. Loop Device Node Pre-Allocation (Critical for High-Density ⭐️)
 > [!IMPORTANT]
-> **Key fix for multi-instance crashes on the 2nd container (Exit Code 129)!**  
-> In Android 10+ (specifically Android 14 & 15), core runtimes (Bionic libc, dynamic linker `linker64`, ART) are packaged inside APEX images. A single container instance mounts 20~30 `.apex` images as Loop devices.  
-> Standard Linux hosts only pre-create **8 Loop device nodes** (`/dev/loop0` ~ `/dev/loop7`). Once the first container uses them up, subsequent containers fail to mount the dynamic linker, triggering `vold` emergency shutdowns.
+> **Key to Fixing 2nd Container Exit Code 129!**  
+> Modern Android (Android 14/15) mounts 20-30 `.apex` images per container as loop devices. Standard Linux systems only pre-allocate 8 loop nodes (`/dev/loop0` ~ `/dev/loop7`). Once the first container exhausts them, the second container fails to mount runtimes and terminates (`vold` crash).
 
-Run this one-time command on the host to create up to 256 loop nodes:
+Pre-allocate 256 loop nodes on the host:
 ```bash
 sudo bash -c 'for i in $(seq 8 255); do [ ! -e /dev/loop$i ] && mknod -m 660 /dev/loop$i b 7 $i; done'
 ```
-*💡 We recommend persisting this via a systemd startup unit (e.g. `/etc/systemd/system/redroid-loop.service`) to survive host reboots.*
 
-### 3. Network Isolation Policy (Strictly Prohibit `--net=host`)
+### 3. Network Mode Safety Rule (Strictly Prohibit `--net=host`)
 > [!CAUTION]
-> **Never launch Redroid containers with `--net=host` under privileged mode!**  
-> Redroid is a full Android OS. Android's internal `netd` daemon assumes exclusive ownership of the host network stack: on boot, it will flush host default routing tables (`lookup main`), force disable `net.ipv4.ip_forward=0`, and inject restrictive iptables DROP rules, **completely severing network bridging across all host containers**!  
-> **Always run Redroid containers in standard Docker Bridge mode.**
+> **Never run privileged Redroid containers with `--net=host`!**  
+> Android's internal `netd` daemon assumes exclusive ownership of the host routing table. It flushes `lookup main` routing rules, disables `net.ipv4.ip_forward`, and drops external traffic, **completely severing network access across all host containers**!  
+> **Always run Redroid in Docker standard bridge mode.**
 
-### 4. GPU Hardware Acceleration & Rendering Choice
-* **Host with Intel/AMD iGPU or Discrete GPU**:
-  Pass through the GPU render node `-v /dev/dri:/dev/dri` and configure boot parameter `androidboot.redroid_gpu_mode=host` for zero-copy hardware acceleration.
-* **CPU-Only Cloud VPS or Headless Servers**:
-  Configure `androidboot.redroid_gpu_mode=guest` for software Mesa CPU rendering.
+### 4. GPU Hardware Acceleration
+* **Host with Intel/AMD GPU**: Pass `-v /dev/dri:/dev/dri` and append `androidboot.redroid_gpu_mode=host` for hardware encoding;
+* **CPU-Only Cloud Servers**: Append `androidboot.redroid_gpu_mode=guest` for Mesa CPU software rendering.
 
 ---
 
-## ⚖️ Device Onboarding Method Comparison
+## ➡️ 4. Proceed to Detailed Setup Guides
 
-Select the most appropriate onboarding method based on your operating environment, scale, and access permissions:
+Select your preferred onboarding path below:
 
-1. **WebUSB Browser Onboarding**:
-   - **Auto-Reconnection after Reboot**: ❌ **Not supported** (Requires re-pairing in browser after device reboot or cable disconnection).
-   - **Batch Deployment**: ❌ **Not supported** (Limited by browser WebUSB security specifications, devices must be selected one by one).
-   - **Target Audience**: Beginners with zero setup; plug in via USB and click to deploy without installing local ADB drivers.
-
-2. **Terminal ADB (Desktop Script)**:
-   - **Auto-Reconnection after Reboot**: ❌ **Not supported** (Requires running script again after reboot).
-   - **Batch Deployment**: ✅ **Supported** (Concurrent batch deployment scripts push to all USB/Wi-Fi connected devices simultaneously).
-   - **Target Audience**: Fleet management for non-rooted physical devices in testing labs.
-
-3. **Magisk Module**:
-   - **Auto-Reconnection after Reboot**: ✅ **Supported** (Registered as background system service, boots up and connects upon network availability).
-   - **Batch Deployment**: ✅ **Supported** (Pre-configure `config.json` inside the module package and flash across devices silently via Recovery or Magisk CLI).
-   - **Target Audience**: Unattended server racks, 24/7 cloud phone farms, and rooted production devices.
-
-4. **App ADB Mode (Shizuku)**:
-   - **Auto-Reconnection after Reboot**: ❌ **Not supported** (Shizuku process terminates upon device reboot).
-   - **Batch Deployment**: ❌ **Not supported** (Manual tap required per device).
-   - **Target Audience**: Computer-free quick testing using Android 11+ Wireless Debugging.
-
-5. **App Root Permission Mode**:
-   - **Auto-Reconnection after Reboot**: ✅ **Supported** (Starts automatically with Root `su` background daemon).
-   - **Batch Deployment**: ✅ **Supported** (Built-in one-click configuration recovery & repair interface).
-   - **Target Audience**: Rooted devices requiring an intuitive GUI without flashing Magisk modules.
-
-6. **Docker / Redroid All-in-One (AIO) Container & Custom ROM** <span style="color: #10b981; font-size: 13px; font-weight: bold;">(✅ Supported)</span>:
-   - **Auto-Reconnection after Reboot**: ✅ **Natively supported** (Built into standard container image, boots up immediately on launch).
-   - **Batch Deployment**: ✅ **Supported** (Instantly scale dozens of instances; auto-generates unique Device IDs from the last 4 bytes of MAC address).
-   - **Target Audience**: Standardized server virtualization, automated cloud phone farms, and custom Android ROMs.
-
-7. **Linux Host Agent (Host Supervisor Daemon)** <span style="color: #38bdf8; font-size: 13px; font-weight: bold;">(🚀 Upcoming)</span>:
-   - **Auto-Reconnection after Reboot**: ✅ **Supported** (Persistent systemd service on Linux host).
-   - **Host-Level VM Life Cycle & Power Control**: ✅ **Unified VM power management** (Manage all local Redroid containers; execute batch boot, shutdown, and reboot via remote signaling).
-   - **Target Audience**: High-density datacenter clusters and large-scale cloud phone compute nodes.
-
-### 📋 Feature Comparison Table
-
-| Method | Auto-Boot Persistence | Batch Operations | Permissions | Best For | Detailed Guide / Status |
-| :--- | :---: | :---: | :--- | :--- | :--- |
-| **1. WebUSB** | ❌ No | ❌ No | USB Debugging Only | Driver-free browser pairing, zero setup | [View Guide](/en/agent-webusb) |
-| **2. PC Script** | ❌ No | ✅ Yes (Batch Script) | USB Debugging Only | Non-rooted multi-device concurrent deployment | [View Guide](/en/agent-script) |
-| **3. Magisk Module** | ✅ Yes | ✅ Yes (Pre-configured Package) | Root (Magisk/KSU/APatch) | 24/7 unattended device racks & automated farms | [View Guide](/en/agent-magisk) |
-| **4. App (Shizuku)** | ❌ No | ❌ No | Non-Root (Shizuku) | PC-free standalone testing via Wireless Debugging | [View Guide](/en/app-guide) |
-| **5. App (Root Mode)** | ✅ Yes | ✅ Yes (Config Auto-Repair) | Root (`su`) | Rooted devices wanting a simple graphical app | [View Guide](/en/app-guide) |
-| **6. Docker Redroid AIO** | ✅ Yes | ✅ Yes (1-Click Multi-Instance) | Docker / Privileged | Instant container builds, auto MAC deduplication | [View Guide](/en/agent-docker) |
-| **7. Linux Host Agent** | ✅ Yes | ✅ Yes (Host Power Control) | Host Root | Lifecycle supervision & remote power cycling | 🚀 **Upcoming** |
-
----
-
-## ➡️ Next Steps: Select Your Onboarding Guide
-
-Once device prerequisites are satisfied, continue to the dedicated guide for your target platform:
-
-1. **[Method 1: WebUSB Browser Setup](/en/agent-webusb)**: Zero-driver one-click setup inside your web browser.
-2. **[Method 2: PC Script One-Click Deployment](/en/agent-script)**: Push via desktop scripts (USB, wired, or wireless ADB).
-3. **[Method 3: Magisk / Root Auto-Start Module](/en/agent-magisk)**: Persistent background system service for unattended environments.
-4. **[Method 4: Android App Native Client](/en/app-guide)**: Native Android app for both host control and agent streaming.
-5. **[Method 5: Docker / Redroid Cloud Phone](/en/agent-docker)**: Server-side Redroid virtualization with pre-configured AIO toolkits.
+1. **[Method 1: WebUSB Browser Setup](/en/agent-webusb)**: Zero-driver browser deployment (recommended for beginner users).
+2. **[Method 2: PC ADB Script Deployment](/en/agent-script)**: Command-line script deployment (USB, Wi-Fi ADB, batch fleet onboarding).
+3. **[Method 3: Magisk / Root Auto-Start Module](/en/agent-magisk)**: Boot-persistent daemon for rooted devices and 24/7 racks.
+4. **[Method 4: Android App Native Client](/en/app-guide)**: Mobile client supporting on-device host mode (Root auto-start & Shizuku non-root).
+5. **[Method 5: Docker / Redroid Cloud Phone](/en/agent-docker)**: Server-side Redroid cluster setup using the 1-second AIO build kit.

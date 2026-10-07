@@ -14,11 +14,12 @@ export default withMermaid(defineConfig({
         nav: [
           { text: '官网首页', link: '/index.html' },
           { text: '快速开始', link: '/introduction' },
-          { text: '设备接入', link: '/agent-prep' },
+          { text: '设备接入', link: '/agent-deploy' },
           { text: '服务端部署', link: '/deploy-config' },
           { text: '功能手册', link: '/feature-dashboard' },
           { text: '实操教程', link: '/tutorial-windows' },
-          { text: '常见问题', link: '/faq' }
+          { text: '常见问题', link: '/faq' },
+          { text: '下载中心', link: 'https://webrtc-phone.com/#download' }
         ],
         sidebar: [
           {
@@ -36,10 +37,9 @@ export default withMermaid(defineConfig({
             text: '📱 二、设备接入与 Agent 部署',
             collapsed: false,
             items: [
-              { text: '设备接入全景选型指南', link: '/agent-deploy' },
-              { text: '接入准备与开发者选项', link: '/agent-prep' },
+              { text: '设备准备与全景选型指南', link: '/agent-deploy' },
               { text: '方式一：网页端 WebUSB 部署', link: '/agent-webusb' },
-              { text: '方式二：电脑脚本一键包接入', link: '/agent-script' },
+              { text: '方式二：电脑 ADB 脚本一键部署', link: '/agent-script' },
               { text: '方式三：Magisk / Root 模块开机自启', link: '/agent-magisk' },
               { text: '方式四：Android App 原生客户端', link: '/app-guide' },
               { text: '方式五：Docker / Redroid 容器云手机', link: '/agent-docker' }
@@ -121,11 +121,12 @@ export default withMermaid(defineConfig({
         nav: [
           { text: 'Home', link: '/index.html' },
           { text: 'Quickstart', link: '/en/introduction' },
-          { text: 'Device Setup', link: '/en/agent-prep' },
+          { text: 'Device Setup', link: '/en/agent-deploy' },
           { text: 'Server Deploy', link: '/en/deploy-config' },
           { text: 'Features', link: '/en/feature-dashboard' },
           { text: 'Tutorials', link: '/en/tutorial-windows' },
-          { text: 'FAQ', link: '/en/faq' }
+          { text: 'FAQ', link: '/en/faq' },
+          { text: 'Download', link: 'https://webrtc-phone.com/#download' }
         ],
         sidebar: [
           {
@@ -143,10 +144,9 @@ export default withMermaid(defineConfig({
             text: '📱 2. Device Access & Agent Setup',
             collapsed: false,
             items: [
-              { text: 'Onboarding Overview & Matrix', link: '/en/agent-deploy' },
-              { text: 'Device Preparation & Developer Options', link: '/en/agent-prep' },
+              { text: 'Device Preparation & Decision Matrix', link: '/en/agent-deploy' },
               { text: 'Method 1: WebUSB Browser Setup', link: '/en/agent-webusb' },
-              { text: 'Method 2: PC Script One-Click Setup', link: '/en/agent-script' },
+              { text: 'Method 2: PC ADB Script One-Click Setup', link: '/en/agent-script' },
               { text: 'Method 3: Magisk / Root Auto-Start', link: '/en/agent-magisk' },
               { text: 'Method 4: Android App Native Client', link: '/en/app-guide' },
               { text: 'Method 5: Docker / Redroid Cloud Phone', link: '/en/agent-docker' }

@@ -1,57 +1,63 @@
-# 方式三：Magisk / Root 模块开机自启 (Magisk Setup)
+# 方式三：Magisk / Root 模块开机自启 (Root 开机自启)
 
 本指南介绍将 `cloudphone-agent` 封装为 **Magisk / KernelSU / APatch 模块** 刷入 Android 手机的部署方式。  
-刷入后 Agent 将作为系统级底层守护服务运行：**开机自动拉起、异常崩溃自动重启**，全程无需连接电脑，非常适合机房批量部署与长期无人值守的物理真机群控。
+刷入后 Agent 将作为系统级底层守护服务运行：**开机自动拉起、异常崩溃自动重启**，设备重启后无需电脑连接即可自动上线并保活，非常适合机房批量部署与长期无人值守的物理真机群控。
+
+> 💡 **快捷提示**：在管理控制台的 **`/deploy`（部署）页面** 右下角，或前往 [官方下载中心 (webrtc-phone.com/#download)](https://webrtc-phone.com/#download)，切换至 **“Magisk / KSU 刷机模块 (Root 开机自启)”** 面板（如下图所示），可直接一键下载模块刷机包、离线预配工具，并支持直接点击 **“复制命令”** 在手机终端或电脑端一键配置信令。
+
+![管理控制台 Magisk / KSU 部署与配置指导面板](img/magisk-deploy-guide.png)
 
 ---
 
-## 📋 前置条件
+## 📋 适用场景与前提条件
 
-1. **设备已 Root**：手机已安装并激活 Magisk（v24+）、KernelSU 或 APatch 模块管理器。
-2. **已知信令地址**：确认您的信令服务端地址（如 `wss://192.168.1.100:8443`）。
-3. **获取模块包**：打开云手机 Web 控制大盘，进入 **“一键部署”** 页面，切换到 **“Magisk / KSU 刷机模块”** 选项卡，下载 **`cloudphone-agent-magisk.zip`**。
+| 项目 | 要求说明 |
+| :--- | :--- |
+| **设备权限要求** | 物理手机需已 **Root**，并已激活 Magisk（v24+）、KernelSU 或 APatch 模块管理器 |
+| **服务核心优势** | 刷入后作为系统后台服务自动运行，设备重启后无需电脑连接即可自动开机自启并保活 |
+| **网络要求** | 手机 Wi-Fi / 网络能够连通云手机服务端的信令地址 |
 
 ---
 
-## 🔥 第一步：刷入模块
+## 🔥 第一步：获取并刷入 Magisk 模块
 
-1. 将下载的 `cloudphone-agent-magisk.zip` 传输到手机内部存储（可通过微信传输、手机浏览器直接下载或数据线拷贝）。
-2. 打开手机上的 **Magisk / KernelSU / APatch 管理器**。
-3. 进入 **「模块」** 页面，点击 **「从本地安装」**，选中该 ZIP 模块包。
-4. 刷入完成后，点击右下角 **「重启」** 手机。
+1. **获取刷机包**：
+   - 打开 Web 控制台左侧 **“部署”**（`/deploy`）页面；
+   - 在右下角切换到 **“Magisk / KSU 刷机模块 (Root 开机自启)”** 选项卡；
+   - 点击 **“下载刷机包 (ZIP)”** 紫色按钮，下载 `cloudphone-agent-magisk.zip`。
+2. 将下载的 `cloudphone-agent-magisk.zip` 传输到手机内部存储（可通过微信、手机浏览器下载或电脑 ADB/数据线拷贝）。
+3. 打开手机上的 **Magisk / KernelSU / APatch 管理器**。
+4. 进入 **「模块」** 页面，点击 **「从本地安装」**，选中该 ZIP 模块包。
+5. 刷入完成后，点击右下角 **「重启」** 手机。重启后在模块列表中即可看到已激活的 `穿云投屏(ScrcpyOverWebRTC)` 模块卡片：
+
+![Magisk 模块安装成功与 Action 按钮](img/magisk-module-list.png)
 
 模块在安装时会自动完成以下底层适配：
 * **架构自适应**：自动探测设备 CPU 架构（`arm64` / `armeabi-v7a` / `x86_64`），安装匹配的原生二进制。
-* **系统级守护**：注册系统开机自启脚本，系统启动完成后自动拉起 Agent，并以 5 秒周期巡检保活。
+* **系统级守护**：注册系统开机自启脚本，系统启动完成后自动拉起 Agent，并以看门狗巡检保活。
 * **运维控制台**：内置 `cpctl`（即 `cloudphone-ctl`）交互式命令行工具。
 * **配置平滑备份**：若设备上已存在旧配置，后续覆盖升级刷入时会自动备份并恢复，避免参数被清空。
 
 ---
 
-## ⚙️ 第二步：配置信令地址与设备 ID
+## ⚙️ 第二步：参数配置与上线
 
-手机重启后守护脚本已在后台运行，首次使用需将 Agent 指向您的信令服务器地址。以下三种方式任选其一：
+手机重启后守护脚本已在后台自动运行。首次使用需将 Agent 指向您的信令服务器地址，以下方式任选其一（控制台页面已动态生成对应命令，支持一键复制）：
 
-### 方式 A：命令行一键配置（推荐）
+### 推荐首选 方式 A：命令行一键配置 (手机终端 / ADB shell)
 
-在手机终端 App（如 Termux / MT 管理器终端）或电脑 `adb shell` 中执行（Web 部署页面会根据当前服务器地址动态生成该命令，可直接复制）：
+在手机终端 App（如 Termux / MT 管理器终端）中执行，或电脑连接手机后在 `adb shell` 中执行：
 
 ```bash
 su
 cpctl set CP_AGENT_SIGNALING "wss://<您的服务器IP>:8443"
-cpctl set CP_AGENT_ID "<自定义设备ID>"
-
-# 💡 强烈建议：配置 TURN 中转服务（确保跨网段/跨公网 100% 成功出流）
-cpctl set CP_AGENT_ICE_SERVERS '["turn:cloudphone_user:cloudphone_secure_password@<您的服务器IP>:3478?transport=udp","stun:<您的服务器IP>:3478"]'
-
+cpctl set CP_AGENT_ICE_SERVERS "stun:stun.l.google.com:19302"
 cpctl restart
 ```
 
-> [!IMPORTANT]
-> **中转服务 (ICE/TURN) 配置提醒**：  
-> 虽然手机在局域网内或双方均具备公网 IPv6 时能够直接 P2P 连通，但当手机切换至移动 4G/5G 蜂窝网络或处于严格对称 NAT（Symmetric NAT）环境时，**若未配置 TURN 中转服务，可能导致大盘能看预览但点击控制一直超时黑屏**。因此强烈建议在 `CP_AGENT_ICE_SERVERS` 中填入您服务端的 TURN 地址与凭据！
-
-> 💡 **协议一致性**：信令地址协议需与服务端 TLS 状态一致：服务端开启 HTTPS（默认）时使用 `wss://`，关闭时使用 `ws://`。
+> 💡 **说明**：
+> - 设备 ID 默认由系统根据手机硬件型号及序列号自动匹配分配，无需手动设定。
+> - 控制台 `/deploy` 页面的 **“方式 A：命令行一键配置”** 代码框已预填您的当前信令与 ICE 地址，直接点击右侧 **【复制命令】** 即可粘贴运行。
 
 ### 方式 B：交互式控制台菜单
 
@@ -89,13 +95,27 @@ cpctl
 
 ### 方式 D：手机端直接编辑配置文件
 
-使用 MT 管理器等具备 Root 权限的文件编辑器直接编辑配置文件：
+若您习惯使用手机端图形化文件管理器，可以使用 **MT 管理器** 等具备 Root 权限的应用直接修改配置文件：
 
-```text
-/data/adb/modules/cloudphone-agent/config.conf
-```
+1. 打开 MT 管理器，授权 Root 权限后进入模块安装目录：
+   ```text
+   /data/adb/modules/cloudphone-agent/
+   ```
 
-保存修改后，在 Magisk 管理器的模块列表中 **连续点击 2 次 Action 按钮**（第一次停止、第二次启动）即可瞬间热重载生效，无需重启手机。
+![MT 管理器查看模块目录文件](img/magisk-module-dir.png)
+
+2. 点击打开 `config.conf` 配置文件进行编辑（如下图所示）：
+
+![MT 管理器编辑 config.conf 配置文件](img/magisk-config-edit.png)
+
+核心配置项说明：
+- `ENABLED=true`：后台开机自启与看门狗巡检总开关。
+- `CP_AGENT_SIGNALING="wss://<您的服务器IP>:8443"`：**必填**，服务端的信令服务地址。
+- `CP_AGENT_ICE_SERVERS="stun:stun.l.google.com:19302"`：STUN / TURN 穿透服务器地址（空则仅支持局域网直连）。
+- `CP_AGENT_ID=""`：自定义设备 ID，留空系统将自动根据硬件型号和序列号生成。
+
+3. **秒级热重载生效（免重启手机）**：
+   修改保存后无需重启整台手机！只需回到 Magisk / KernelSU 的模块列表，在 `穿云投屏(ScrcpyOverWebRTC)` 卡片上 **连续点击 2 次 `▶ Action` 按钮**（第一次停止、第二次启动），或在手机终端执行 `su -c cpctl restart`，Agent 即可瞬间完成平滑重启并以新配置上线！
 
 ---
 
@@ -137,15 +157,31 @@ cpctl
 
 ---
 
-## 🔍 验证运行状态
+## 🔍 第三步：验证 Magisk 模块服务状态
 
-在手机终端或电脑端运行以下命令验证：
+在控制台 `/deploy` 页面的 **“第三步 验证 Magisk 模块服务状态”** 中同样提供了一键复制命令。您可在电脑端（通过 ADB）或手机本地终端中验证：
 
+### 1. 检查服务运行状态（RUNNING 代表运行正常）
+
+* **电脑 ADB 执行**：
+  ```bash
+  adb shell "su -c cpctl status"
+  ```
+* **手机本地终端执行**：
+  ```bash
+  su
+  cpctl status
+  ```
+
+输出中只要显示 **Agent Process: RUNNING** 且 **Scrcpy Helper: RUNNING**，即代表模块已成功自启并在后台稳定保活。此时即可拔除数据线，在 Web 控制台的“大盘”或“虚机”中直接开始远程控制。
+
+### 2. 实时查看服务运行日志
+
+若需排查连接或查看详细工作日志，可执行实时日志追踪：
 ```bash
-adb shell "su -c cpctl status"
+adb shell "su -c cpctl log"
 ```
-
-输出中只要显示 **Agent Process: RUNNING** 且 **Scrcpy Helper: RUNNING**，即代表服务已完全正常工作。打开 Web 控制大盘，该设备即可稳定在线操作。
+*(手机终端直接执行 `su -c cpctl log`，按 `Ctrl+C` 可退出实时追踪)*
 
 ---
 

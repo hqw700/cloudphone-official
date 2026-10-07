@@ -3,6 +3,10 @@
 Welcome to the official developer documentation and user guide for **ScrcpyOverWebRTC**.  
 This platform is built with **WebRTC P2P direct streaming, redroid virtualization, and deeply customized scrcpy-server**, designed for ultra-low latency, responsive touch interactions, and enterprise device fleet management.
 
+> [!TIP]
+> **Official Resource & Image Download Center**: 👉 [https://webrtc-phone.com/#download](https://webrtc-phone.com/#download)  
+> Download the latest Android App client, Magisk auto-start modules, offline configuration tools, and full server release bundles.
+
 ---
 
 ## 📖 Documentation Sections
@@ -14,10 +18,9 @@ This platform is built with **WebRTC P2P direct streaming, redroid virtualizatio
 * **[Industry Use Cases & Sizing](/en/use-cases)**: Real-world business scenarios, gaming botting, device leasing, and surveillance setups.
 
 ### 📱 2. Device Access & Agent Setup
-* **[Onboarding Portal & Overview](/en/agent-deploy)**: Decision matrix for all available device onboarding pathways.
-* **[Device Preparation & Developer Options](/en/agent-prep)**: USB debugging, security injection toggles, and OEM permissions.
+* **[Device Preparation & Decision Matrix](/en/agent-deploy)**: Onboarding decision matrix, USB debugging toggles, and OEM permissions.
 * **[Method 1: WebUSB Browser Setup](/en/agent-webusb)**: Pair and deploy the Agent directly inside Chrome/Edge with zero driver installation.
-* **[Method 2: PC Script One-Click Deployment](/en/agent-script)**: Deploy via desktop scripts with wired or wireless ADB.
+* **[Method 2: PC ADB Script One-Click Setup](/en/agent-script)**: Deploy via desktop scripts with wired or wireless ADB.
 * **[Method 3: Magisk / Root Auto-Start Module](/en/agent-magisk)**: 24/7 background system service persistence with `cpctl` CLI tooling.
 * **[Method 4: Android App Native Client](/en/app-guide)**: Native Android app supporting both controller and managed agent modes.
 * **[Method 5: Docker / Redroid Cloud Phone](/en/agent-docker)**: 1-second AIO image builder and container fleet management.

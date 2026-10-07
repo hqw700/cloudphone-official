@@ -1,6 +1,8 @@
-# Method 2: PC Script One-Click Deployment
+# Method 2: PC ADB Script One-Click Deployment (No Root)
 
 If you are comfortable with terminal commands, need to onboard multiple devices concurrently on a local network, or prefer connecting via **Wireless ADB over TCP/IP**, the official portable deployment package `agent-deploy.zip` provides an automated solution.
+
+> 💡 **Quick Tip**: On the **`/deploy` page** of your web console, or directly at the [Official Download Center (webrtc-phone.com/#download)](https://webrtc-phone.com/#download), you can download this package with one click. The console also **dynamically generates pre-configured deployment commands** for your specific server, allowing you to click **"Copy Command"** and run it immediately in your terminal without typing parameters manually.
 
 ---
 
@@ -16,10 +18,13 @@ If you are comfortable with terminal commands, need to onboard multiple devices 
 
 ## ⚡ Step-by-Step Instructions
 
-### Step 1: Download Deployment Package
-1. Open the Web Console (e.g. `https://<YOUR-SERVER-IP>:8443`).
-2. Navigate to the **"Deploy Device"** page and download **`agent-deploy.zip`**.
-3. Extract the archive into any local folder on your computer.
+### Step 1: Download Deployment Package & Copy Commands
+1. Open the Web Console (e.g. `https://<YOUR-SERVER-IP>:8443` or `http://localhost:8443`).
+2. Click **"Deploy"** in the left sidebar (`/deploy`).
+3. In the bottom-right **"Standalone Setup & Configuration Guide"** panel under **"PC ADB One-Click Deployment (No Root)"** (shown below):
+4. Click the green **"Download Now (ZIP)"** button to get `agent-deploy.zip`, and extract it into any local folder.
+
+![PC ADB Deployment & Guide Panel](../img/adb-script-guide.png)
 
 Archive directory structure:
 ```text
@@ -35,7 +40,7 @@ agent-deploy/
 ```
 
 ### Step 2: Connect Phone & Verify ADB Status
-In your PC terminal, run:
+Ensure USB debugging is enabled on the device, connect it to your PC with a data cable, then run:
 ```bash
 adb devices
 ```
@@ -43,20 +48,19 @@ Confirm your device is listed with status `device`.
 
 *(If using wireless ADB, connect first via `adb connect <PHONE-IP>:5555`)*
 
-### Step 3: Run Deployment Script
+### Step 3: Copy Command & Run in Terminal
 
-The web console deployment page dynamically generates the exact execution commands based on your server settings:
+In **"Step 2: Run Deployment Script Locally"** on the `/deploy` page, the console has already generated commands tailored to your server's IP/domain and ICE settings. Simply click the **[Copy Command]** button and paste it into your terminal inside the extracted directory:
 
-#### Scenario A: Single Device Onboarding
+#### Scenario A: Single Device Onboarding (Recommended)
 
 * **Linux / macOS**:
   ```bash
-  chmod +x run.sh
-  ./run.sh -id <Custom-Device-ID> -signaling wss://<YOUR-SERVER-IP>:8443
+  chmod +x run.sh && ./run.sh -signaling "wss://<YOUR-SERVER-IP>:8443" -max-fps 60 -ice-servers "stun:stun.l.google.com:19302"
   ```
-* **Windows (CMD / PowerShell)**:
+* **Windows (CMD)**:
   ```cmd
-  run.bat -id <Custom-Device-ID> -signaling wss://<YOUR-SERVER-IP>:8443
+  run.bat -signaling "wss://<YOUR-SERVER-IP>:8443" -max-fps 60 -ice-servers "stun:stun.l.google.com:19302"
   ```
 
 #### Scenario B: Multi-Device Concurrent Batch Onboarding
@@ -66,32 +70,33 @@ To push to all connected devices in parallel for fleet control:
 * **Linux / macOS**:
   ```bash
   chmod +x batch_start.sh
-  ./batch_start.sh -signaling wss://<YOUR-SERVER-IP>:8443 -ice-servers "<TURN-URL>"
+  ./batch_start.sh -signaling "wss://<YOUR-SERVER-IP>:8443" -max-fps 60 -ice-servers "stun:stun.l.google.com:19302"
   ```
 * **Windows**:
   Double-click **`batch_start.bat`** to launch the interactive prompt wizard, or run in CMD:
   ```cmd
-  batch_start.bat -signaling wss://<YOUR-SERVER-IP>:8443 -ice-servers "<TURN-URL>"
+  batch_start.bat -signaling "wss://<YOUR-SERVER-IP>:8443" -max-fps 60 -ice-servers "stun:stun.l.google.com:19302"
   ```
 
 > 💡 **Parameter Details**:
-> - `-id <Device-ID>`: Custom device identifier. If omitted, generated as `Model-SerialNumber`. In batch mode, each device receives a unique auto-generated ID.
-> - `-signaling <URL>`: Required. Points to the signaling server (e.g. `wss://192.168.1.100:8443`).
-> - `-ice-servers <STUN/TURN>`: Optional. Recommended when streaming across complex NATs or public cloud networks.
+> - `-signaling <URL>`: Required. Points to the signaling WebSocket server (e.g. `wss://192.168.100.241:8443`).
+> - `-max-fps <fps>`: Optional. Maximum stream frame rate (defaults to 60 fps).
+> - `-ice-servers <STUN/TURN>`: Optional. WebRTC NAT traversal server (defaults to Google STUN or your private STUN/TURN server).
+> - Device ID (`-id`) is auto-detected and assigned by default from device hardware model and serial number; specifying manually is optional.
 
 ### Step 4: Verification & Disconnection
 
-The script automatically:
-1. Detects the device's CPU architecture and pushes matching binaries to `/data/local/tmp/`;
-2. Grants execution permissions and launches the daemon detached via `setsid nohup`;
-3. Outputs the background PID and releases the local ADB handle.
+Upon execution, the script automatically handles architecture detection, binary push, permission assignment, and detached background execution:
 
-Verify that the Agent is running in the background:
-```bash
-adb shell "ps -A | grep cloudphone-agent"
-```
+![Script Deployment Execution in Terminal](../img/adb-script-deploy.png)
 
-Unplug the USB cable and refresh the web console device list. The device appears online and is ready for immediate streaming.
+Pipeline breakdown matching the terminal output above:
+1. **Architecture Detection**: Automatically detects device ABI (e.g. `aarch64` / `arm64`);
+2. **Push Binaries**: Pushes the matching `cloudphone-agent` and `libsys_core.so` engine to `/data/local/tmp/` via ADB;
+3. **Daemon Execution**: Grants executable permissions (`chmod 755`) and launches detached via `setsid nohup`, outputting the background PID;
+4. The terminal displays `=== [OK] Agent started successfully in background. ===` with the log path `/data/local/tmp/cloudphone-agent.log`.
+
+You can now **safely unplug the USB cable**. Return to the web console "Dashboard" or "Devices" page to see the device online and start controlling!
 
 ---
 

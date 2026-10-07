@@ -23,39 +23,46 @@ Users **do not need to install Android SDK or configure any ADB drivers on their
 2. Connect your phone to your PC via a USB data cable.
 
 ### Step 2: Open Console Deployment Page
-1. In your browser, open the management console (e.g. `https://<YOUR-SERVER-IP>:8443`).
-2. Click **"One-Click Deploy"** in the top navigation bar (or **"Deploy Device"** in the device list).
-3. Ensure the **"ADB One-Click Deployment (USB / Wireless)"** tab is active.
+1. In your browser, open the management console (e.g., `https://<YOUR-SERVER-IP>:8443` or `http://localhost:8443`).
+2. Click **"Deploy"** in the left sidebar navigation (URL path `/deploy`), entering the **"One-Click WebUSB Deployment"** page.
 
-### Step 3: Connect & Authorize Device
-1. Click the blue **"Connect & Authorize Device"** button.
-2. A native browser USB device selector dialog appears at the top. Select your Android device and click **"Connect"**.
-3. If an "Allow USB debugging?" dialog appears on your phone screen, check "Always allow" and tap **Allow**.
+![One-Click WebUSB Deployment Page](../img/webusb-deploy.png)
 
-```
-+--------------------------------------------------------+
-| 🌐 https://your-server:8443 wants to connect to a USB  |
-+--------------------------------------------------------+
-|  📱 Pixel 7 Pro (Google Inc.)                          |
-|  📱 Redmi K60 (Xiaomi)                                 |
-+--------------------------------------------------------+
-|                                  [ Cancel ]  [ Connect ]|
-+--------------------------------------------------------+
-```
+3. Review configuration parameters on the left (default settings are recommended for most users):
+   - **Signaling URL (Required)**: Automatically pre-filled with the current server URL (e.g., `wss://192.168.100.241:8443`). If accessing via reverse proxy or public domain, make sure the address is accessible by the device.
+   - **ICE Servers (Optional)**: Defaults to Google STUN (`stun:stun.l.google.com:19302`) for WebRTC NAT traversal. In LAN environments, leave as default.
+   - **Device ID (Optional)**: Leave blank to auto-generate a random ID, or enter a readable custom identifier.
+   - **Encoding options / External Addr / WebRTC Port**: Advanced tuning parameters. Leave blank to use optimized defaults.
 
-### Step 4: One-Click Push & Launch
-1. Upon authorization, the web console inspects the target device's CPU architecture (e.g. `arm64-v8a`, `armeabi-v7a`, or `x86_64`).
-2. Click the **"Push to Phone & Start"** button.
-3. The browser automatically performs the full onboarding sequence (taking ~3-5 seconds):
-   - Downloads the matched `cloudphone-agent` binary and `libsys_core.so` screen mirroring core from the signaling server;
-   - Transmits binaries directly into the device's `/data/local/tmp/` directory via WebUSB;
-   - Sets executable permissions (`chmod 755`);
-   - Executes `setsid nohup` to launch the Agent detached in the background and registers with the signaling server.
+### Step 3: Click "Connect USB Device & Deploy" with Dual Authorization
+1. Ensure the phone is physically connected to your computer via USB data cable, then click the pink button **[Connect USB Device & Deploy]** at the bottom left.
+2. **Browser WebUSB Authorization**:
+   - The button label changes to **"Deploying..."**, the first milestone **"Connect USB Device"** on the right progress panel lights up, and the terminal logs `Requesting USB device connection...`;
+   - A native browser WebUSB device picker dialog appears at the top (as shown below);
+   - Select your Android phone model from the list (e.g. `AOSP on Cheetah`), and click the highlighted **"Connect"** button.
+
+![Browser USB Device Authorization Dialog](../img/webusb-select-device.png)
+
+3. **Phone USB Debugging Authorization**: An **"Allow USB debugging?"** prompt will appear on your phone's screen (often showing RSA key fingerprint). Check **"Always allow from this computer"** and tap **Allow**.
+
+> 💡 **Troubleshooting USB Conflicts**: If an error like `The device is already in use by another program` or `Unable to claim interface` appears, an active ADB daemon or third-party phone manager is locking the port. Run `adb kill-server` in your terminal and close any phone management software, then click Deploy again.
+
+### Step 4: Fully Automated Deployment Pipeline (Zero Second-Click)
+Once authorized, the deployment runs completely unattended. The **"USB Automated Deployment Progress"** panel on the right will light up each of the 5 milestone indicators:
+1. **Connect USB Device**: Establishes underlying WebUSB physical data transport;
+2. **ADB Authentication**: Completes WebADB protocol authentication & handshake;
+3. **Detect Architecture**: Automatically inspects device CPU ABI (e.g. `arm64-v8a`, `armeabi-v7a`, `amd64`);
+4. **Push Files**: Pulls the matching `cloudphone-agent` binary and `libsys_core.so` screen mirroring core from the signaling server, writing to `/data/local/tmp/`;
+5. **Start Service**: Sets executable permissions (`chmod 755`) and executes `setsid nohup` in Android background detached from terminal to launch Agent and register with signaling server.
+
+The black log terminal displays real-time execution outputs. When all 5 milestones turn green with checkmarks, the progress bar reaches 100%, and the green status displays **"Deployment Successful! Device is Online"**, the entire onboarding is complete.
+
+![USB Deployment Succeeded and Device Online](../img/webusb-success.png)
 
 ### Step 5: Disconnect Cable & Control Wirelessly
-1. The web page displays: **"Deployed successfully! Agent is running in background"**.
-2. You can now **unplug the physical USB cable**.
-3. Return to the device list dashboard; your device card is active and ready for ultra-low latency direct control!
+1. The Agent is now running independently as a background daemon on the phone.
+2. You can now **safely unplug the physical USB cable**.
+3. Click **"Dashboard"** or **"Devices"** in the left sidebar; your newly onboarded phone card is online. Click to start ultra-low latency WebRTC remote streaming and control!
 
 > 💡 **On-Device Emergency Disconnect**: After unplugging the cable, if you want to immediately sever the remote session directly on the phone, open `http://127.0.0.1:12345/d` in the phone's mobile browser to disconnect active sessions or terminate the Agent daemon.
 

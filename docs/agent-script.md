@@ -1,6 +1,8 @@
-# 方式二：电脑脚本一键包接入 (Script Setup)
+# 方式二：电脑 ADB 脚本一键部署 (无需 Root)
 
-如果您熟悉命令行操作、需要在内网开发机批量接入多台手机，或者希望通过**无线网络 ADB (TCP/IP)** 接入设备，推荐使用官方的一键部署资源包 `agent-deploy.zip`。
+如果您熟悉命令行操作、需要在内网批量接入多台手机进行群控，或者希望通过**无线网络 ADB (TCP/IP)** 接入设备，推荐使用官方的电脑端一键部署资源包 `agent-deploy.zip`。
+
+> 💡 **快捷提示**：在管理控制台的 **`/deploy`（部署）页面** 右下角，或直接前往 [官方下载中心 (webrtc-phone.com/#download)](https://webrtc-phone.com/#download)，您可以直接一键下载该资源包。管理控制台还为您**动态组装好对应当前服务器网络环境的部署命令**，支持直接点击 **“复制命令”** 在本地终端粘贴执行，无需手动拼写参数。
 
 ---
 
@@ -9,19 +11,22 @@
 | 项目 | 要求说明 |
 | :--- | :--- |
 | **适用系统** | Windows (10/11)、macOS (Intel/Apple Silicon)、Linux (Ubuntu/Debian/CentOS 等) |
-| **环境要求** | 电脑上已安装 ADB 命令行工具（终端输入 `adb version` 正常输出） |
+| **环境要求** | 电脑上已安装 ADB 命令行工具（终端输入 `adb version` 可正常输出） |
 | **连接方式** | 支持 USB 有线连接，或通过 `adb connect <手机IP>:5555` 建立的无线网络连接 |
 
 ---
 
 ## ⚡ 详细操作步骤
 
-### 第 1 步：下载一键部署包
-1. 打开 Web 控制大盘（如 `https://<您的服务器IP>:8443`）。
-2. 进入 **“部署新设备”** 页面，点击下载 **`agent-deploy.zip`** 一键部署资源包。
-3. 将 ZIP 包解压至本地电脑任意英文路径下。
+### 第 1 步：在控制台获取部署包与复制命令
+1. 打开 Web 管理控制台（如 `https://<您的服务器IP>:8443` 或 `http://localhost:8443`）。
+2. 在左侧菜单栏点击 **“部署”**（路由为 `/deploy`），进入部署页面。
+3. 在页面右下角找到 **“独立部署与配置指导”** 区域，默认处于 **“电脑 ADB 一键部署 (无需 Root)”** 面板（如下图所示）。
+4. 点击第一步中的 **“立即下载 (ZIP)”** 绿色按钮，下载 `agent-deploy.zip` 并解压到电脑任意目录。
 
-包内文件结构如下：
+![管理控制台电脑 ADB 部署与指导面板](img/adb-script-guide.png)
+
+解压后的目录文件结构如下：
 ```text
 agent-deploy/
 ├── cloudphone-agent-arm64       # Android 64位 Agent 原生二进制
@@ -35,28 +40,27 @@ agent-deploy/
 ```
 
 ### 第 2 步：连接手机并核实 ADB 状态
-在电脑终端中执行：
+确保手机已开启开发者模式与 USB 调试，使用数据线连接电脑后，在终端执行：
 ```bash
 adb devices
 ```
-确认列表中已列出目标设备，且状态为 `device`。
+确认列表中已列出目标设备，且状态显示为 `device`。
 
-*(如果使用无线 ADB，请先执行 `adb connect <手机IP>:5555`)*
+*(若使用局域网无线调试，请先在手机开启无线调试并在电脑终端执行 `adb connect <手机IP>:5555`)*
 
-### 第 3 步：运行脚本接入设备
+### 第 3 步：一键复制命令并在终端运行
 
-控制台部署页会根据您当前服务端的地址与配置，**动态生成完整的一键执行命令**，您可直接复制执行：
+在控制台 `/deploy` 页面的 **“第二步 本地终端运行一键脚本”** 中，系统已根据您当前服务的 IP/域名及 ICE 配置动态生成好了完整指令。您可以直接点击代码框右上角的 **【复制命令】** 按钮，然后在解压目录下的终端中粘贴执行：
 
-#### 场景 A：单台设备接入
+#### 场景 A：单台设备接入（推荐）
 
 * **Linux / macOS**：
   ```bash
-  chmod +x run.sh
-  ./run.sh -id <自定义设备ID> -signaling wss://<您的服务器IP>:8443
+  chmod +x run.sh && ./run.sh -signaling "wss://<您的服务器IP>:8443" -max-fps 60 -ice-servers "stun:stun.l.google.com:19302"
   ```
-* **Windows (CMD / PowerShell)**：
+* **Windows (CMD)**：
   ```cmd
-  run.bat -id <自定义设备ID> -signaling wss://<您的服务器IP>:8443
+  run.bat -signaling "wss://<您的服务器IP>:8443" -max-fps 60 -ice-servers "stun:stun.l.google.com:19302"
   ```
 
 #### 场景 B：多机批量并发拉起（自动遍历所有已连接设备）
@@ -66,32 +70,33 @@ adb devices
 * **Linux / macOS**：
   ```bash
   chmod +x batch_start.sh
-  ./batch_start.sh -signaling wss://<您的服务器IP>:8443 -ice-servers "<TURN地址>"
+  ./batch_start.sh -signaling "wss://<您的服务器IP>:8443" -max-fps 60 -ice-servers "stun:stun.l.google.com:19302"
   ```
 * **Windows**：
   直接**双击 `batch_start.bat`** 即可弹出向导输入信令地址一键全量拉起；或在 CMD 执行：
   ```cmd
-  batch_start.bat -signaling wss://<您的服务器IP>:8443 -ice-servers "<TURN地址>"
+  batch_start.bat -signaling "wss://<您的服务器IP>:8443" -max-fps 60 -ice-servers "stun:stun.l.google.com:19302"
   ```
 
-> 💡 **参数说明**：
-> - `-id <设备名称>`：单机部署时自定义设备唯一标识，留空则按「型号-序列号」生成。批量启动时每台设备会自动分配独立 ID。
-> - `-signaling <信令地址>`：必填。指向服务端信令地址（如 `wss://192.168.1.100:8443`）。
-> - `-ice-servers <STUN/TURN>`：可选。如果存在跨网段或公网复杂 NAT，强烈建议配置 TURN 中转凭证。
+> 💡 **核心参数解析**：
+> - `-signaling <信令地址>`：必填。指向服务端信令服务 WebSocket 地址（如 `wss://192.168.100.241:8443`）。
+> - `-max-fps <帧率>`：可选。视频推流最大帧率（默认 60 帧）。
+> - `-ice-servers <STUN/TURN>`：可选。WebRTC NAT 穿透服务器地址（默认使用 Google STUN 或您的私有 STUN/TURN）。
+> - 设备 ID（`-id`）默认无需指定，脚本与服务会自动根据设备底层型号与序列号匹配分配，即插即用。
 
 ### 第 4 步：脚本自动化流程与验证
 
-脚本运行时会自动完成：
-1. 探测手机 CPU 架构并推送匹配的二进制文件至 `/data/local/tmp/`；
-2. 赋予可执行权限并以 `setsid nohup` 后台守护模式拉起；
-3. 输出启动成功的 PID 并断开临时 ADB 依赖。
+执行脚本后，终端将自动完成架构探测、文件推送、权限授予与后台脱离终端守护拉起：
 
-此时在电脑终端运行以下命令，可观察 Agent 是否在后台健康保活：
-```bash
-adb shell "ps -A | grep cloudphone-agent"
-```
+![终端执行脚本成功部署](img/adb-script-deploy.png)
 
-拔掉 USB 数据线，刷新 Web 控制台设备列表，即可看到该手机已在线上线，点击卡片直接开控。
+对照上图输出，脚本完整执行流水线包含：
+1. **架构探测**：自动识别手机底层 ABI（如 `aarch64` / `arm64`）；
+2. **极速推送**：通过 ADB 向手机 `/data/local/tmp/` 目录推送匹配架构的 `cloudphone-agent` 与 `libsys_core.so` 投屏核心；
+3. **静默拉起**：自动配置 `chmod 755` 权限，并通过 `setsid nohup` 在后台拉起守护进程并打印启动成功的 PID；
+4. 终端提示 `=== [OK] Agent started successfully in background. ===`，并注明日志落盘路径 `/data/local/tmp/cloudphone-agent.log`。
+
+此时您已可以**安全拔掉物理 USB 数据线**。返回浏览器 Web 控制台的“大盘”或“虚机”页面，即可看到该手机已在线上线，点击卡片直接开启低延迟直控！
 
 ---
 
