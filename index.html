@@ -73,7 +73,7 @@
         <div class="hero-content" style="animation: slideInLeft var(--transition-slow); display: flex; flex-direction: column; align-items: center;">
           <div class="badge-tag" style="margin-bottom: 20px;">
             <span class="badge-dot"></span>
-            <span id="hero-badge-text" data-i18n="heroBadge">v0.4.0 正式发布</span>
+            <span id="hero-badge-text" data-i18n="heroBadge">v0.4.1 正式发布</span>
           </div>
           <h1 class="hero-title" style="font-size: 64px; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px;">
             <span class="text-gradient" data-i18n="heroTitle">穿云投屏</span>
@@ -586,7 +586,7 @@
                 获取官方最新发布的开源源码、Release 预编译包（包括 webrtc-signaling 信令端、android-agentd 以及脚本工具）。
               </p>
               <div class="bg-slate-950/40 border border-slate-800/50 rounded-lg p-3 text-xs text-[--text-secondary] mb-4" style="background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-muted); border-radius: var(--radius-sm); padding: 12px; font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">
-                <div style="margin-bottom: 6px;"><span data-i18n="dlGithubVer">最新版本：</span><span id="github-version" class="font-mono text-purple-400 font-bold" style="color: #c084fc; font-weight: 600;">v0.4.0</span></div>
+                <div style="margin-bottom: 6px;"><span data-i18n="dlGithubVer">最新版本：</span><span id="github-version" class="font-mono text-purple-400 font-bold" style="color: #c084fc; font-weight: 600;">v0.4.1</span></div>
                 <div style="margin-bottom: 6px;"><span data-i18n="dlGithubRepo">官方仓库：</span><span class="font-mono" style="color: var(--text-secondary);">hqw700/ScrcpyOverWebRTC</span></div>
                 <div style="display: flex; align-items: center; justify-content: space-between;">
                   <div><span data-i18n="dlGithubStatus">发布状态：</span><span style="color: var(--color-success);" data-i18n="dlGithubStatusVal">Stable (稳定版)</span></div>
@@ -641,7 +641,7 @@
     <section class="section" id="changelog" style="padding-top: 30px; padding-bottom: 50px;">
       <div class="container">
         <div class="section-title-wrap">
-          <span class="section-subtitle" id="changelog-subtitle">What's New in v0.4.0</span>
+          <span class="section-subtitle" id="changelog-subtitle">What's New in v0.4.1</span>
           <h2 class="section-title" data-i18n="changelogTitle">最新版本更新日志</h2>
           <p class="section-desc" data-i18n="changelogDesc">全新升级 Android 客户端、Magisk 保活模块以及管理平台核心性能。</p>
         </div>
@@ -654,28 +654,28 @@
               <span class="px-3 py-1 text-xs font-bold rounded-full bg-cyan-950 text-cyan-400 border border-cyan-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(6, 182, 212, 0.15); color: var(--accent-blue); font-size: 12px; font-weight: 700; border: 1px solid rgba(6, 182, 212, 0.3);" data-i18n="changelogAppBadge">
                 📱 Android APP 客户端
               </span>
-              <span class="text-xs font-mono text-cyan-300" id="changelog-app-version" style="color: #67e8f9; font-size: 12px; font-family: var(--font-mono);">v0.4.0</span>
+              <span class="text-xs font-mono text-cyan-300" id="changelog-app-version" style="color: #67e8f9; font-size: 12px; font-family: var(--font-mono);">v0.4.1</span>
             </div>
             <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: var(--accent-blue);">•</span>
-                <span data-i18n="clAppLi1"><strong>全新前台常驻保活服务</strong>：引入 specialUse 前台守护服务与看门狗自动拉起机制，彻底修复此前状态栏通知图标高频闪烁重绘问题，防杀与长期稳定保活能力大幅提升。</span>
+                <span data-i18n="clAppLi1"><strong>被控端接入稳定性加固</strong>：修复无物理屏幕等特殊虚拟云手机环境下后台服务异常退出、无法正常接入的问题。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: var(--accent-blue);">•</span>
-                <span data-i18n="clAppLi2"><strong>自启与后台无感托管增强</strong>：全面优化 Root 与 Shizuku (免 Root ADB) 双引擎自启与后台运行策略，真机与云机开机即连，脱机状态下长期无感托管。</span>
+                <span data-i18n="clAppLi2"><strong>前台保活与自愈守护</strong>：持续优化前台守护服务与连接探测机制，网络抖动自动重连，保障长效稳定受控。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: var(--accent-blue);">•</span>
-                <span data-i18n="clAppLi3"><strong>客户端界面全英文深度适配</strong>：全站 XML 布局、Compose 界面与 Java/Kotlin 代码字符全量国际化抽取，精准跟随系统语言切换，提供标准海外英文交互体验。</span>
+                <span data-i18n="clAppLi3"><strong>双引擎与免电脑受控</strong>：支持 Root 与 Shizuku (免 Root ADB) 双引擎自启，真机与云机开机即连、脱机无感托管。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: var(--accent-blue);">•</span>
-                <span data-i18n="clAppLi4"><strong>多通道状态监听与自愈机制</strong>：优化 Agent 连接心跳探测与网络抖动自愈，切网自动重新上线，保障长时间无人值守运行不掉线。</span>
+                <span data-i18n="clAppLi4"><strong>客户端全英文适配</strong>：全界面深度适配标准英文体验，精准跟随系统语言切换。</span>
               </li>
             </ul>
             <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
-              <a id="changelog-app-link" href="https://pan.quark.cn/s/7dc2d785910f" target="_blank" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300" style="color: var(--accent-blue); text-decoration: none; font-size: 12px;" data-i18n="clAppDownload">
+              <a id="changelog-app-link" href="https://pan.quark.cn/s/d79ea636834d" target="_blank" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300" style="color: var(--accent-blue); text-decoration: none; font-size: 12px;" data-i18n="clAppDownload">
                 获取 ScrcpyOverWebRTC-release.apk →
               </a>
             </div>
@@ -687,61 +687,61 @@
               <span class="px-3 py-1 text-xs font-bold rounded-full bg-purple-950 text-purple-400 border border-purple-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(168, 85, 247, 0.15); color: #c084fc; font-size: 12px; font-weight: 700; border: 1px solid rgba(168, 85, 247, 0.3);" data-i18n="changelogMagiskBadge">
                 🧩 Magisk 极速模块
               </span>
-              <span class="text-xs font-mono text-purple-300" id="changelog-magisk-version" style="color: #d8b4fe; font-size: 12px; font-family: var(--font-mono);">v0.4.0</span>
+              <span class="text-xs font-mono text-purple-300" id="changelog-magisk-version" style="color: #d8b4fe; font-size: 12px; font-family: var(--font-mono);">v0.4.1</span>
             </div>
             <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #c084fc;">•</span>
-                <span data-i18n="clMagiskLi1"><strong>Magisk 模块离线配置工具</strong>：支持在电脑端直接解包配置 Magisk 刷机包参数（提供 Windows 批处理/PowerShell 免 Python 及 Shell 脚本），刷入直接连接后台，避免手动敲命令。</span>
+                <span data-i18n="clMagiskLi1"><strong>适配狐狸面具 (Kitsune Mask)</strong>：补充标准刷机脚本与环境校验，兼容更多 Magisk 版本与精简系统环境。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #c084fc;">•</span>
-                <span data-i18n="clMagiskLi2"><strong>ADB 多机批量并发拉起</strong>：提供自动遍历探测在线健康设备并并发推送启动 Agent 的脚本套件，群控多机连上电脑一键批量上线。</span>
+                <span data-i18n="clMagiskLi2"><strong>修复部分云手机无法接入</strong>：彻底根除无实体屏幕或定制云机因截图异常崩溃导致无法接入的问题。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #c084fc;">•</span>
-                <span data-i18n="clMagiskLi3"><strong>客户端断开解耦与心跳对齐</strong>：Agent 断开清理流程异步化，心跳超时调整为 60s 对齐服务端，消除网络闪断引发的假死掉线重连风暴。</span>
+                <span data-i18n="clMagiskLi3"><strong>协程级容灾与异常自愈</strong>：Agent 采集与上报协程加入全局 Recover 保护，避免异常调用拖垮主进程。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #c084fc;">•</span>
-                <span data-i18n="clMagiskLi4"><strong>推流源动态追踪与写入超时</strong>：引入 RunningVideoSource 物理源追踪状态机，摄像头与屏幕切换强制冷重启；信令全链路注入 2~3s 写超时防护防死锁。</span>
+                <span data-i18n="clMagiskLi4"><strong>部署套件纯原生化</strong>：支持离线免 Python 批处理配置，群控脚本原生跨平台开箱即用。</span>
               </li>
             </ul>
             <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
-              <a id="changelog-magisk-link" href="https://pan.quark.cn/s/5fd96c4c4f86" target="_blank" class="text-xs font-semibold text-purple-400 hover:text-purple-300" style="color: #c084fc; text-decoration: none; font-size: 12px;" data-i18n="clMagiskDownload">
+              <a id="changelog-magisk-link" href="https://pan.quark.cn/s/13c6b801685c" target="_blank" class="text-xs font-semibold text-purple-400 hover:text-purple-300" style="color: #c084fc; text-decoration: none; font-size: 12px;" data-i18n="clMagiskDownload">
                 获取 cloudphone-agent-magisk.zip →
               </a>
             </div>
           </div>
 
-          <!-- 3. v0.4.0 管理平台修改 -->
+          <!-- 3. v0.4.1 管理平台修改 -->
           <div class="p-6 rounded-2xl border border-blue-800/40 bg-slate-950/50 shadow-xl relative overflow-hidden" style="padding: 24px; border-radius: var(--radius-lg); border: 1px solid rgba(59, 130, 246, 0.3); background: rgba(10, 15, 29, 0.75);">
             <div class="flex items-center justify-between mb-4">
               <span class="px-3 py-1 text-xs font-bold rounded-full bg-blue-950 text-blue-400 border border-blue-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; font-size: 12px; font-weight: 700; border: 1px solid rgba(59, 130, 246, 0.3);" data-i18n="changelogPlatformBadge">
                 💻 管理平台优化
               </span>
-              <span class="text-xs font-mono text-blue-300" id="changelog-platform-version" style="color: #93c5fd; font-size: 12px; font-family: var(--font-mono);">v0.4.0</span>
+              <span class="text-xs font-mono text-blue-300" id="changelog-platform-version" style="color: #93c5fd; font-size: 12px; font-family: var(--font-mono);">v0.4.1</span>
             </div>
             <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span data-i18n="clPlatformLi1"><strong>全站深度国际化 (i18n) 支持</strong>：管理大盘、设备直控、安防监控大屏、Web-ADB 终端、文件管理及系统设置实现 100% 中英文（English / 简体中文）无缝切换与本地记忆。</span>
+                <span data-i18n="clPlatformLi1"><strong>优化免密分享与租约管理</strong>：移除免密分享多余顶栏，深度适配移动端视口与全屏沉浸体验；支持更灵活的租约时长配置。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span data-i18n="clPlatformLi2"><strong>更新感知提醒与用户反馈集成</strong>：新增智能版本更新感知提醒，支持在网页端直接一键提交反馈建议与问题诊断，沟通与升级更加高效。</span>
+                <span data-i18n="clPlatformLi2"><strong>预览画面流量与性能优化</strong>：增加息屏检测与智能待机降频；画面无变化时完全静默不更新，大幅降低网络开销与卡顿。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span data-i18n="clPlatformLi3"><strong>传输通道与网络稳定性大幅加固</strong>：优化弱网重连与长会话心跳机制，直连与大盘推流资源智能互斥，宿主机带宽与编解码占用更低、连接更稳。</span>
+                <span data-i18n="clPlatformLi3"><strong>专属 TURN 动态下发</strong>：支持受控 Agent 指定就近专属 TURN 服务器，直连与访客全自动继承，跨云公网穿透更灵活。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span data-i18n="clPlatformLi4"><strong>群控直控与交互体验细节升级</strong>：大盘矩阵触控映射更精准，快捷指令栏交互与浮窗边界保护完善，全面提升多设备并发管控流畅度。</span>
+                <span data-i18n="clPlatformLi4"><strong>全站国际化与交互打磨</strong>：全站中英文无缝切换，直控状态栏默认纯净隐藏，多端体验更加流畅。</span>
               </li>
             </ul>
             <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
-              <a id="changelog-platform-link" href="https://pan.quark.cn/s/0b45bebf08c1" target="_blank" class="text-xs font-semibold text-blue-400 hover:text-blue-300" style="color: #60a5fa; text-decoration: none; font-size: 12px;" data-i18n="clPlatformDownload">
+              <a id="changelog-platform-link" href="https://pan.quark.cn/s/ac13b1831dbc" target="_blank" class="text-xs font-semibold text-blue-400 hover:text-blue-300" style="color: #60a5fa; text-decoration: none; font-size: 12px;" data-i18n="clPlatformDownload">
                 获取 cloudphone.zip 平台包 →
               </a>
             </div>

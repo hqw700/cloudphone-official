@@ -20,7 +20,7 @@ export const TRANSLATIONS = {
     langSwitch: 'English',
 
     // Hero 区域
-    heroBadge: 'v0.4.0 正式发布',
+    heroBadge: 'v0.4.1 正式发布',
     heroTitle: '穿云投屏',
     heroSubtitle: '不仅仅是投屏，更是你的专属云手机',
     heroDesc: '依托纯粹的 <strong>P2P 直连</strong> 与 <strong>WebRTC 极速协议</strong>，“穿云投屏”以企业级云手机架构重构设备连接。我们打破了物理硬件与云端虚拟环境的界限，为您实现 <strong>实体真机</strong>、<strong>本地模拟器</strong>，甚至 <strong>市面主流云手机</strong> 的统一纳管。无需复杂的网络穿透与配置，所有设备一键极速上云，在浏览器中瞬间化身为您的 <strong>专属云端真机</strong>。',
@@ -92,20 +92,20 @@ export const TRANSLATIONS = {
     tabHal: '🔮 虚拟 HAL & 集群管理',
 
     // 更新日志要点
-    clAppLi1: '<strong>全新前台常驻保活服务</strong>：引入 specialUse 前台守护服务与看门狗自动拉起机制，彻底修复此前状态栏通知图标高频闪烁重绘问题，防杀与长期稳定保活能力大幅提升。',
-    clAppLi2: '<strong>自启与后台无感托管增强</strong>：全面优化 Root 与 Shizuku (免 Root ADB) 双引擎自启与后台运行策略，真机与云机开机即连，脱机状态下长期无感托管。',
-    clAppLi3: '<strong>客户端界面全英文深度适配</strong>：全站 XML 布局、Compose 界面与 Java/Kotlin 代码字符全量国际化抽取，精准跟随系统语言切换，提供标准海外英文交互体验。',
-    clAppLi4: '<strong>多通道状态监听与自愈机制</strong>：优化 Agent 连接心跳探测与网络抖动自愈，切网自动重新上线，保障长时间无人值守运行不掉线。',
+    clAppLi1: '<strong>被控端接入稳定性加固</strong>：修复无物理屏幕等特殊虚拟云手机环境下后台服务异常退出、无法正常接入的问题。',
+    clAppLi2: '<strong>前台保活与自愈守护</strong>：持续优化前台守护服务与连接探测机制，网络抖动自动重连，保障长效稳定受控。',
+    clAppLi3: '<strong>双引擎与免电脑受控</strong>：支持 Root 与 Shizuku (免 Root ADB) 双引擎自启，真机与云机开机即连、脱机无感托管。',
+    clAppLi4: '<strong>客户端全英文适配</strong>：全界面深度适配标准英文体验，精准跟随系统语言切换。',
 
-    clMagiskLi1: '<strong>Magisk 模块离线配置工具</strong>：支持在电脑端直接解包配置 Magisk 刷机包参数（提供 Windows 批处理/PowerShell 免 Python 及 Shell 脚本），刷入直接连接后台，避免手动敲命令。',
-    clMagiskLi2: '<strong>ADB 多机批量并发拉起</strong>：提供自动遍历探测在线健康设备并并发推送启动 Agent 的脚本套件，群控多机连上电脑一键批量上线。',
-    clMagiskLi3: '<strong>客户端断开解耦与心跳对齐</strong>：Agent 断开清理流程异步化，心跳超时调整为 60s 对齐服务端，消除网络闪断引发的假死掉线重连风暴。',
-    clMagiskLi4: '<strong>推流源动态追踪与写入超时</strong>：引入 RunningVideoSource 物理源追踪状态机，摄像头与屏幕切换强制冷重启；信令全链路注入 2~3s 写超时防护防死锁。',
+    clMagiskLi1: '<strong>适配狐狸面具 (Kitsune Mask)</strong>：补充标准刷机脚本与环境校验，兼容更多 Magisk 版本与精简系统环境。',
+    clMagiskLi2: '<strong>修复部分云手机无法接入</strong>：彻底根除无实体屏幕或定制云机因截图异常崩溃导致无法接入的问题。',
+    clMagiskLi3: '<strong>协程级容灾与异常自愈</strong>：Agent 采集与上报协程加入全局 Recover 保护，避免异常调用拖垮主进程。',
+    clMagiskLi4: '<strong>部署套件纯原生化</strong>：支持离线免 Python 批处理配置，群控脚本原生跨平台开箱即用。',
 
-    clPlatformLi1: '<strong>全站深度国际化 (i18n) 支持</strong>：管理大盘、设备直控、安防监控大屏、Web-ADB 终端、文件管理及系统设置实现 100% 中英文（English / 简体中文）无缝切换与本地记忆。',
-    clPlatformLi2: '<strong>更新感知提醒与用户反馈集成</strong>：新增智能版本更新感知提醒，支持在网页端直接一键提交反馈建议与问题诊断，沟通与升级更加高效。',
-    clPlatformLi3: '<strong>传输通道与网络稳定性大幅加固</strong>：优化弱网重连与长会话心跳机制，直连与大盘推流资源智能互斥，宿主机带宽与编解码占用更低、连接更稳。',
-    clPlatformLi4: '<strong>群控直控与交互体验细节升级</strong>：大盘矩阵触控映射更精准，快捷指令栏交互与浮窗边界保护完善，全面提升多设备并发管控流畅度。',
+    clPlatformLi1: '<strong>优化免密分享与租约管理</strong>：移除免密分享多余顶栏，深度适配移动端视口与全屏沉浸体验；支持更灵活的租约时长配置。',
+    clPlatformLi2: '<strong>预览画面流量与性能优化</strong>：增加息屏检测与智能待机降频；画面无变化时完全静默不更新，大幅降低网络开销与卡顿。',
+    clPlatformLi3: '<strong>专属 TURN 动态下发</strong>：支持受控 Agent 指定就近专属 TURN 服务器，直连与访客全自动继承，跨云公网穿透更灵活。',
+    clPlatformLi4: '<strong>全站国际化与交互打磨</strong>：全站中英文无缝切换，直控状态栏默认纯净隐藏，多端体验更加流畅。',
     clAppDownload: '获取 ScrcpyOverWebRTC-release.apk →',
     clMagiskDownload: '获取 cloudphone-agent-magisk.zip →',
     clPlatformDownload: '获取 cloudphone.zip 平台包 →',
@@ -233,7 +233,7 @@ export const TRANSLATIONS = {
     langSwitch: '简体中文',
 
     // Hero section
-    heroBadge: 'v0.4.0 Released',
+    heroBadge: 'v0.4.1 Released',
     heroTitle: 'ScrcpyOverWebRTC',
     heroSubtitle: 'More Than Mirroring — Your Dedicated Cloud Phone',
     heroDesc: 'Powered by pure <strong>P2P direct connections</strong> and <strong>WebRTC ultra-fast protocols</strong>, ScrcpyOverWebRTC redefines remote Android device management. We eliminate the barrier between physical hardware and cloud containers, allowing you to unify <strong>physical phones</strong>, <strong>local emulators</strong>, and <strong>cloud instances</strong> in one central console. No complex port forwarding required — every device transforms into your <strong>dedicated cloud phone</strong> inside any modern web browser.',
@@ -295,20 +295,20 @@ export const TRANSLATIONS = {
     changelogPlatformBadge: '💻 Management Platform',
 
     // Changelog bullet points
-    clAppLi1: '<strong>Foreground Daemon Keepalive Service</strong>: Introduced specialUse foreground service with watchdog auto-respawn, eliminating status bar icon flashing and drastically boosting keepalive resilience.',
-    clAppLi2: '<strong>Enhanced Boot Auto-start & Silent Hosting</strong>: Upgraded Root and Shizuku (root-free ADB) dual-engine startup policies, enabling seamless boot connection and robust headless background hosting.',
-    clAppLi3: '<strong>Complete English Localization</strong>: Fully extracted all UI strings across XML layouts, Compose screens, and runtime dialogs, seamlessly adapting to system language for global usability.',
-    clAppLi4: '<strong>Multi-Channel Health Monitoring & Self-Healing</strong>: Improved heartbeat probes and network jitter resilience, automatically reconnecting upon network switches for uninterrupted operation.',
+    clAppLi1: '<strong>Controlled Daemon Stability Hardened</strong>: Fixed background service crash and connection failures in headless virtual cloud phone environments.',
+    clAppLi2: '<strong>Foreground Keepalive & Self-Healing</strong>: Refined foreground daemon service and connection detection for seamless reconnects during network jitter.',
+    clAppLi3: '<strong>Dual-Engine PC-Free Hosting</strong>: Reliable boot auto-start via Root and Shizuku (root-free ADB) for long-term untethered hosting.',
+    clAppLi4: '<strong>Complete English Localization</strong>: Fully localized UI strings adapting cleanly to system language preferences.',
 
-    clMagiskLi1: '<strong>Offline Magisk Config Tool</strong>: Unpack and configure Magisk module parameters directly on PC (Windows batch/PowerShell & Shell scripts included) for zero-CLI flashing.',
-    clMagiskLi2: '<strong>ADB Multi-Device Concurrent Start</strong>: Automated discovery and concurrent agent launcher script suite to bring dozens of USB-connected phones online at once.',
-    clMagiskLi3: '<strong>Async Disconnect & Heartbeat Alignment</strong>: Asynchronous disconnect cleanup and aligned 60s timeout to eliminate reconnect storms caused by network jitters.',
-    clMagiskLi4: '<strong>Dynamic Video Source & Write Timeouts</strong>: State machine tracking for screen/camera switching with cold restart; 2-3s write timeouts on signaling channels against deadlocks.',
+    clMagiskLi1: '<strong>Kitsune Mask Adaptation</strong>: Added standard installation scripts and validations, ensuring compatibility across diverse Magisk versions.',
+    clMagiskLi2: '<strong>Headless Cloud Phone Crash Fix</strong>: Eliminated snapshot panics on headless or customized virtual Android environments.',
+    clMagiskLi3: '<strong>Coroutine-Level Crash Resilience</strong>: Added global recover protection across sampling and telemetry goroutines against unhandled exceptions.',
+    clMagiskLi4: '<strong>Pure Native Deployment Suite</strong>: Batch starter scripts now zero-Python dependency, natively running on Windows, Linux, and macOS.',
 
-    clPlatformLi1: '<strong>Full-site Deep i18n & Bilingual Support</strong>: Management dashboard, direct control, surveillance console, WebADB terminal, file manager, and settings now feature 100% seamless English / Chinese switching.',
-    clPlatformLi2: '<strong>Update Notifications & User Feedback System</strong>: Integrated smart update perception with built-in one-click feedback and diagnostics submission for streamlined communication.',
-    clPlatformLi3: '<strong>Hardened Transmission & Network Robustness</strong>: Optimized weak network reconnection and heartbeat handling, with intelligent stream mutexing to cut bandwidth and codec overhead.',
-    clPlatformLi4: '<strong>Group Control & Interaction Refinement</strong>: Sharper touch coordinate mapping, refined quick action bar, and floating window boundaries for superior multi-device fleet management.',
+    clPlatformLi1: '<strong>Optimized Guest Share & Lease</strong>: Removed redundant top bar, perfectly adapted to mobile viewports with immersive full-screen direct control.',
+    clPlatformLi2: '<strong>Preview Traffic & Screen-off Backoff</strong>: Intelligent screen-off standby downsampling and absolute silence on static frames, drastically cutting bandwidth.',
+    clPlatformLi3: '<strong>Dedicated TURN Dynamic Routing</strong>: Agents can specify nearby TURN servers, inherited seamlessly by direct control and guest shares for multi-cloud NAT traversal.',
+    clPlatformLi4: '<strong>Site-Wide i18n & Refined UX</strong>: Seamless bilingual switching, clean stats badge default, and enhanced fleet management fluency.',
     clAppDownload: 'Get ScrcpyOverWebRTC-release.apk →',
     clMagiskDownload: 'Get cloudphone-agent-magisk.zip →',
     clPlatformDownload: 'Get cloudphone.zip Platform Bundle →',
