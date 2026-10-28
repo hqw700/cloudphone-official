@@ -538,7 +538,7 @@
           <p class="section-desc" data-i18n="downloadSubtitle">提供多样化的获取渠道，包括高速网盘、GitHub 官方发布包以及 Docker 一键拉取镜像。</p>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-10" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mt-10" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 24px;">
           
           <!-- 1. 网盘下载 -->
           <div class="flex flex-col justify-between p-6 rounded-2xl border border-[--border-glow] bg-[--bg-card] hover:bg-[--bg-card-hover] hover:border-[--border-glow-hover] transition-all duration-300 shadow-xl group" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-glow); background: var(--bg-card); transition: all var(--transition-normal);">
@@ -552,15 +552,15 @@
               </p>
               <div class="space-y-2 mb-4" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
                 <a id="app-apk-link" href="https://pan.quark.cn/s/8fed0a4b57e1" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
-                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;"><span data-i18n="dlAppLabel">📱 Android APP</span> (<span id="app-apk-version">v0.3.8</span>)</span>
+                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;"><span data-i18n="dlAppLabel">📱 Android APP</span> (<span id="app-apk-version">v0.4.2</span>)</span>
                   <span class="text-cyan-400 font-mono text-[11px]" style="color: var(--accent-blue);" data-i18n="dlAppApkBtn">下载 .apk 🚀</span>
                 </a>
                 <a id="magisk-module-link" href="https://pan.quark.cn/s/d86361df7b12" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
-                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;"><span data-i18n="dlMagiskLabel">🧩 Magisk 模块</span> (<span id="magisk-module-version">v0.3.8</span>)</span>
+                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;"><span data-i18n="dlMagiskLabel">🧩 Magisk 模块</span> (<span id="magisk-module-version">v0.4.1</span>)</span>
                   <span class="text-cyan-400 font-mono text-[11px]" style="color: var(--accent-blue);" data-i18n="dlMagiskZipBtn">下载 .zip 🚀</span>
                 </a>
                 <a id="platform-zip-link" href="https://pan.quark.cn/s/fbeb736acb0e" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
-                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;"><span data-i18n="dlPlatformLabel">📦 管理平台</span> (<span id="platform-zip-version">v0.3.8</span>)</span>
+                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;"><span data-i18n="dlPlatformLabel">📦 管理平台</span> (<span id="platform-zip-version">v0.4.1</span>)</span>
                   <span class="text-cyan-400 font-mono text-[11px]" style="color: var(--accent-blue);" data-i18n="dlPlatformZipBtn">下载全套包 🚀</span>
                 </a>
               </div>
@@ -570,7 +570,7 @@
             </a>
           </div>
 
-          <!-- 2. GitHub Release -->
+          <!-- 2. GitHub Release (主服务与平台) -->
           <div class="flex flex-col justify-between p-6 rounded-2xl border border-[--border-glow] bg-[--bg-card] hover:bg-[--bg-card-hover] hover:border-[--border-glow-hover] transition-all duration-300 shadow-xl group" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-glow); background: var(--bg-card); transition: all var(--transition-normal);">
             <div>
               <div class="flex items-center justify-between mb-4" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
@@ -601,7 +601,36 @@
             </a>
           </div>
 
-          <!-- 3. Docker Pull -->
+          <!-- 3. GitHub Android 原生客户端 -->
+          <div class="flex flex-col justify-between p-6 rounded-2xl border border-[--border-glow] bg-[--bg-card] hover:bg-[--bg-card-hover] hover:border-[--border-glow-hover] transition-all duration-300 shadow-xl group" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-glow); background: var(--bg-card); transition: all var(--transition-normal);">
+            <div>
+              <div class="flex items-center justify-between mb-4" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-emerald-950/40 text-emerald-400 text-2xl border border-emerald-800/30 group-hover:scale-110 transition-transform" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); background: rgba(16, 185, 129, 0.1); color: var(--color-success); font-size: 24px; border: 1px solid rgba(16, 185, 129, 0.2);">
+                  📱
+                </div>
+                <a href="https://github.com/hqw700/WebrtcPhone-Android" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; text-decoration: none;" title="GitHub Stars">
+                  <img src="https://img.shields.io/github/stars/hqw700/WebrtcPhone-Android?style=flat-square&logo=github" alt="GitHub Stars" style="height: 22px; border-radius: 4px;" />
+                </a>
+              </div>
+              <h3 class="text-xl font-bold text-[--text-primary] mb-2" style="font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;" data-i18n="dlAndroidTitle">Android 开源客户端</h3>
+              <p class="text-sm text-[--text-secondary] mb-4 leading-relaxed" style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6;" data-i18n="dlAndroidDesc">
+                官方原生 Android 主控端应用，基于 Jetpack Compose 与 WebRTC 打造，提供毫秒级低延迟投屏与设备管理。
+              </p>
+              <div class="bg-slate-950/40 border border-slate-800/50 rounded-lg p-3 text-xs text-[--text-secondary] mb-4" style="background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-muted); border-radius: var(--radius-sm); padding: 12px; font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">
+                <div style="margin-bottom: 6px;"><span data-i18n="dlAndroidVer">最新版本：</span><span id="android-github-version" class="font-mono text-emerald-400 font-bold" style="color: #34d399; font-weight: 600;">v0.4.2</span></div>
+                <div style="margin-bottom: 6px;"><span data-i18n="dlAndroidRepo">开源仓库：</span><span class="font-mono" style="color: var(--text-secondary);">hqw700/WebrtcPhone-Android</span></div>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <div><span data-i18n="dlAndroidTech">技术栈：</span><span style="color: #67e8f9;">Kotlin / Compose</span></div>
+                  <span class="text-[11px] text-emerald-400 font-mono" data-i18n="dlAndroidOpenSource">Apache 2.0 开源</span>
+                </div>
+              </div>
+            </div>
+            <a href="https://github.com/hqw700/WebrtcPhone-Android" target="_blank" class="w-full py-2.5 px-4 rounded-xl text-white font-semibold text-center transition-colors text-sm shadow-md" style="display: block; width: 100%; padding: 10px 16px; border-radius: var(--radius-md); background: #059669; color: #fff; font-weight: 600; text-align: center; font-size: 14px; transition: background var(--transition-fast);" data-i18n="dlAndroidBtn">
+              前往 Android 开源仓库
+            </a>
+          </div>
+
+          <!-- 4. Docker Pull -->
           <div class="flex flex-col justify-between p-6 rounded-2xl border border-[--border-glow] bg-[--bg-card] hover:bg-[--bg-card-hover] hover:border-[--border-glow-hover] transition-all duration-300 shadow-xl group" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-glow); background: var(--bg-card); transition: all var(--transition-normal);">
             <div>
               <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-blue-950/40 text-blue-400 text-2xl mb-4 border border-blue-800/30 group-hover:scale-110 transition-transform" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); background: rgba(59, 130, 246, 0.1); color: var(--color-info); font-size: 24px; margin-bottom: 16px; border: 1px solid rgba(59, 130, 246, 0.2);">
@@ -1086,7 +1115,8 @@
           <li><a href="/" class="footer-link" data-i18n="footerHome">主页</a></li>
           <li><a href="/docs/" class="footer-link" data-i18n="footerDocs">帮助文档</a></li>
           <li class="hide-on-en"><a href="/buy.html" class="footer-link" data-i18n="footerBuy">授权购买</a></li>
-          <li><a href="https://github.com/hqw700/ScrcpyOverWebRTC" class="footer-link" target="_blank" data-i18n="footerGithub">GitHub</a></li>
+          <li><a href="https://github.com/hqw700/ScrcpyOverWebRTC" class="footer-link" target="_blank" data-i18n="footerGithub">GitHub (主项目)</a></li>
+          <li><a href="https://github.com/hqw700/WebrtcPhone-Android" class="footer-link" target="_blank" data-i18n="footerAndroidGithub">GitHub (Android客户端)</a></li>
         </ul>
       </div>
     </footer>

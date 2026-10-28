@@ -1,17 +1,64 @@
 # 方式四：Android App 原生客户端 (App Guide)
 
-官方 Android 原生客户端 **「穿云投屏」**（工程代号 `WebrtcTest`）集 **主控端** 与 **被控端** 于一身，支持在 Android 手机与平板上随时操控云手机或将本机作为被控端使用。
+[![GitHub Stars](https://img.shields.io/github/stars/hqw700/WebrtcPhone-Android?style=flat-square&logo=github)](https://github.com/hqw700/WebrtcPhone-Android)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.0.21-blue.svg)](https://kotlinlang.org)
+[![Android SDK](https://img.shields.io/badge/minSdk-24%20%7C%20compileSdk-35-brightgreen.svg)](https://developer.android.com)
+[![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-2024.12.01-purple.svg)](https://developer.android.com/jetpack/compose)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/hqw700/WebrtcPhone-Android/blob/main/LICENSE)
 
-* **作为主控端 (Controller)**：直接登录云手机信令中心，随时随地在手机屏幕上浏览大盘并低延迟控制其他设备；支持卡密免登录直连。
-* **作为被控端 (Agent Host)**：无需借助电脑，通过 **Root 提权** 或 **Shizuku (免 Root ADB)** 引擎在手机内直接拉起 Agent 成为被控云手机；开启独立单机模式后，甚至能将信令服务端与 Web 控制台直接运行在本机。
+官方 Android 原生客户端 **「穿云投屏」**（开源仓库：[WebrtcPhone-Android](https://github.com/hqw700/WebrtcPhone-Android)）是专为云手机与远程真机深度打造的现代化 Android 移动主控应用。
+
+项目基于 **Kotlin 2.0 + Jetpack Compose + Google WebRTC (M114+) + MediaCodec** 纯原生构建，通过连接信令服务器（Signaling Server），实现对远程 Android 物理真机以及云手机容器（redroid / AOSP）的毫秒级低延迟超清投屏、精细化多点触控、秒级切机抽屉、文件双模管理、批量安装与租约运维。
+
+> 🌐 **开源仓库地址**：👉 [https://github.com/hqw700/WebrtcPhone-Android](https://github.com/hqw700/WebrtcPhone-Android)
 
 ---
 
-## 📥 安装 App
+## 📥 获取与安装 App
 
-前往 [Releases](https://github.com/hqw700/ScrcpyOverWebRTC/releases) 页面下载最新版 CloudPhone App (`.apk`) 并安装到您的 Android 手机上。
+### 1. 预编译包下载
+* **GitHub Releases**：前往 [WebrtcPhone-Android Releases](https://github.com/hqw700/WebrtcPhone-Android/releases) 获取官方签名发布的最新版安装包 (`WebrtcPhone-v<版本>-release.apk`)。
+* **国内高速网盘**：前往官网 [镜像下载中心](https://webrtc-phone.com/#download) 夸克网盘免密高速下载。
 
-> 💡 **零外部依赖**：App 内部已打包集成各架构编译好的 Agent 原生程序及投屏组件，运行被控端模式时**无需向手机推送任何外部文件**。
+### 2. 源码本地构建
+```bash
+# 1. 克隆开源工程
+git clone https://github.com/hqw700/WebrtcPhone-Android.git
+cd WebrtcPhone-Android
+
+# 2. 编译 Debug 安装包
+./gradlew assembleDebug
+
+# 3. 运行自动化单元测试
+./gradlew testDebugUnitTest
+
+# 4. 构建 Release 混淆签名安装包 (需在 local.properties 配置签名私钥)
+./gradlew assembleRelease
+```
+编译产物位于 `app/build/outputs/apk/release/WebrtcPhone-v<版本>-release.apk`。
+
+---
+
+## ✨ 核心特性一览
+
+* **超清低延迟双通道传输**：
+  * **WebRTC P2P 直连**：基于 DTLS-SRTP 媒体通道，硬件解码直通，端到端延迟低至 30~50ms。
+  * **WebSocket H.264 备用穿透**：纯 TCP WebSocket 流式解码，突破企业级严苛防火墙及对称型 NAT 限制。
+* **全功能移动控制**：
+  * 精准多点触控与手势映射（双指缩放、旋转、滑动）。
+  * 物理按键注入（Back、Home、Power、音量、通知栏唤起、锁屏与截图）。
+  * 双向剪贴板静默同步与 100% 汉字落屏文本批量注入。
+* **设备大盘与快速切机抽屉**：
+  * 大盘矩阵缩略图与实时帧率、分辨率动态展示。
+  * 投屏中独创**设备抽屉（Device Drawer）**，无需退出当前会话即可在多台设备间秒级换机。
+* **文件与应用分发系统**：
+  * **P2P 文件管理器**：独立 DataChannel 直连传输，支持设备目录浏览、新建、重命名、文件下载。
+  * **服务器中转与批量任务分发**：支持先上传至服务器盘，一键批量下发/静默安装至多台选定设备，带实时进度监控。
+* **远程终端与 WebADB**：
+  * 内置基于 xterm.js 的交互式 PTY 终端通道，支持即时命令行运维。
+* **端到端安全规范**：
+  * 严谨的 TLS TOFU（Trust On First Use）指纹固定机制，拒绝 Trust-All 弱安全策略。
+  * 凭据均通过 Android Keystore 加密存储（AES-256-GCM），杜绝明文泄露。
 
 ---
 

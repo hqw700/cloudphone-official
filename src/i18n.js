@@ -70,6 +70,13 @@ export const TRANSLATIONS = {
     dlGithubStatus: '发布状态：',
     dlGithubStatusVal: 'Stable (稳定版)',
     dlGithubBtn: '前往 GitHub Releases',
+    dlAndroidTitle: 'Android 开源客户端',
+    dlAndroidDesc: '官方原生 Android 主控端应用，基于 Jetpack Compose 与 WebRTC 打造，提供毫秒级低延迟投屏与设备管理。',
+    dlAndroidVer: '最新版本：',
+    dlAndroidRepo: '开源仓库：',
+    dlAndroidTech: '技术栈：',
+    dlAndroidOpenSource: 'Apache 2.0 开源',
+    dlAndroidBtn: '前往 Android 开源仓库',
     dlDockerTitle: 'Docker 一体化镜像',
     dlDockerDesc: '包含信令服务、Web 仪表盘、coturn 中转服务。一行指令，即可在本地或云端完成全套控制端基础设施部署。',
     dlDockerSize: '镜像大小：约 280MB (多架构)',
@@ -92,7 +99,7 @@ export const TRANSLATIONS = {
     tabHal: '🔮 虚拟 HAL & 集群管理',
 
     // 更新日志要点
-    clAppLi1: '<strong>被控端接入稳定性加固</strong>：修复无物理屏幕等特殊虚拟云手机环境下后台服务异常退出、无法正常接入的问题。',
+    clAppLi1: '<strong>官方客户端全面开源</strong>：全新重构为独立项目 WebrtcPhone-Android 并于 GitHub 正式开源，采用全套 Jetpack Compose 现代化架构。',
     clAppLi2: '<strong>前台保活与自愈守护</strong>：持续优化前台守护服务与连接探测机制，网络抖动自动重连，保障长效稳定受控。',
     clAppLi3: '<strong>双引擎与免电脑受控</strong>：支持 Root 与 Shizuku (免 Root ADB) 双引擎自启，真机与云机开机即连、脱机无感托管。',
     clAppLi4: '<strong>客户端全英文适配</strong>：全界面深度适配标准英文体验，精准跟随系统语言切换。',
@@ -106,7 +113,7 @@ export const TRANSLATIONS = {
     clPlatformLi2: '<strong>预览画面流量与性能优化</strong>：增加息屏检测与智能待机降频；画面无变化时完全静默不更新，大幅降低网络开销与卡顿。',
     clPlatformLi3: '<strong>专属 TURN 动态下发</strong>：支持受控 Agent 指定就近专属 TURN 服务器，直连与访客全自动继承，跨云公网穿透更灵活。',
     clPlatformLi4: '<strong>全站国际化与交互打磨</strong>：全站中英文无缝切换，直控状态栏默认纯净隐藏，多端体验更加流畅。',
-    clAppDownload: '获取 ScrcpyOverWebRTC-release.apk →',
+    clAppDownload: '获取 WebrtcPhone-release.apk →',
     clMagiskDownload: '获取 cloudphone-agent-magisk.zip →',
     clPlatformDownload: '获取 cloudphone.zip 平台包 →',
 
@@ -130,8 +137,8 @@ export const TRANSLATIONS = {
     fDash8D: '感知大盘滚动视口 (IntersectionObserver)，仅对可见区域卡片推流，结合 WebCodecs GPU 硬件解码，极致节省带宽与 CPU。',
 
     // Panel 2: App & Daemon
-    fApp1T: 'APP 主控端直控大盘',
-    fApp1D: '支持原生 Android App 登录连接大盘直控云手机，提供多点触控、悬浮金刚键、端到端延迟悬浮球及软键盘抑制。',
+    fApp1T: 'Android 原生客户端 (已开源)',
+    fApp1D: '官方主控端应用 WebrtcPhone-Android 已全面开源，基于 Jetpack Compose 与 WebRTC 打造，提供毫秒级低延迟直控、设备抽屉秒级切机、双向剪切板与文件管理。',
     fApp2T: 'Root / Shizuku 双引擎被控',
     fApp2D: '物理手机免连接电脑，支持 Root 或无线调试 Shizuku (ADB) 双引擎授权，一键免电脑拉起 Agent 受控运行。',
     fApp3T: '独立单机模式 (手机内置 Server)',
@@ -214,7 +221,8 @@ export const TRANSLATIONS = {
     footerHome: '主页',
     footerDocs: '帮助文档',
     footerBuy: '授权购买',
-    footerGithub: 'GitHub'
+    footerGithub: 'GitHub (主项目)',
+    footerAndroidGithub: 'GitHub (Android 客户端)'
   },
 
   'en-US': {
@@ -283,6 +291,13 @@ export const TRANSLATIONS = {
     dlGithubStatus: 'Release Status: ',
     dlGithubStatusVal: 'Stable',
     dlGithubBtn: 'Go to GitHub Releases',
+    dlAndroidTitle: 'Android Open Source Client',
+    dlAndroidDesc: 'Official native Android client built with Jetpack Compose & WebRTC, featuring ultra-low latency mirroring & device management.',
+    dlAndroidVer: 'Latest Version: ',
+    dlAndroidRepo: 'Open Source Repo: ',
+    dlAndroidTech: 'Tech Stack: ',
+    dlAndroidOpenSource: 'Apache 2.0',
+    dlAndroidBtn: 'Go to Android Repository',
     dlDockerTitle: 'Docker All-in-One Image',
     dlDockerDesc: 'Includes signaling server, Web dashboard, and coturn relay. One command to deploy the entire server infrastructure.',
     dlDockerSize: 'Image size: ~280MB (Multi-Arch)',
@@ -295,7 +310,7 @@ export const TRANSLATIONS = {
     changelogPlatformBadge: '💻 Management Platform',
 
     // Changelog bullet points
-    clAppLi1: '<strong>Controlled Daemon Stability Hardened</strong>: Fixed background service crash and connection failures in headless virtual cloud phone environments.',
+    clAppLi1: '<strong>Official Client Open Source</strong>: Refactored into standalone project WebrtcPhone-Android and officially open-sourced on GitHub, powered by Jetpack Compose.',
     clAppLi2: '<strong>Foreground Keepalive & Self-Healing</strong>: Refined foreground daemon service and connection detection for seamless reconnects during network jitter.',
     clAppLi3: '<strong>Dual-Engine PC-Free Hosting</strong>: Reliable boot auto-start via Root and Shizuku (root-free ADB) for long-term untethered hosting.',
     clAppLi4: '<strong>Complete English Localization</strong>: Fully localized UI strings adapting cleanly to system language preferences.',
@@ -309,7 +324,7 @@ export const TRANSLATIONS = {
     clPlatformLi2: '<strong>Preview Traffic & Screen-off Backoff</strong>: Intelligent screen-off standby downsampling and absolute silence on static frames, drastically cutting bandwidth.',
     clPlatformLi3: '<strong>Dedicated TURN Dynamic Routing</strong>: Agents can specify nearby TURN servers, inherited seamlessly by direct control and guest shares for multi-cloud NAT traversal.',
     clPlatformLi4: '<strong>Site-Wide i18n & Refined UX</strong>: Seamless bilingual switching, clean stats badge default, and enhanced fleet management fluency.',
-    clAppDownload: 'Get ScrcpyOverWebRTC-release.apk →',
+    clAppDownload: 'Get WebrtcPhone-release.apk →',
     clMagiskDownload: 'Get cloudphone-agent-magisk.zip →',
     clPlatformDownload: 'Get cloudphone.zip Platform Bundle →',
 
@@ -343,8 +358,8 @@ export const TRANSLATIONS = {
     fDash8D: 'Uses IntersectionObserver to stream only visible cards in viewport, paired with WebCodecs GPU hardware decoding to minimize CPU and bandwidth usage.',
 
     // Panel 2: App & Daemon
-    fApp1T: 'Native Android Master App',
-    fApp1D: 'Native Android application to control cloud phones with multi-touch, floating navigation keys, RTT latency ball, and soft keyboard suppression.',
+    fApp1T: 'Native Android Client (Open Source)',
+    fApp1D: 'Official Android client WebrtcPhone-Android is fully open source, built with Jetpack Compose & WebRTC, featuring ultra-low latency direct control, device drawer switching, bidirectional clipboard, and file management.',
     fApp2T: 'Dual-Engine Root & Shizuku Control',
     fApp2D: 'No PC needed: supports Root or wireless debugging Shizuku (UID 2000) dual engines to launch the Agent directly on device.',
     fApp3T: 'Standalone Device Mode',
@@ -427,7 +442,8 @@ export const TRANSLATIONS = {
     footerHome: 'Home',
     footerDocs: 'Documentation',
     footerBuy: 'Pricing',
-    footerGithub: 'GitHub'
+    footerGithub: 'GitHub (Core)',
+    footerAndroidGithub: 'GitHub (Android Client)'
   }
 }
 

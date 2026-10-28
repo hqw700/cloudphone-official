@@ -1,17 +1,64 @@
-# Method 4: Android App Native Client
+# Method 4: Android App Native Client (Open Source)
 
-The official native Android client (code-named `WebrtcTest`) combines both **Controller (Master)** and **Agent Host (Managed)** capabilities into a single application, allowing you to manage and control devices directly from Android phones and tablets, or turn any phone into a remote cloud phone without a computer.
+[![GitHub Stars](https://img.shields.io/github/stars/hqw700/WebrtcPhone-Android?style=flat-square&logo=github)](https://github.com/hqw700/WebrtcPhone-Android)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.0.21-blue.svg)](https://kotlinlang.org)
+[![Android SDK](https://img.shields.io/badge/minSdk-24%20%7C%20compileSdk-35-brightgreen.svg)](https://developer.android.com)
+[![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-2024.12.01-purple.svg)](https://developer.android.com/jetpack/compose)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/hqw700/WebrtcPhone-Android/blob/main/LICENSE)
 
-* **Controller Mode**: Sign in to the signaling center from your mobile device to inspect matrix overviews and operate remote devices with responsive low-latency controls; supports passcode quick access.
-* **Agent Host Mode**: Launch the Agent daemon directly on the device using either **Root elevation** or **Shizuku (Non-Root ADB)** without needing a PC. Enabling Standalone Mode runs the signaling server and web console directly inside the phone itself.
+The official native Android client **「WebrtcPhone-Android」** (GitHub: [WebrtcPhone-Android](https://github.com/hqw700/WebrtcPhone-Android)) is a modern, high-performance controller application tailored specifically for cloud phones and remote physical Android devices.
+
+Built with **Kotlin 2.0, Jetpack Compose, Google WebRTC (M114+), and Android MediaCodec**, the app connects directly to the signaling server to deliver ultra-low latency screen mirroring, multi-touch gestures, instant device switching via a side drawer, dual-mode file management, batch APK installation, and lease management.
+
+> 🌐 **Open Source Repository**: 👉 [https://github.com/hqw700/WebrtcPhone-Android](https://github.com/hqw700/WebrtcPhone-Android)
 
 ---
 
-## 📥 App Installation
+## 📥 Get & Install App
 
-Download the latest CloudPhone App (`.apk`) from the [Releases](https://github.com/hqw700/ScrcpyOverWebRTC/releases) page and install it on your Android device.
+### 1. Precompiled APK Download
+* **GitHub Releases**: Visit [WebrtcPhone-Android Releases](https://github.com/hqw700/WebrtcPhone-Android/releases) to download the latest signed release package (`WebrtcPhone-v<version>-release.apk`).
+* **High-Speed Cloud Drive**: Visit the official [Download Center](https://webrtc-phone.com/#download) to download directly via Quark Pan.
 
-> 💡 **Zero External Dependencies**: The app bundles precompiled native Agent binaries and screen mirroring components for all architectures (`arm64`, `armeabi-v7a`, `x86_64`). No files need to be pushed from a PC.
+### 2. Build from Source
+```bash
+# 1. Clone open-source repository
+git clone https://github.com/hqw700/WebrtcPhone-Android.git
+cd WebrtcPhone-Android
+
+# 2. Build Debug APK
+./gradlew assembleDebug
+
+# 3. Run automated unit tests
+./gradlew testDebugUnitTest
+
+# 4. Build ProGuard-obfuscated Release APK (requires keystore in local.properties)
+./gradlew assembleRelease
+```
+The compiled APK will be located at `app/build/outputs/apk/release/WebrtcPhone-v<version>-release.apk`.
+
+---
+
+## ✨ Core Feature Highlights
+
+* **Ultra-Low Latency Dual-Engine Transport**:
+  * **WebRTC P2P Direct**: DTLS-SRTP media pipeline with hardware decoder passthrough, achieving 30~50ms end-to-end latency.
+  * **WebSocket H.264 Fallback**: Pure TCP streaming decoder, bypassing strict enterprise firewalls and symmetric NATs.
+* **Full-Featured Touch & Device Controls**:
+  * Multi-touch gestures (pinch-to-zoom, rotate, fling).
+  * Hardware key injection (Back, Home, Power, Volume, Notifications, Screen lock, Screenshot).
+  * Silent bidirectional clipboard sync and 100% IME text injection without character drops.
+* **Device Matrix & Instant Switching Drawer**:
+  * Live thumbnails with dynamic FPS and resolution indicators.
+  * Unique **Device Drawer** allows switching between devices in seconds without leaving the active stream.
+* **File & App Distribution System**:
+  * **P2P File Manager**: Dedicated DataChannel for filesystem browsing, uploads, downloads, and deletions.
+  * **Server Relay & Batch Tasks**: Upload to the central server and batch dispatch or silently install APKs across multiple devices with progress tracking.
+* **Remote Terminal & WebADB**:
+  * Built-in interactive PTY terminal powered by xterm.js for real-time shell administration.
+* **End-to-End Enterprise Security**:
+  * Strict TLS TOFU (Trust On First Use) certificate pinning—never using trust-all certificates.
+  * Tokens and passwords securely encrypted in Android Keystore (AES-256-GCM).
 
 ---
 

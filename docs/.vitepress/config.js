@@ -19,7 +19,8 @@ export default withMermaid(defineConfig({
           { text: '功能手册', link: '/feature-dashboard' },
           { text: '实操教程', link: '/tutorial-windows' },
           { text: '常见问题', link: '/faq' },
-          { text: '下载中心', link: 'https://webrtc-phone.com/#download' }
+          { text: '下载中心', link: 'https://webrtc-phone.com/#download' },
+          { text: 'Android 客户端', link: 'https://github.com/hqw700/WebrtcPhone-Android' }
         ],
         sidebar: [
           {
@@ -41,7 +42,7 @@ export default withMermaid(defineConfig({
               { text: '方式一：网页端 WebUSB 部署', link: '/agent-webusb' },
               { text: '方式二：电脑 ADB 脚本一键部署', link: '/agent-script' },
               { text: '方式三：Magisk / Root 模块开机自启', link: '/agent-magisk' },
-              { text: '方式四：Android App 原生客户端', link: '/app-guide' },
+              { text: '方式四：Android App 原生客户端 (已开源)', link: '/app-guide' },
               { text: '方式五：Docker / Redroid 容器云手机', link: '/agent-docker' }
             ]
           },
@@ -126,7 +127,8 @@ export default withMermaid(defineConfig({
           { text: 'Features', link: '/en/feature-dashboard' },
           { text: 'Tutorials', link: '/en/tutorial-windows' },
           { text: 'FAQ', link: '/en/faq' },
-          { text: 'Download', link: 'https://webrtc-phone.com/#download' }
+          { text: 'Download', link: 'https://webrtc-phone.com/#download' },
+          { text: 'Android Client', link: 'https://github.com/hqw700/WebrtcPhone-Android' }
         ],
         sidebar: [
           {
@@ -148,7 +150,7 @@ export default withMermaid(defineConfig({
               { text: 'Method 1: WebUSB Browser Setup', link: '/en/agent-webusb' },
               { text: 'Method 2: PC ADB Script One-Click Setup', link: '/en/agent-script' },
               { text: 'Method 3: Magisk / Root Auto-Start', link: '/en/agent-magisk' },
-              { text: 'Method 4: Android App Native Client', link: '/en/app-guide' },
+              { text: 'Method 4: Android App Native Client (Open Source)', link: '/en/app-guide' },
               { text: 'Method 5: Docker / Redroid Cloud Phone', link: '/en/agent-docker' }
             ]
           },

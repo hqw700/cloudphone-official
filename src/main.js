@@ -517,6 +517,8 @@ async function loadDynamicConfig() {
     if (appVer) {
       if (appApkVersion) appApkVersion.textContent = appVer
       if (changelogAppVer) changelogAppVer.textContent = appVer
+      const androidGithubVersion = document.getElementById('android-github-version')
+      if (androidGithubVersion) androidGithubVersion.textContent = appVer
     }
     if (magiskVer) {
       if (magiskModuleVersion) magiskModuleVersion.textContent = magiskVer
