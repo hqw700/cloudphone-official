@@ -483,6 +483,8 @@ async function loadDynamicConfig() {
     if (config.appApkLink) {
       if (appApkLink) appApkLink.setAttribute('href', config.appApkLink)
       if (changelogAppLink) changelogAppLink.setAttribute('href', config.appApkLink)
+    } else if (config.androidRepo && changelogAppLink) {
+      changelogAppLink.setAttribute('href', config.androidRepo)
     }
     if (config.magiskModuleLink) {
       if (magiskModuleLink) magiskModuleLink.setAttribute('href', config.magiskModuleLink)

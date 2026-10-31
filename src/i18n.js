@@ -20,7 +20,7 @@ export const TRANSLATIONS = {
     langSwitch: 'English',
 
     // Hero 区域
-    heroBadge: 'v0.4.1 正式发布',
+    heroBadge: 'v0.4.2 正式发布',
     heroTitle: '穿云投屏',
     heroSubtitle: '不仅仅是投屏，更是你的专属云手机',
     heroDesc: '依托纯粹的 <strong>P2P 直连</strong> 与 <strong>WebRTC 极速协议</strong>，“穿云投屏”以企业级云手机架构重构设备连接。我们打破了物理硬件与云端虚拟环境的界限，为您实现 <strong>实体真机</strong>、<strong>本地模拟器</strong>，甚至 <strong>市面主流云手机</strong> 的统一纳管。无需复杂的网络穿透与配置，所有设备一键极速上云，在浏览器中瞬间化身为您的 <strong>专属云端真机</strong>。',
@@ -86,7 +86,7 @@ export const TRANSLATIONS = {
     changelogDesc: '全新升级 Android 客户端、Magisk 保活模块以及管理平台核心性能。',
     changelogAppBadge: '📱 Android APP 客户端',
     changelogMagiskBadge: '🧩 Magisk 极速模块',
-    changelogPlatformBadge: '💻 管理平台优化',
+    changelogPlatformBadge: '💻 管理平台 & PVE 编排',
 
     // 全景功能大盘
     featuresTitle: '全景功能大盘与核心技术矩阵',
@@ -99,23 +99,23 @@ export const TRANSLATIONS = {
     tabHal: '🔮 虚拟 HAL & 集群管理',
 
     // 更新日志要点
-    clAppLi1: '<strong>官方客户端全面开源</strong>：全新重构为独立项目 WebrtcPhone-Android 并于 GitHub 正式开源，采用全套 Jetpack Compose 现代化架构。',
-    clAppLi2: '<strong>前台保活与自愈守护</strong>：持续优化前台守护服务与连接探测机制，网络抖动自动重连，保障长效稳定受控。',
+    clAppLi1: '<strong>官方客户端全新重构开源</strong>：全新重构为独立项目 WebrtcPhone-Android 并于 GitHub 开源，基于 Kotlin + Compose + WebRTC 打造。',
+    clAppLi2: '<strong>原生多机直控与运维</strong>：支持手机端直接控制多台云手机、P2P文件分发、终端运维与独占租约开通。',
     clAppLi3: '<strong>双引擎与免电脑受控</strong>：支持 Root 与 Shizuku (免 Root ADB) 双引擎自启，真机与云机开机即连、脱机无感托管。',
-    clAppLi4: '<strong>客户端全英文适配</strong>：全界面深度适配标准英文体验，精准跟随系统语言切换。',
+    clAppLi4: '<strong>极致低延迟音视频</strong>：优化 WebRTC 解码管线与触控映射，操作延迟对标原生投屏手感。',
 
-    clMagiskLi1: '<strong>适配狐狸面具 (Kitsune Mask)</strong>：补充标准刷机脚本与环境校验，兼容更多 Magisk 版本与精简系统环境。',
-    clMagiskLi2: '<strong>修复部分云手机无法接入</strong>：彻底根除无实体屏幕或定制云机因截图异常崩溃导致无法接入的问题。',
-    clMagiskLi3: '<strong>协程级容灾与异常自愈</strong>：Agent 采集与上报协程加入全局 Recover 保护，避免异常调用拖垮主进程。',
-    clMagiskLi4: '<strong>部署套件纯原生化</strong>：支持离线免 Python 批处理配置，群控脚本原生跨平台开箱即用。',
+    clMagiskLi1: '<strong>Android 12+ 剪贴板加固</strong>：启动时自动降权至 shell 执行，彻底解决 Root 模式下剪贴板权限被拦截异常。',
+    clMagiskLi2: '<strong>摄像头监控多焦段热切换</strong>：修复监控模式下切换超广角/主摄/长焦镜头与变焦时推流未响应的问题。',
+    clMagiskLi3: '<strong>双通道剪贴板与信令广播</strong>：打通 WebRTC 与信令/WebSocket 双通道剪贴板同步，优化主动获取交互与兜底。',
+    clMagiskLi4: '<strong>长效保活与协程容灾</strong>：守护进程全局 Recover 保护，网络抖动自动重连自愈。',
 
-    clPlatformLi1: '<strong>优化免密分享与租约管理</strong>：移除免密分享多余顶栏，深度适配移动端视口与全屏沉浸体验；支持更灵活的租约时长配置。',
-    clPlatformLi2: '<strong>预览画面流量与性能优化</strong>：增加息屏检测与智能待机降频；画面无变化时完全静默不更新，大幅降低网络开销与卡顿。',
-    clPlatformLi3: '<strong>专属 TURN 动态下发</strong>：支持受控 Agent 指定就近专属 TURN 服务器，直连与访客全自动继承，跨云公网穿透更灵活。',
-    clPlatformLi4: '<strong>全站国际化与交互打磨</strong>：全站中英文无缝切换，直控状态栏默认纯净隐藏，多端体验更加流畅。',
-    clAppDownload: '获取 WebrtcPhone-release.apk →',
+    clPlatformLi1: '<strong>PVE 原生云手机调度编排</strong>：深度集成 Proxmox VE 8.x，基于 redroid-pve 实现非特权容器 (unprivileged: 1) 秒级 Thin-Clone 开通与 2 秒无痕出厂快照重置。',
+    clPlatformLi2: '<strong>GPU 硬件直通与 BinderFS 预检</strong>：默认支持 Intel / AMD GPU 满血硬件直通渲染与 BinderFS 自动预检修复。',
+    clPlatformLi3: '<strong>快捷文本即时输入与一键存词</strong>：侧边栏浮层集成即时输入框，支持直接键入文字落屏发送，支持 Enter 发送与一键「+ 存为短语」。',
+    clPlatformLi4: '<strong>24小时滑动登录续期与快照自愈</strong>：管理后台会话改为 24 小时滑动续期，活跃操作自动续期；大盘推流快照刷新秒级自愈。',
+    clAppDownload: '前往 WebrtcPhone-Android 开源仓库 →',
     clMagiskDownload: '获取 cloudphone-agent-magisk.zip →',
-    clPlatformDownload: '获取 cloudphone.zip 平台包 →',
+    clPlatformDownload: '获取 cloudphone-v0.4.2-netdisk.zip 平台包 →',
 
     // 全景功能大盘 38 项卡片
     // Panel 1: Dashboard
@@ -241,7 +241,7 @@ export const TRANSLATIONS = {
     langSwitch: '简体中文',
 
     // Hero section
-    heroBadge: 'v0.4.1 Released',
+    heroBadge: 'v0.4.2 Released',
     heroTitle: 'ScrcpyOverWebRTC',
     heroSubtitle: 'More Than Mirroring — Your Dedicated Cloud Phone',
     heroDesc: 'Powered by pure <strong>P2P direct connections</strong> and <strong>WebRTC ultra-fast protocols</strong>, ScrcpyOverWebRTC redefines remote Android device management. We eliminate the barrier between physical hardware and cloud containers, allowing you to unify <strong>physical phones</strong>, <strong>local emulators</strong>, and <strong>cloud instances</strong> in one central console. No complex port forwarding required — every device transforms into your <strong>dedicated cloud phone</strong> inside any modern web browser.',
@@ -276,7 +276,7 @@ export const TRANSLATIONS = {
     downloadTitle: 'Downloads & Deployment Packages',
     downloadSubtitle: 'Available as Docker Compose, Magisk Modules, Android Apps, and standalone portable packages.',
     dlQuarkTitle: 'Cloud Drive Downloads (Quark)',
-    dlQuarkDesc: 'Direct high-speed downloads in China for Android APK, Magisk modules, and platform bundle.',
+    dlQuarkDesc: 'Direct high-speed downloads in China for Magisk modules and platform deployment bundle.',
     dlQuarkBtn: 'Open Cloud Drive Share',
     dlAppApkBtn: 'Download .apk 🚀',
     dlMagiskZipBtn: 'Download .zip 🚀',
@@ -307,26 +307,26 @@ export const TRANSLATIONS = {
     changelogDesc: 'Major upgrades across Android App, Magisk daemon, and management platform.',
     changelogAppBadge: '📱 Android App Client',
     changelogMagiskBadge: '🧩 Magisk System Module',
-    changelogPlatformBadge: '💻 Management Platform',
+    changelogPlatformBadge: '💻 Management Platform & PVE',
 
     // Changelog bullet points
-    clAppLi1: '<strong>Official Client Open Source</strong>: Refactored into standalone project WebrtcPhone-Android and officially open-sourced on GitHub, powered by Jetpack Compose.',
-    clAppLi2: '<strong>Foreground Keepalive & Self-Healing</strong>: Refined foreground daemon service and connection detection for seamless reconnects during network jitter.',
+    clAppLi1: '<strong>Brand-New Kotlin + Compose Architecture</strong>: Rewritten from scratch as an independent open-source project WebrtcPhone-Android, powered by Jetpack Compose & WebRTC.',
+    clAppLi2: '<strong>Multi-Device Fleet Direct Control</strong>: Native mobile control over multiple cloud phones, P2P file transfers, remote terminals & exclusive leases.',
     clAppLi3: '<strong>Dual-Engine PC-Free Hosting</strong>: Reliable boot auto-start via Root and Shizuku (root-free ADB) for long-term untethered hosting.',
-    clAppLi4: '<strong>Complete English Localization</strong>: Fully localized UI strings adapting cleanly to system language preferences.',
+    clAppLi4: '<strong>Ultra-Low-Latency Streaming</strong>: Fine-tuned WebRTC hardware rendering and touch coordinate mapping matching native app fluidity.',
 
-    clMagiskLi1: '<strong>Kitsune Mask Adaptation</strong>: Added standard installation scripts and validations, ensuring compatibility across diverse Magisk versions.',
-    clMagiskLi2: '<strong>Headless Cloud Phone Crash Fix</strong>: Eliminated snapshot panics on headless or customized virtual Android environments.',
-    clMagiskLi3: '<strong>Coroutine-Level Crash Resilience</strong>: Added global recover protection across sampling and telemetry goroutines against unhandled exceptions.',
-    clMagiskLi4: '<strong>Pure Native Deployment Suite</strong>: Batch starter scripts now zero-Python dependency, natively running on Windows, Linux, and macOS.',
+    clMagiskLi1: '<strong>Android 12+ Clipboard Hardening</strong>: Dynamically de-escalates to shell UID on launch, eliminating Android 12+ root clipboard permission blocks.',
+    clMagiskLi2: '<strong>Surveillance Multi-Lens Hot-Switching</strong>: Fixed camera stream restarting when switching between ultra-wide, wide, and telephoto lenses or zooming.',
+    clMagiskLi3: '<strong>Dual-Channel WebRTC & Signaling Sync</strong>: Smooth clipboard synchronization across both WebRTC data channels and WebSocket signaling.',
+    clMagiskLi4: '<strong>Daemon Resilience & Self-Healing</strong>: Global coroutine recover guards and automatic reconnects during network jitter.',
 
-    clPlatformLi1: '<strong>Optimized Guest Share & Lease</strong>: Removed redundant top bar, perfectly adapted to mobile viewports with immersive full-screen direct control.',
-    clPlatformLi2: '<strong>Preview Traffic & Screen-off Backoff</strong>: Intelligent screen-off standby downsampling and absolute silence on static frames, drastically cutting bandwidth.',
-    clPlatformLi3: '<strong>Dedicated TURN Dynamic Routing</strong>: Agents can specify nearby TURN servers, inherited seamlessly by direct control and guest shares for multi-cloud NAT traversal.',
-    clPlatformLi4: '<strong>Site-Wide i18n & Refined UX</strong>: Seamless bilingual switching, clean stats badge default, and enhanced fleet management fluency.',
-    clAppDownload: 'Get WebrtcPhone-release.apk →',
+    clPlatformLi1: '<strong>PVE Native LXC Orchestration</strong>: Deep integration with Proxmox VE 8.x via redroid-pve; unprivileged mode (unprivileged: 1), sub-second Thin-Clone, and 2s factory rollback.',
+    clPlatformLi2: '<strong>GPU Passthrough & BinderFS Pre-Check</strong>: Out-of-the-box hardware acceleration for Intel & AMD GPUs with automated BinderFS pre-checks.',
+    clPlatformLi3: '<strong>Quick Text Live Input & Saving</strong>: Direct on-screen typing from sidebar popover with Enter-to-send and one-click phrase library saving.',
+    clPlatformLi4: '<strong>24h Sliding Auth & Snapshot Self-Healing</strong>: 24-hour sliding web session renewal on user activity; thumbnail snapshots self-heal in real time.',
+    clAppDownload: 'Visit WebrtcPhone-Android Repo →',
     clMagiskDownload: 'Get cloudphone-agent-magisk.zip →',
-    clPlatformDownload: 'Get cloudphone.zip Platform Bundle →',
+    clPlatformDownload: 'Get cloudphone-v0.4.2-netdisk.zip Platform Bundle →',
 
     // Feature matrix section
     featuresTitle: 'Full Feature Matrix & Technical Architecture',
