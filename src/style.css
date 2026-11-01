@@ -278,6 +278,75 @@ body.lang-en .hide-on-en {
    Hero Section 区域 (主视觉)
    ========================================================================== */
 
+.release-notice.container {
+  width: calc(100% - 48px);
+  max-width: 1152px;
+  margin-top: 94px;
+  padding: 22px 26px;
+  border: 1px solid rgba(251, 191, 36, 0.55);
+  border-left: 4px solid #fbbf24;
+  border-radius: var(--radius-md);
+  background: linear-gradient(120deg, rgba(120, 53, 15, 0.3), rgba(30, 41, 59, 0.6));
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.release-notice-heading,
+.release-notice-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.release-notice-heading h2 {
+  font-size: 19px;
+  color: #fef3c7;
+}
+
+.release-notice-badge {
+  flex-shrink: 0;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: #fbbf24;
+  color: #422006;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.release-notice p {
+  margin-top: 10px;
+  color: #e2e8f0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.release-notice .release-notice-important {
+  color: #fde68a;
+  font-weight: 600;
+}
+
+.release-notice-actions {
+  margin-top: 16px;
+}
+
+.release-notice-guide {
+  color: #fde68a;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.release-notice + .hero-section {
+  padding-top: 48px;
+}
+
+@media (max-width: 600px) {
+  .release-notice.container {
+    width: calc(100% - 24px);
+    padding: 18px;
+  }
+}
+
 .hero-section {
   position: relative;
   padding-top: 140px;

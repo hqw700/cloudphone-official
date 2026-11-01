@@ -67,13 +67,26 @@
       </div>
     </header>
 
+    <aside class="release-notice container" id="agent-expiration-notice" aria-labelledby="release-notice-title">
+      <div class="release-notice-heading">
+        <span class="release-notice-badge" data-i18n="releaseNoticeBadge">v0.4.3 紧急修复</span>
+        <h2 id="release-notice-title" data-i18n="releaseNoticeTitle">旧版 Agent 到期问题说明</h2>
+      </div>
+      <p data-i18n="releaseNoticeCause">由于早期测试版本的疏漏，Agent 内置的测试到期日期（2026-11-01）未及时移除，导致旧版本无法启动或自动退出。v0.4.3 已移除默认到期限制，对造成的不便深表歉意。</p>
+      <p class="release-notice-important" data-i18n="releaseNoticeAction">请更新并重新部署设备端 Agent；Magisk / KernelSU 用户请更新模块并重启设备。仅更新服务端无法解决此问题。</p>
+      <div class="release-notice-actions">
+        <a href="#download" class="btn btn-primary btn-sm" data-i18n="releaseNoticeDownload">下载 v0.4.3 修复包</a>
+        <a href="/docs/agent-expiration-fix.html" class="release-notice-guide" data-i18n="releaseNoticeGuide">暂不升级？查看旧版本恢复方法 →</a>
+      </div>
+    </aside>
+
     <!-- 主视觉 Hero 区域 & 动态拓扑动效整合 -->
     <section class="hero-section" style="padding-bottom: 50px; display: flex; flex-direction: column; align-items: center; text-align: center;">
       <div class="container" style="width: 100%; display: flex; flex-direction: column; align-items: center; max-width: 1000px; margin-bottom: 40px;">
         <div class="hero-content" style="animation: slideInLeft var(--transition-slow); display: flex; flex-direction: column; align-items: center;">
           <div class="badge-tag" style="margin-bottom: 20px;">
             <span class="badge-dot"></span>
-            <span id="hero-badge-text" data-i18n="heroBadge">v0.4.2 正式发布</span>
+            <span id="hero-badge-text" data-i18n="heroBadge">v0.4.3 紧急修复已发布</span>
           </div>
           <h1 class="hero-title" style="font-size: 64px; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px;">
             <span class="text-gradient" data-i18n="heroTitle">穿云投屏</span>
@@ -551,17 +564,17 @@
                 适合国内网络直连。提供 Magisk 极速模块以及管理平台全套压缩包（免密下载）。
               </p>
               <div class="space-y-2 mb-4" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-                <a id="magisk-module-link" href="https://pan.quark.cn/s/e95a92e0ce6a" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
-                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;"><span data-i18n="dlMagiskLabel">🧩 Magisk 模块</span> (<span id="magisk-module-version">v0.4.2</span>)</span>
+                <a id="magisk-module-link" href="https://pan.quark.cn/s/c2fb80b237a1" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
+                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;"><span data-i18n="dlMagiskLabel">🧩 Magisk 模块</span> (<span id="magisk-module-version">v0.4.3</span>)</span>
                   <span class="text-cyan-400 font-mono text-[11px]" style="color: var(--accent-blue);" data-i18n="dlMagiskZipBtn">下载 .zip 🚀</span>
                 </a>
-                <a id="platform-zip-link" href="https://pan.quark.cn/s/ffe38a1266cf" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
-                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;"><span data-i18n="dlPlatformLabel">📦 管理平台</span> (<span id="platform-zip-version">v0.4.2</span>)</span>
+                <a id="platform-zip-link" href="https://pan.quark.cn/s/8d1fa2582cc1" target="_blank" class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-700/50 transition-all text-xs" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-muted); text-decoration: none;">
+                  <span class="font-medium text-slate-200" style="color: #e2e8f0; font-size: 13px;"><span data-i18n="dlPlatformLabel">📦 管理平台</span> (<span id="platform-zip-version">v0.4.3</span>)</span>
                   <span class="text-cyan-400 font-mono text-[11px]" style="color: var(--accent-blue);" data-i18n="dlPlatformZipBtn">下载全套包 🚀</span>
                 </a>
               </div>
             </div>
-            <a id="quark-link" href="https://pan.quark.cn/s/ffe38a1266cf" target="_blank" class="w-full py-2 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-center transition-colors text-xs shadow-md" style="display: block; width: 100%; padding: 8px 16px; border-radius: var(--radius-md); background: var(--accent-blue); color: var(--bg-deep); font-weight: 600; text-align: center; font-size: 13px; transition: background var(--transition-fast);" data-i18n="dlQuarkBtn">
+            <a id="quark-link" href="https://pan.quark.cn/s/8d1fa2582cc1" target="_blank" class="w-full py-2 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-center transition-colors text-xs shadow-md" style="display: block; width: 100%; padding: 8px 16px; border-radius: var(--radius-md); background: var(--accent-blue); color: var(--bg-deep); font-weight: 600; text-align: center; font-size: 13px; transition: background var(--transition-fast);" data-i18n="dlQuarkBtn">
               打开夸克网盘全量分享
             </a>
           </div>
@@ -582,7 +595,7 @@
                 获取官方最新发布的开源源码、Release 预编译包（包括 webrtc-signaling 信令端、android-agentd 以及脚本工具）。
               </p>
               <div class="bg-slate-950/40 border border-slate-800/50 rounded-lg p-3 text-xs text-[--text-secondary] mb-4" style="background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-muted); border-radius: var(--radius-sm); padding: 12px; font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">
-                <div style="margin-bottom: 6px;"><span data-i18n="dlGithubVer">最新版本：</span><span id="github-version" class="font-mono text-purple-400 font-bold" style="color: #c084fc; font-weight: 600;">v0.4.2</span></div>
+                <div style="margin-bottom: 6px;"><span data-i18n="dlGithubVer">最新版本：</span><span id="github-version" class="font-mono text-purple-400 font-bold" style="color: #c084fc; font-weight: 600;">v0.4.3</span></div>
                 <div style="margin-bottom: 6px;"><span data-i18n="dlGithubRepo">官方仓库：</span><span class="font-mono" style="color: var(--text-secondary);">hqw700/ScrcpyOverWebRTC</span></div>
                 <div style="display: flex; align-items: center; justify-content: space-between;">
                   <div><span data-i18n="dlGithubStatus">发布状态：</span><span style="color: var(--color-success);" data-i18n="dlGithubStatusVal">Stable (稳定版)</span></div>
@@ -666,9 +679,9 @@
     <section class="section" id="changelog" style="padding-top: 30px; padding-bottom: 50px;">
       <div class="container">
         <div class="section-title-wrap">
-          <span class="section-subtitle" id="changelog-subtitle">What's New in v0.4.2</span>
+          <span class="section-subtitle" id="changelog-subtitle">What's New in v0.4.3 & App v0.4.2</span>
           <h2 class="section-title" data-i18n="changelogTitle">最新版本更新日志</h2>
-          <p class="section-desc" data-i18n="changelogDesc">全新升级 Android 客户端、Magisk 保活模块以及管理平台核心性能。</p>
+          <p class="section-desc" data-i18n="changelogDesc">v0.4.3 紧急修复 Agent 到期问题；平台包与 Magisk 模块已更新，Android App 版本保持 v0.4.2。</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-8" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
@@ -712,61 +725,61 @@
               <span class="px-3 py-1 text-xs font-bold rounded-full bg-purple-950 text-purple-400 border border-purple-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(168, 85, 247, 0.15); color: #c084fc; font-size: 12px; font-weight: 700; border: 1px solid rgba(168, 85, 247, 0.3);" data-i18n="changelogMagiskBadge">
                 🧩 Magisk 极速模块
               </span>
-              <span class="text-xs font-mono text-purple-300" id="changelog-magisk-version" style="color: #d8b4fe; font-size: 12px; font-family: var(--font-mono);">v0.4.2</span>
+              <span class="text-xs font-mono text-purple-300" id="changelog-magisk-version" style="color: #d8b4fe; font-size: 12px; font-family: var(--font-mono);">v0.4.3</span>
             </div>
             <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #c084fc;">•</span>
-                <span data-i18n="clMagiskLi1"><strong>Android 12+ 剪贴板加固</strong>：启动时自动降权至 shell 执行，彻底解决 Root 模式下剪贴板权限被拦截异常。</span>
+                <span data-i18n="clMagiskLi1"><strong>移除默认到期限制</strong>：模块内置 Agent 默认不再因测试日期到期停止运行。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #c084fc;">•</span>
-                <span data-i18n="clMagiskLi2"><strong>摄像头监控多焦段热切换</strong>：修复监控模式下切换超广角/主摄/长焦镜头与变焦时推流未响应的问题。</span>
+                <span data-i18n="clMagiskLi2"><strong>恢复启动与持续运行</strong>：修复旧版 Agent 到期后无法启动或自动退出的问题。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #c084fc;">•</span>
-                <span data-i18n="clMagiskLi3"><strong>双通道剪贴板与信令广播</strong>：打通 WebRTC 与信令/WebSocket 双通道剪贴板同步，优化主动获取交互与兜底。</span>
+                <span data-i18n="clMagiskLi3"><strong>更新模块后重启</strong>：安装 v0.4.3 模块并重启设备，使设备端修复生效。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #c084fc;">•</span>
-                <span data-i18n="clMagiskLi4"><strong>长效保活与协程容灾</strong>：守护进程全局 Recover 保护，网络抖动自动重连自愈。</span>
+                <span data-i18n="clMagiskLi4"><strong>旧版本临时恢复</strong>：在 config.conf 中加入 export CP_AGENT_EXPIRES_AT="2099-01-01"，再重启 Agent。</span>
               </li>
             </ul>
             <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
-              <a id="changelog-magisk-link" href="https://pan.quark.cn/s/e95a92e0ce6a" target="_blank" class="text-xs font-semibold text-purple-400 hover:text-purple-300" style="color: #c084fc; text-decoration: none; font-size: 12px;" data-i18n="clMagiskDownload">
+              <a id="changelog-magisk-link" href="https://pan.quark.cn/s/c2fb80b237a1" target="_blank" class="text-xs font-semibold text-purple-400 hover:text-purple-300" style="color: #c084fc; text-decoration: none; font-size: 12px;" data-i18n="clMagiskDownload">
                 获取 cloudphone-agent-magisk.zip →
               </a>
             </div>
           </div>
 
-          <!-- 3. v0.4.2 管理平台修改 -->
+          <!-- 3. v0.4.3 管理平台紧急修复 -->
           <div class="p-6 rounded-2xl border border-blue-800/40 bg-slate-950/50 shadow-xl relative overflow-hidden" style="padding: 24px; border-radius: var(--radius-lg); border: 1px solid rgba(59, 130, 246, 0.3); background: rgba(10, 15, 29, 0.75);">
             <div class="flex items-center justify-between mb-4">
               <span class="px-3 py-1 text-xs font-bold rounded-full bg-blue-950 text-blue-400 border border-blue-700/50" style="padding: 4px 10px; border-radius: 9999px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; font-size: 12px; font-weight: 700; border: 1px solid rgba(59, 130, 246, 0.3);" data-i18n="changelogPlatformBadge">
                 💻 管理平台 & PVE 编排
               </span>
-              <span class="text-xs font-mono text-blue-300" id="changelog-platform-version" style="color: #93c5fd; font-size: 12px; font-family: var(--font-mono);">v0.4.2</span>
+              <span class="text-xs font-mono text-blue-300" id="changelog-platform-version" style="color: #93c5fd; font-size: 12px; font-family: var(--font-mono);">v0.4.3</span>
             </div>
             <ul class="space-y-2 text-xs text-slate-300" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span data-i18n="clPlatformLi1"><strong>PVE 原生云手机调度编排</strong>：深度集成 Proxmox VE 8.x，基于 redroid-pve 实现非特权容器 (`unprivileged: 1`) 秒级 Thin-Clone 开通与 2 秒无痕出厂快照重置。</span>
+                <span data-i18n="clPlatformLi1"><strong>Agent 默认不过期</strong>：移除早期测试版本遗留的默认到期日期 2026-11-01。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span data-i18n="clPlatformLi2"><strong>GPU 硬件直通与 BinderFS 预检</strong>：默认支持 Intel / AMD GPU 满血硬件直通渲染与 BinderFS 自动预检修复。</span>
+                <span data-i18n="clPlatformLi2"><strong>请同步更新设备端</strong>：升级平台后重新部署 Agent，仅更新服务端无法解除旧 Agent 的限制。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span data-i18n="clPlatformLi3"><strong>快捷文本即时输入与一键存词</strong>：侧边栏浮层集成即时输入框，支持直接键入文字落屏发送，支持 Enter 发送与一键「+ 存为短语」。</span>
+                <span data-i18n="clPlatformLi3"><strong>旧脚本恢复方法</strong>：在设备端启动命令的 env 后加入 CP_AGENT_EXPIRES_AT=2099-01-01，再重新部署。</span>
               </li>
               <li style="display: flex; align-items: flex-start; gap: 6px;">
                 <span style="color: #60a5fa;">•</span>
-                <span data-i18n="clPlatformLi4"><strong>24小时滑动登录续期与快照自愈</strong>：管理后台会话改为 24 小时滑动续期，活跃操作自动续期；大盘推流快照刷新秒级自愈。</span>
+                <span data-i18n="clPlatformLi4"><strong>双语事故说明与恢复指南</strong>：公开事故原因，提供脚本部署与 Magisk 模块的恢复步骤。</span>
               </li>
             </ul>
             <div class="mt-4 pt-3 border-t border-slate-800/80" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-muted);">
-              <a id="changelog-platform-link" href="https://pan.quark.cn/s/ffe38a1266cf" target="_blank" class="text-xs font-semibold text-blue-400 hover:text-blue-300" style="color: #60a5fa; text-decoration: none; font-size: 12px;" data-i18n="clPlatformDownload">
+              <a id="changelog-platform-link" href="https://pan.quark.cn/s/8d1fa2582cc1" target="_blank" class="text-xs font-semibold text-blue-400 hover:text-blue-300" style="color: #60a5fa; text-decoration: none; font-size: 12px;" data-i18n="clPlatformDownload">
                 获取 cloudphone-v0.4.2-netdisk.zip 平台包 →
               </a>
             </div>

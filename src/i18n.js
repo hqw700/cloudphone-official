@@ -20,7 +20,13 @@ export const TRANSLATIONS = {
     langSwitch: 'English',
 
     // Hero 区域
-    heroBadge: 'v0.4.2 正式发布',
+    releaseNoticeBadge: "v0.4.3 紧急修复",
+    releaseNoticeTitle: "旧版 Agent 到期问题说明",
+    releaseNoticeCause: "由于早期测试版本的疏漏，Agent 内置的测试到期日期（2026-11-01）未及时移除，导致旧版本无法启动或自动退出。v0.4.3 已移除默认到期限制，对造成的不便深表歉意。",
+    releaseNoticeAction: "请更新并重新部署设备端 Agent；Magisk / KernelSU 用户请更新模块并重启设备。仅更新服务端无法解决此问题。",
+    releaseNoticeDownload: "下载 v0.4.3 修复包",
+    releaseNoticeGuide: "暂不升级？查看旧版本恢复方法 →",
+    heroBadge: "v0.4.3 紧急修复已发布",
     heroTitle: '穿云投屏',
     heroSubtitle: '不仅仅是投屏，更是你的专属云手机',
     heroDesc: '依托纯粹的 <strong>P2P 直连</strong> 与 <strong>WebRTC 极速协议</strong>，“穿云投屏”以企业级云手机架构重构设备连接。我们打破了物理硬件与云端虚拟环境的界限，为您实现 <strong>实体真机</strong>、<strong>本地模拟器</strong>，甚至 <strong>市面主流云手机</strong> 的统一纳管。无需复杂的网络穿透与配置，所有设备一键极速上云，在浏览器中瞬间化身为您的 <strong>专属云端真机</strong>。',
@@ -83,7 +89,7 @@ export const TRANSLATIONS = {
 
     // 更新日志板块
     changelogTitle: '最新版本更新日志',
-    changelogDesc: '全新升级 Android 客户端、Magisk 保活模块以及管理平台核心性能。',
+    changelogDesc: "v0.4.3 紧急修复 Agent 到期问题；平台包与 Magisk 模块已更新，Android App 版本保持 v0.4.2。",
     changelogAppBadge: '📱 Android APP 客户端',
     changelogMagiskBadge: '🧩 Magisk 极速模块',
     changelogPlatformBadge: '💻 管理平台 & PVE 编排',
@@ -104,18 +110,18 @@ export const TRANSLATIONS = {
     clAppLi3: '<strong>双引擎与免电脑受控</strong>：支持 Root 与 Shizuku (免 Root ADB) 双引擎自启，真机与云机开机即连、脱机无感托管。',
     clAppLi4: '<strong>极致低延迟音视频</strong>：优化 WebRTC 解码管线与触控映射，操作延迟对标原生投屏手感。',
 
-    clMagiskLi1: '<strong>Android 12+ 剪贴板加固</strong>：启动时自动降权至 shell 执行，彻底解决 Root 模式下剪贴板权限被拦截异常。',
-    clMagiskLi2: '<strong>摄像头监控多焦段热切换</strong>：修复监控模式下切换超广角/主摄/长焦镜头与变焦时推流未响应的问题。',
-    clMagiskLi3: '<strong>双通道剪贴板与信令广播</strong>：打通 WebRTC 与信令/WebSocket 双通道剪贴板同步，优化主动获取交互与兜底。',
-    clMagiskLi4: '<strong>长效保活与协程容灾</strong>：守护进程全局 Recover 保护，网络抖动自动重连自愈。',
+    clMagiskLi1: "<strong>移除默认到期限制</strong>：模块内置 Agent 默认不再因测试日期到期停止运行。",
+    clMagiskLi2: "<strong>恢复启动与持续运行</strong>：修复旧版 Agent 到期后无法启动或自动退出的问题。",
+    clMagiskLi3: "<strong>更新模块后重启</strong>：安装 v0.4.3 模块并重启设备，使设备端修复生效。",
+    clMagiskLi4: "<strong>旧版本临时恢复</strong>：在 config.conf 中加入 export CP_AGENT_EXPIRES_AT=\"2099-01-01\"，再重启 Agent。",
 
-    clPlatformLi1: '<strong>PVE 原生云手机调度编排</strong>：深度集成 Proxmox VE 8.x，基于 redroid-pve 实现非特权容器 (unprivileged: 1) 秒级 Thin-Clone 开通与 2 秒无痕出厂快照重置。',
-    clPlatformLi2: '<strong>GPU 硬件直通与 BinderFS 预检</strong>：默认支持 Intel / AMD GPU 满血硬件直通渲染与 BinderFS 自动预检修复。',
-    clPlatformLi3: '<strong>快捷文本即时输入与一键存词</strong>：侧边栏浮层集成即时输入框，支持直接键入文字落屏发送，支持 Enter 发送与一键「+ 存为短语」。',
-    clPlatformLi4: '<strong>24小时滑动登录续期与快照自愈</strong>：管理后台会话改为 24 小时滑动续期，活跃操作自动续期；大盘推流快照刷新秒级自愈。',
+    clPlatformLi1: "<strong>Agent 默认不过期</strong>：移除早期测试版本遗留的默认到期日期 2026-11-01。",
+    clPlatformLi2: "<strong>请同步更新设备端</strong>：升级平台后重新部署 Agent，仅更新服务端无法解除旧 Agent 的限制。",
+    clPlatformLi3: "<strong>旧脚本恢复方法</strong>：在设备端启动命令的 env 后加入 CP_AGENT_EXPIRES_AT=2099-01-01，再重新部署。",
+    clPlatformLi4: "<strong>双语事故说明与恢复指南</strong>：公开事故原因，提供脚本部署与 Magisk 模块的恢复步骤。",
     clAppDownload: '前往 WebrtcPhone-Android 开源仓库 →',
-    clMagiskDownload: '获取 cloudphone-agent-magisk.zip →',
-    clPlatformDownload: '获取 cloudphone-v0.4.2-netdisk.zip 平台包 →',
+    clMagiskDownload: "获取 cloudphone-agent-magisk-v0.4.3.zip →",
+    clPlatformDownload: "获取 cloudphone-v0.4.3-netdisk.zip 平台包 →",
 
     // 全景功能大盘 38 项卡片
     // Panel 1: Dashboard
@@ -241,7 +247,13 @@ export const TRANSLATIONS = {
     langSwitch: '简体中文',
 
     // Hero section
-    heroBadge: 'v0.4.2 Released',
+    releaseNoticeBadge: "v0.4.3 Emergency Hotfix",
+    releaseNoticeTitle: "Older Agent Expiration Notice",
+    releaseNoticeCause: "Due to an oversight in an early test version, the Agent’s test expiration date (November 1, 2026) was left in place, preventing older Agents from starting or causing them to exit automatically. v0.4.3 removes the default expiration. We apologize for the disruption.",
+    releaseNoticeAction: "Update and redeploy the device-side Agent. Magisk / KernelSU users should update the module and reboot. Updating the server alone does not resolve this issue.",
+    releaseNoticeDownload: "Download the v0.4.3 Hotfix",
+    releaseNoticeGuide: "Cannot upgrade yet? View recovery steps →",
+    heroBadge: "v0.4.3 Emergency Hotfix Released",
     heroTitle: 'ScrcpyOverWebRTC',
     heroSubtitle: 'More Than Mirroring — Your Dedicated Cloud Phone',
     heroDesc: 'Powered by pure <strong>P2P direct connections</strong> and <strong>WebRTC ultra-fast protocols</strong>, ScrcpyOverWebRTC redefines remote Android device management. We eliminate the barrier between physical hardware and cloud containers, allowing you to unify <strong>physical phones</strong>, <strong>local emulators</strong>, and <strong>cloud instances</strong> in one central console. No complex port forwarding required — every device transforms into your <strong>dedicated cloud phone</strong> inside any modern web browser.',
@@ -304,7 +316,7 @@ export const TRANSLATIONS = {
 
     // Changelog section
     changelogTitle: 'Latest Version Changelog',
-    changelogDesc: 'Major upgrades across Android App, Magisk daemon, and management platform.',
+    changelogDesc: "v0.4.3 fixes Agent expiration in the platform bundle and Magisk module. The Android App remains at v0.4.2.",
     changelogAppBadge: '📱 Android App Client',
     changelogMagiskBadge: '🧩 Magisk System Module',
     changelogPlatformBadge: '💻 Management Platform & PVE',
@@ -315,18 +327,18 @@ export const TRANSLATIONS = {
     clAppLi3: '<strong>Dual-Engine PC-Free Hosting</strong>: Reliable boot auto-start via Root and Shizuku (root-free ADB) for long-term untethered hosting.',
     clAppLi4: '<strong>Ultra-Low-Latency Streaming</strong>: Fine-tuned WebRTC hardware rendering and touch coordinate mapping matching native app fluidity.',
 
-    clMagiskLi1: '<strong>Android 12+ Clipboard Hardening</strong>: Dynamically de-escalates to shell UID on launch, eliminating Android 12+ root clipboard permission blocks.',
-    clMagiskLi2: '<strong>Surveillance Multi-Lens Hot-Switching</strong>: Fixed camera stream restarting when switching between ultra-wide, wide, and telephoto lenses or zooming.',
-    clMagiskLi3: '<strong>Dual-Channel WebRTC & Signaling Sync</strong>: Smooth clipboard synchronization across both WebRTC data channels and WebSocket signaling.',
-    clMagiskLi4: '<strong>Daemon Resilience & Self-Healing</strong>: Global coroutine recover guards and automatic reconnects during network jitter.',
+    clMagiskLi1: "<strong>Default Expiration Removed</strong>: The bundled Agent no longer stops running due to the test expiration date by default.",
+    clMagiskLi2: "<strong>Startup and Runtime Recovery</strong>: Fixed older Agents failing to start or exiting automatically after expiration.",
+    clMagiskLi3: "<strong>Update and Reboot</strong>: Install the v0.4.3 module and reboot the device to apply the Agent fix.",
+    clMagiskLi4: "<strong>Older Version Workaround</strong>: Add export CP_AGENT_EXPIRES_AT=\"2099-01-01\" to config.conf, then restart the Agent.",
 
-    clPlatformLi1: '<strong>PVE Native LXC Orchestration</strong>: Deep integration with Proxmox VE 8.x via redroid-pve; unprivileged mode (unprivileged: 1), sub-second Thin-Clone, and 2s factory rollback.',
-    clPlatformLi2: '<strong>GPU Passthrough & BinderFS Pre-Check</strong>: Out-of-the-box hardware acceleration for Intel & AMD GPUs with automated BinderFS pre-checks.',
-    clPlatformLi3: '<strong>Quick Text Live Input & Saving</strong>: Direct on-screen typing from sidebar popover with Enter-to-send and one-click phrase library saving.',
-    clPlatformLi4: '<strong>24h Sliding Auth & Snapshot Self-Healing</strong>: 24-hour sliding web session renewal on user activity; thumbnail snapshots self-heal in real time.',
+    clPlatformLi1: "<strong>No Default Agent Expiration</strong>: Removed the November 1, 2026 test expiration date left in early versions.",
+    clPlatformLi2: "<strong>Update Device-Side Agents</strong>: Redeploy Agents after upgrading. Updating the server alone does not remove the limit from older Agents.",
+    clPlatformLi3: "<strong>Older Script Recovery</strong>: Add CP_AGENT_EXPIRES_AT=2099-01-01 after env in the device-side launch command, then redeploy.",
+    clPlatformLi4: "<strong>Bilingual Incident and Recovery Guide</strong>: Published the cause and recovery steps for script deployments and Magisk modules.",
     clAppDownload: 'Visit WebrtcPhone-Android Repo →',
-    clMagiskDownload: 'Get cloudphone-agent-magisk.zip →',
-    clPlatformDownload: 'Get cloudphone-v0.4.2-netdisk.zip Platform Bundle →',
+    clMagiskDownload: "Get cloudphone-agent-magisk-v0.4.3.zip →",
+    clPlatformDownload: "Get cloudphone-v0.4.3-netdisk.zip Platform Bundle →",
 
     // Feature matrix section
     featuresTitle: 'Full Feature Matrix & Technical Architecture',

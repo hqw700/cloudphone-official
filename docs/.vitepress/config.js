@@ -93,6 +93,7 @@ export default withMermaid(defineConfig({
             text: '🛠️ 七、排障与调优',
             collapsed: false,
             items: [
+              { text: 'Agent 到期紧急修复 (v0.4.3)', link: '/agent-expiration-fix' },
               { text: '常见问题解答与调优 (FAQ)', link: '/faq' }
             ]
           }
@@ -201,6 +202,7 @@ export default withMermaid(defineConfig({
             text: '🛠️ 7. Troubleshooting & Optimization',
             collapsed: false,
             items: [
+              { text: 'Agent Expiration Hotfix (v0.4.3)', link: '/en/agent-expiration-fix' },
               { text: 'Frequently Asked Questions (FAQ)', link: '/en/faq' }
             ]
           }
